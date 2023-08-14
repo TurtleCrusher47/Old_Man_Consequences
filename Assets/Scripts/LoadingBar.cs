@@ -8,18 +8,13 @@ using TMPro;
 public class LoadingBar : MonoBehaviour
 {
     [SerializeField] Slider slider;
-    [SerializeField] TMP_Text progressText; 
+    [SerializeField] TMP_Text progressText;
+    [SerializeField] string sceneName;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(LoadLevelAsync(sceneName));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator LoadLevelAsync(string sceneName)
@@ -28,8 +23,11 @@ public class LoadingBar : MonoBehaviour
 
         while (op.isDone == false)
         {
-            progressText.fillAmount = op.progress;
-            yield return new WaitForEndOfFrame();
+            float progress = Mathf.Clamp01(op.progress / 0.9f); // Adjusted to give a 0 to 1 range
+            slider.value = progress;
+            progressText.text = $"{progress * 100}%"; // Update the progress text
+
+            yield return null;
         }
     }
 }

@@ -647,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1751754852}
   progressText: {fileID: 714016940}
+  sceneName: BoatScene
 --- !u!4 &1640371333
 Transform:
   m_ObjectHideFlags: 0
