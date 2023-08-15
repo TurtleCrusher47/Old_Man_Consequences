@@ -8,6 +8,8 @@ public class SpacebarSceneChanger : MonoBehaviour
     [SerializeField] string nextScene;
     [SerializeField] GameObject loadingPanel;
     [SerializeField] Slider slider;
+
+    private bool inCollider;
     
     // Start is called before the first frame update
     void Start()
@@ -15,15 +17,11 @@ public class SpacebarSceneChanger : MonoBehaviour
         slider.value = 0f;
     }
 
-    // When player enters the collision area, the UI panel appears
-    // If the player holds space in that area for the required seconds, the scene switches
-    void OnTriggerEnter2D(Collider2D collider)
+    void Update()
     {
-        if (collider.gameObject.tag == "Player")
+        if (inCollider)
         {
-            loadingPanel.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 slider.value += Time.deltaTime;
 
@@ -35,9 +33,23 @@ public class SpacebarSceneChanger : MonoBehaviour
         }
     }
 
+    // When player enters the collision area, the UI panel appears
+    // If the player holds space in that area for the required seconds, the scene switches
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            loadingPanel.SetActive(true);
+
+            inCollider = true;
+        }
+    }
+
     // If the player leaves the area, reset the slider
     void OnTriggerExit2D(Collider2D collider)
     {
+        inCollider = false;
+        
         slider.value = 0f;
         loadingPanel.SetActive(false);
     }
