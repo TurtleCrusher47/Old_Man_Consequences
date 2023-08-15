@@ -5,17 +5,22 @@ using UnityEngine;
 public class FishBehaviour : MonoBehaviour
 {
     // Sprite and animations
-    private SpriteRenderer _sr;
-    private Animator _ar;
-    private Vector2 _dir;
+    private SpriteRenderer sr;
+    private Animator ar;
+    private Vector3 dir;
     // For fish physics and swimming
-    private Rigidbody _rb;
+    private Rigidbody rb;
     // Waypoints to swim to
     [SerializeField]
-    private Transform[] _waypointList;
-    // Current waypoint
-    private int _currWaypoint;
+    private List<GameObject> waypointList = new List<GameObject>();
 
+    // Current waypoint index
+    private int currWaypointIndex;
+    // Current waypoint location
+    private Vector3 currWaypointLoc;
+    // Minimum distance to next point
+    [SerializeField]
+    private float minDistToNextPoint = 1f;
     // FSM for fish swimming 
     enum SwimState
     {
@@ -25,34 +30,57 @@ public class FishBehaviour : MonoBehaviour
         NUM_SWIMSTATE
     }
     [SerializeField]
-    private SwimState _swimState;
+    private SwimState swimState;
 
 
     void Awake()
     {
-        _sr = GetComponent<SpriteRenderer>();
-        _ar = GetComponent<Animator>();
-        _swimState = SwimState.IDLE;
-        _dir = new Vector2(0, 0);
-        _currWaypoint = 0;
+        sr = GetComponent<SpriteRenderer>();
+        ar = GetComponent<Animator>();
+        swimState = SwimState.IDLE;
+        dir = new Vector3(0, 0, 0);
+        currWaypointIndex = 0;
+        currWaypointLoc = waypointList[currWaypointIndex].transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (_swimState)
+       
+        switch (swimState)
         {
             case SwimState.IDLE:
                
                 break;
             case SwimState.SWIM:
                 Swim();
+                UpdateSpriteDirection();
                 break;
             case SwimState.GATHER:
 
                 Gather();
                 break;
         }
+    }
+
+    // For testing
+
+    [SerializeField]
+    private float movementSpeed = 1f;
+    void FixedUpdate()
+    {
+        // Get the current position of the game object
+        Vector2 currentPos = transform.position;
+        // Get the input from horizontal and vertical axis - x and y
+        Vector2 moveDirection = new Vector2(Input.GetAxis("Horizontal"),
+        Input.GetAxis("Vertical"));
+        // To ensure the vector is unit length
+        moveDirection = Vector2.ClampMagnitude(moveDirection, 1);
+        // Calculate the new position based on velocity (moveDirection * movementSpeed)
+        Vector2 movement = moveDirection * movementSpeed;
+        // Calculate new position
+        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
+        transform.position = newPos;
     }
     protected void Idle()
     {
@@ -61,12 +89,27 @@ public class FishBehaviour : MonoBehaviour
     protected void Swim()
     {
         // Look in direction of next waypoint and swim there
-        // To swim there, apply an impulse force. 
-        // While fish is not within 5 units of the next point, apply another impulse force.
+        dir = currWaypointLoc - gameObject.transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // To swim there, apply an impulse force.
+        // If the fish is within 5 units of next way point, move to next waypoint.
+        if (Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint)
+        {
+            currWaypointIndex++;
+            currWaypointIndex %= waypointList.Count;
+            currWaypointLoc = waypointList[currWaypointIndex].transform.position;
+        }
     }
   
     protected void Gather()
     {
         // Swim around a single point???
+    }
+
+    // make da fishy look in right direction
+    protected void UpdateSpriteDirection()
+    {
+        sr.flipY = currWaypointLoc.x < transform.position.x;
     }
 }
