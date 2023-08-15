@@ -58,7 +58,7 @@ public class WorldClockManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Time: " + hours + ":" + minutes + " " + timeCounter);
+        //Debug.Log("Time: " + hours + ":" + minutes + " " + timeCounter);
 
         if (minutes % 10 == 0)
         {
