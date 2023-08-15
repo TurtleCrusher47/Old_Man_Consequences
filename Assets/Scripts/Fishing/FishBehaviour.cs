@@ -9,7 +9,7 @@ public class FishBehaviour : MonoBehaviour
     private Animator ar;
     private Vector3 dir;
     // For fish physics and swimming
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     // Waypoints to swim to
     [SerializeField]
     private List<GameObject> waypointList = new List<GameObject>();
@@ -22,7 +22,7 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField]
     private float minDistToNextPoint = 1f;
     // FSM for fish swimming 
-    enum SwimState
+    protected enum SwimState
     {
         IDLE = 0, 
         SWIM = 1,
@@ -32,11 +32,22 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField]
     private SwimState swimState;
 
+    // Timers for ALL states
+    // Idle state
+    private float idleTimer;
 
+    // max time between swims
+    [SerializeField]
+    private float maxSwimInterval = 2;
+    // Timer that counts down time till next swim
+    private float swimForwardTimer;
+    // No idea for now
+    private float gatherTimer;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         ar = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         swimState = SwimState.IDLE;
         dir = new Vector3(0, 0, 0);
         currWaypointIndex = 0;
@@ -63,12 +74,11 @@ public class FishBehaviour : MonoBehaviour
         }
     }
 
-    // For testing
-
     [SerializeField]
     private float movementSpeed = 1f;
     void FixedUpdate()
     {
+        // Testing for player control
         // Get the current position of the game object
         Vector2 currentPos = transform.position;
         // Get the input from horizontal and vertical axis - x and y
@@ -81,6 +91,8 @@ public class FishBehaviour : MonoBehaviour
         // Calculate new position
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         transform.position = newPos;
+        
+
     }
     protected void Idle()
     {
@@ -88,11 +100,19 @@ public class FishBehaviour : MonoBehaviour
     }
     protected void Swim()
     {
-        // Look in direction of next waypoint and swim there
-        dir = currWaypointLoc - gameObject.transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        // To swim there, apply an impulse force.
+        swimForwardTimer += Time.deltaTime;
+        if (swimForwardTimer > maxSwimInterval)
+        {
+            swimForwardTimer = 0;
+            // Look in direction of next waypoint and swim there
+            dir = currWaypointLoc - gameObject.transform.position;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // To swim there, apply an impulse force.
+            Debug.Log("Force added");
+            rb.AddForce(dir.normalized * movementSpeed, ForceMode2D.Impulse);
+            
+        }
         // If the fish is within 5 units of next way point, move to next waypoint.
         if (Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint)
         {
@@ -112,4 +132,19 @@ public class FishBehaviour : MonoBehaviour
     {
         sr.flipY = currWaypointLoc.x < transform.position.x;
     }
+    protected void ChangeState(SwimState newState)
+    {
+        switch(newState)
+        {
+            case SwimState.IDLE:
+                idleTimer = 0;
+                break;
+            case SwimState.SWIM:
+                swimForwardTimer = 0;
+                break;
+            case SwimState.GATHER:
+                gatherTimer = 0;
+                break;
+        }
+    } 
 }
