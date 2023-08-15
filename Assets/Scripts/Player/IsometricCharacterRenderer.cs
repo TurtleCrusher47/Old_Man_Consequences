@@ -4,52 +4,34 @@ using UnityEngine;
 
 public class IsometricCharacterRenderer : MonoBehaviour
 {
-    public static readonly string[] staticDirections = { "Static N", "Static W", "Static S", "Static E"};
+    public static readonly string walking = "Walking";
 
-    public static readonly string[] runDirections = { "Walk N", "Walk W", "Walk S", "Walk E"};
-
-    public static readonly string[] idleDirections = { "Idle N", "Idle W", "Idle S", "Idle E"}; 
+    public static readonly string[] directions = {"FacingUp", "FacingLeft", "FacingDown", "FacingRight"}; 
 
     private Animator ar;
     int lastDirection;
 
-    float timer;
-
-    private void Awake()
+    private void Start()
     {
         ar = GetComponent<Animator>();   
     }
 
     public void SetDirection(Vector2 direction)
     {
-        //use the Run states by default
-        string[] directionArray = null;
         //measure the magnitude of the input.
         if (direction.magnitude < .01f)
         {
-            //if we are basically standing still, we'll use the Static states
-            //we won't be able to calculate a direction if the user isn't pressing one, anyway!
-            directionArray = staticDirections;
-
-            timer += Time.fixedDeltaTime;
-            // Debug.Log("TIMER:" + timer);
-
-            if (timer >= 6)
-                directionArray = idleDirections;
+            ar.SetBool("Walking", false);
         }
         else
         {
-            //we can calculate which direction we are going in
-            //use DirectionToIndex to get the index of the slice from the direction vector
-            //save the answer to lastDirection
-            directionArray = runDirections;
+            ar.SetBool("Walking", true);
+            ar.SetBool(directions[lastDirection], false);
             lastDirection = DirectionToIndex(direction, 4);
-
-            timer = 0;
         }
         
         // Test this
-        ar.SetBool(directionArray[lastDirection], true);
+        ar.SetBool(directions[lastDirection], true);
     }
 
     //this function converts a Vector2 direction to an index to a slice around a circle

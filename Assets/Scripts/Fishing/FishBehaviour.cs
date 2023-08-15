@@ -68,12 +68,12 @@ public class FishBehaviour : MonoBehaviour
         }
         currWaypointIndex = Random.Range(0, waypointList.Count);
         currWaypointLoc = waypointList[currWaypointIndex].transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
         switch (swimState)
         {
             case SwimState.IDLE:
@@ -84,6 +84,7 @@ public class FishBehaviour : MonoBehaviour
                 UpdateSpriteDirection();
                 break;
             case SwimState.GATHER:
+
                 Gather();
                 break;
         }
@@ -168,4 +169,5 @@ public class FishBehaviour : MonoBehaviour
         }
         swimState = newState;
     } 
+
 }
