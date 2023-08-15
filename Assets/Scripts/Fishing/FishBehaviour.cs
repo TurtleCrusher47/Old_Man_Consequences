@@ -62,7 +62,6 @@ public class FishBehaviour : MonoBehaviour
         Debug.Log(children);
         for (int i = 0; i < children; i++)
         {
-            Debug.Log(i);
             if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
                 waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);   
         }
@@ -90,26 +89,6 @@ public class FishBehaviour : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private float movementSpeed = 1f;
-    void FixedUpdate()
-    {
-        // Testing for player control
-        // Get the current position of the game object
-        Vector2 currentPos = transform.position;
-        // Get the input from horizontal and vertical axis - x and y
-        Vector2 moveDirection = new Vector2(Input.GetAxis("Horizontal"),
-        Input.GetAxis("Vertical"));
-        // To ensure the vector is unit length
-        moveDirection = Vector2.ClampMagnitude(moveDirection, 1);
-        // Calculate the new position based on velocity (moveDirection * movementSpeed)
-        Vector2 movement = moveDirection * movementSpeed;
-        // Calculate new position
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-        transform.position = newPos;
-        
-
-    }
     protected void Idle()
     {
         // Just chill until you hit the maxmimum number of seconds allowed in a state.
@@ -119,6 +98,8 @@ public class FishBehaviour : MonoBehaviour
             ChangeState(SwimState.SWIM);
         }
     }
+    [SerializeField]
+    private float movementSpeed = 1f;
     protected void Swim()
     {
         swimForwardTimer += Time.deltaTime;
@@ -129,8 +110,7 @@ public class FishBehaviour : MonoBehaviour
             dir = currWaypointLoc - gameObject.transform.position;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            // To swim there, apply an impulse force.
-            Debug.Log("Force added");
+            // To swim there, apply an impulse force
             rb.AddForce(dir.normalized * movementSpeed, ForceMode2D.Impulse);
             
         }
