@@ -17,7 +17,9 @@ public class PlayerController2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        ar = GetComponent<Animator>();   
+        ar = GetComponent<Animator>();
+
+        ar.SetBool("FacingRight", isFacingRight);
     }
 
     // Update is called once per frame
@@ -25,7 +27,6 @@ public class PlayerController2D : MonoBehaviour
     {
         // Change direction
         horizontal = Input.GetAxis("Horizontal");
-        ar.SetFloat("Speed", Mathf.Abs(horizontal));
 
         // Flip the sprite
         Flip();
@@ -35,6 +36,11 @@ public class PlayerController2D : MonoBehaviour
     {
         Vector2 velocity = new Vector2(horizontal * playerData.MovementSpeed, 0);
         rb.velocity = velocity;
+
+        if (rb.velocity.magnitude >= 0.1f)
+        ar.SetBool("Walking", true);
+        else
+        ar.SetBool("Walking", false);
     }
 
     private void Flip()
@@ -45,6 +51,8 @@ public class PlayerController2D : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= - 1f;
             transform.localScale = localScale;
+
+            ar.SetBool("FacingRight", isFacingRight);
         }
     }
 }
