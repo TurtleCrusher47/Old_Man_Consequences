@@ -12,6 +12,8 @@ public class FishBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     // Waypoints to swim to
     [SerializeField]
+    private GameObject wayPointContainer;
+
     private List<GameObject> waypointList = new List<GameObject>();
 
     // Current waypoint index
@@ -43,14 +45,28 @@ public class FishBehaviour : MonoBehaviour
     private float swimForwardTimer;
     // No idea for now
     private float gatherTimer;
+
+
     void Awake()
     {
+        // Get components
         sr = GetComponent<SpriteRenderer>();
         ar = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        // Set initial swim state
         swimState = SwimState.IDLE;
+        // Set initial direction
         dir = new Vector3(0, 0, 0);
-        currWaypointIndex = 0;
+        // Get map children from map container object
+        int children = wayPointContainer.transform.childCount;
+        Debug.Log(children);
+        for (int i = 0; i < children; i++)
+        {
+            Debug.Log(i);
+            if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
+                waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);   
+        }
+        currWaypointIndex = Random.Range(0, waypointList.Count);
         currWaypointLoc = waypointList[currWaypointIndex].transform.position;
     }
 
@@ -61,14 +77,13 @@ public class FishBehaviour : MonoBehaviour
         switch (swimState)
         {
             case SwimState.IDLE:
-               
+                Idle();
                 break;
             case SwimState.SWIM:
                 Swim();
                 UpdateSpriteDirection();
                 break;
             case SwimState.GATHER:
-
                 Gather();
                 break;
         }
@@ -97,6 +112,11 @@ public class FishBehaviour : MonoBehaviour
     protected void Idle()
     {
         // Just chill until you hit the maxmimum number of seconds allowed in a state.
+        idleTimer += Time.deltaTime;
+        if (idleTimer > 1)
+        {
+            ChangeState(SwimState.SWIM);
+        }
     }
     protected void Swim()
     {
@@ -116,9 +136,9 @@ public class FishBehaviour : MonoBehaviour
         // If the fish is within 5 units of next way point, move to next waypoint.
         if (Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint)
         {
-            currWaypointIndex++;
-            currWaypointIndex %= waypointList.Count;
+            currWaypointIndex = Random.Range(0, waypointList.Count);
             currWaypointLoc = waypointList[currWaypointIndex].transform.position;
+            ChangeState(SwimState.IDLE);
         }
     }
   
@@ -146,5 +166,6 @@ public class FishBehaviour : MonoBehaviour
                 gatherTimer = 0;
                 break;
         }
+        swimState = newState;
     } 
 }
