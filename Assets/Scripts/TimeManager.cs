@@ -56,8 +56,12 @@ public class TimeManager : MonoBehaviour
 
         Debug.Log("Time: " + hours + ":" + minutes + " " + timeCounter);
 
-        // Update UI
-        UpdateUI();
+        // Update the Time UI in intervals of 15 Minutes
+        if (minutes % 15 == 0) 
+        {
+            // Update UI
+            UpdateUI();
+        }
     }
 
     private void UpdateUI()
