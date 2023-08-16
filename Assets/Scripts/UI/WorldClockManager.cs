@@ -11,6 +11,7 @@ public class WorldClockManager : MonoBehaviour
 
     [Header("Time Settings")]
     [SerializeField] private float secondsPerMinute = 6.0f; // Adjust this to control time speed
+    
 
     private int currentDay = 1;
     private int currentDayIndex = 1; // Index of the current day
@@ -72,7 +73,7 @@ public class WorldClockManager : MonoBehaviour
         // Format time in 12-hour format with AM and PM
         string amPm = isMorning ? "am" : "pm";
         int displayHours = hours % 12 == 0 ? 12 : hours % 12; // Handle 12:00
-        string formattedTime = string.Format("{0:D2}:{1:D2} {2}", displayHours, minutes, amPm);
+        string formattedTime = string.Format("{0:D1}:{1:D2} {2}", displayHours, minutes, amPm);
 
         // Update timeText UI element
         timeText.text = formattedTime;

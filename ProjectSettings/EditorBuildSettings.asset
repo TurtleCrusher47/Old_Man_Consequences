@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FishScene.unity
     guid: e98d25fba0379af4f8cbb179201f7568
+  - enabled: 1
+    path: Assets/Scenes/UIScene.unity
+    guid: c0505a097bc3e6943bd64dda0878e914
   m_configObjects: {}
