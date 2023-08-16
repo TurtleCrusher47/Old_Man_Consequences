@@ -38,7 +38,9 @@ public class FishManager : MonoBehaviour
         }
         if (schooling)
         {
-            SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
+            int newDestination = Random.Range(0, pointsContainer.transform.childCount);
+            Debug.Log(newDestination);  
+            SetAllFishDestinations(newDestination);
         }
     }
 
@@ -62,6 +64,7 @@ public class FishManager : MonoBehaviour
         if (counter == fishCount || destTimer > maxTimePerDest)
         {
             SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
+            destTimer = 0;
         }
     }
     // Set the schooling status of each fish

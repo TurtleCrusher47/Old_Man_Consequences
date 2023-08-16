@@ -75,9 +75,7 @@ public class FishBehaviour : MonoBehaviour
         {
             if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
                 waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);
-            
-            else
-                fishingPoint = wayPointContainer.transform.GetChild(i).gameObject;
+           
             Debug.Log("Index " + i + " X: " + wayPointContainer.transform.GetChild(i).position.x + " Y: " + wayPointContainer.transform.GetChild(i).position.y);
         }
         if (!schooling)
@@ -86,7 +84,7 @@ public class FishBehaviour : MonoBehaviour
         swimForwardTimer = 0;
         swimTurnTimer = 0;
         maxTurnInterval = maxSwimInterval / 2;
-
+        fishingPoint = GameObject.Find("FishingPoint");
     }
     // Update is called once per frame
     void Update()
@@ -142,7 +140,7 @@ public class FishBehaviour : MonoBehaviour
             if (schooling == false)
             {
                 currWaypointIndex = Random.Range(0, waypointList.Count);
-                Debug.Log("Changed by self");
+                Debug.Log("Changed by FishBehaviour");
             }
             currWaypointLoc = waypointList[currWaypointIndex].transform.position;
             ChangeState(SwimState.IDLE);
