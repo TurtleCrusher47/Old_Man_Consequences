@@ -9,7 +9,7 @@ public class TestPlayerStats : MonoBehaviour
     [Header("Hunger")]
     [SerializeField] private Image hungerBar;
     [SerializeField] private float maxHunger = 100f;
-    [SerializeField] private float hungerDecreaseAmountOnClick = 10f; // Decrease hunger on mouse click
+    [SerializeField] private float hungerDecreaseAmountOnClick = 5f; // Decrease hunger on mouse click
 
     [Header("Thirst")]
     [SerializeField] private Image thirstBar;
@@ -37,7 +37,7 @@ public class TestPlayerStats : MonoBehaviour
     void Update()
     {
         // Handle hunger decrease on mouse click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             DecreaseHunger(hungerDecreaseAmountOnClick);
         }

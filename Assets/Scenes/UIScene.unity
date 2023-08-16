@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hungerBar: {fileID: 914623851}
   maxHunger: 100
-  hungerDecreaseAmountOnClick: 10
+  hungerDecreaseAmountOnClick: 5
   thirstBar: {fileID: 1688938732}
   maxThirst: 100
   thirstDecreaseInterval: 5
