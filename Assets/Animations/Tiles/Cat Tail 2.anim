@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Cat Tail 2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 610026767, guid: 8e4ff57e3c49bb6488f1e49388c61d0a, type: 3}
+      value: {fileID: -1062032041, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
     - time: 0.083333336
-      value: {fileID: -1922167207, guid: 8e4ff57e3c49bb6488f1e49388c61d0a, type: 3}
+      value: {fileID: 1466520659, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 610026767, guid: 8e4ff57e3c49bb6488f1e49388c61d0a, type: 3}
-    - {fileID: -1922167207, guid: 8e4ff57e3c49bb6488f1e49388c61d0a, type: 3}
+    - {fileID: -1062032041, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
+    - {fileID: 1466520659, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
