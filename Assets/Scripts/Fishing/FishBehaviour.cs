@@ -7,13 +7,14 @@ public class FishBehaviour : MonoBehaviour
     // Sprite and animations
     private SpriteRenderer sr;
     private Animator ar;
-    private Vector3 dir;
+    private Vector3 targetDir;
     // For fish physics and swimming
     private Rigidbody2D rb;
     // Waypoints to swim to
     [SerializeField]
     private GameObject wayPointContainer;
 
+    private GameObject fishingPoint;
     private List<GameObject> waypointList = new List<GameObject>();
 
     // Current waypoint index
@@ -28,7 +29,8 @@ public class FishBehaviour : MonoBehaviour
     {
         IDLE = 0, 
         SWIM = 1,
-        GATHER = 2,
+        BITE = 2,
+        FLEE = 3,
         NUM_SWIMSTATE
     }
     [SerializeField]
@@ -44,7 +46,7 @@ public class FishBehaviour : MonoBehaviour
     // Timer that counts down time till next swim
     private float swimForwardTimer;
     // No idea for now
-    private float gatherTimer;
+    private float biteTimer;
 
 
     void Awake()
@@ -56,14 +58,16 @@ public class FishBehaviour : MonoBehaviour
         // Set initial swim state
         swimState = SwimState.IDLE;
         // Set initial direction
-        dir = new Vector3(0, 0, 0);
+        targetDir = new Vector3(0, 0, 0);
         // Get map children from map container object
         int children = wayPointContainer.transform.childCount;
         Debug.Log(children);
         for (int i = 0; i < children; i++)
         {
             if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
-                waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);   
+                waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);
+            else
+                fishingPoint = wayPointContainer.transform.GetChild(i).gameObject;
         }
         currWaypointIndex = Random.Range(0, waypointList.Count);
         currWaypointLoc = waypointList[currWaypointIndex].transform.position;
@@ -73,18 +77,19 @@ public class FishBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (swimState)
         {
             case SwimState.IDLE:
                 Idle();
                 break;
             case SwimState.SWIM:
+                LookTowardsDest();
                 Swim();
                 UpdateSpriteDirection();
                 break;
-            case SwimState.GATHER:
-
-                Gather();
+            case SwimState.BITE:
+                Bite();
                 break;
         }
     }
@@ -106,12 +111,9 @@ public class FishBehaviour : MonoBehaviour
         if (swimForwardTimer > maxSwimInterval)
         {
             swimForwardTimer = 0;
-            // Look in direction of next waypoint and swim there
-            dir = currWaypointLoc - gameObject.transform.position;
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            // To swim there, apply an impulse force
-            rb.AddForce(dir.normalized * movementSpeed, ForceMode2D.Impulse);
+           
+            // Swim forward in the direction the fish is facing.
+            rb.AddForce(transform.right.normalized * movementSpeed, ForceMode2D.Impulse);
             
         }
         // If the fish is within 5 units of next way point, move to next waypoint.
@@ -122,10 +124,20 @@ public class FishBehaviour : MonoBehaviour
             ChangeState(SwimState.IDLE);
         }
     }
-  
-    protected void Gather()
+
+    protected void LookTowardsDest()
     {
-        // Swim around a single point???
+        targetDir = currWaypointLoc - gameObject.transform.position;
+        var angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+        var angleToTurn = angle / swimForwardTimer;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, movementSpeed * Time.deltaTime);
+    }
+  
+    protected void Bite()
+    {
+        // Charge towards fishing rod...?
+
     }
 
     // make da fishy look in right direction
@@ -143,8 +155,8 @@ public class FishBehaviour : MonoBehaviour
             case SwimState.SWIM:
                 swimForwardTimer = 0;
                 break;
-            case SwimState.GATHER:
-                gatherTimer = 0;
+            case SwimState.BITE:
+                biteTimer = 0;
                 break;
         }
         swimState = newState;
