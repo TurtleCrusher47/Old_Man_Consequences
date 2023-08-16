@@ -27,13 +27,25 @@ public class PauseMenu : MonoBehaviour
             {
                 Paused();
             }
+
+            if (gameIsPaused == true)
+            {
+                Settings();
+            }
+            else
+            {
+                Resume();
+            }
         }
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false); // Set the panel active to true
+<<<<<<< Updated upstream
         settingsMenu.SetActive(false);
+=======
+>>>>>>> Stashed changes
         Time.timeScale = 1f; // unfreeze the gameplay
         gameIsPaused = false; // change the bool to true
         Debug.Log("Scene Resumed");
