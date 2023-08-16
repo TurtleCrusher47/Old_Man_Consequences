@@ -13,10 +13,11 @@ public class TestPlayerStats : MonoBehaviour
 
     [Header("Thirst")]
     [SerializeField] private Image thirstBar;
-    [SerializeField] private float maxThirst = 100f;
+    [SerializeField] private float maxThirst = 150f; // Increase max thirst to 150f
     [SerializeField] private float thirstDecreaseInterval = 5f; // Decrease thirst every 5 seconds
     [SerializeField] private float thirstDecreaseAmount = 5f;
 
+    // Scrap idea but c first
     [Header("Energy")]
     [SerializeField] private TMP_Text energyProgressText;
     [SerializeField] private Slider energySlider;
@@ -26,11 +27,19 @@ public class TestPlayerStats : MonoBehaviour
     private float nextThirstDecreaseTime;
     private float nextEnergyDecreaseTime;
 
+    private float initialHunger;
+    private float initialThirst;
+    private float initialEnergy;
+
     // Start is called before the first frame update
     void Start()
     {
         nextThirstDecreaseTime = Time.time + thirstDecreaseInterval;
         nextEnergyDecreaseTime = Time.time + energyDecreaseInterval;
+
+        initialHunger = maxHunger;
+        initialThirst = maxThirst;
+        initialEnergy = energySlider.maxValue;  
     }
 
     // Update is called once per frame
@@ -40,6 +49,24 @@ public class TestPlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             DecreaseHunger(hungerDecreaseAmountOnClick);
+        }
+
+        // Handle Test reset of players Hunger
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerHungerRefill();
+        }
+
+        // Handle Test reset of players Thirst
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            PlayerThirstRefill(30);
+        }
+
+        // Handle Test reset of players Energy
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PlayerEnergyRefill();
         }
 
         // Handle thirst decrease over time
@@ -55,6 +82,23 @@ public class TestPlayerStats : MonoBehaviour
             DecreaseEnergy(energyDecreaseAmount);
             nextEnergyDecreaseTime = Time.time + energyDecreaseInterval;
         }
+    }
+
+    private void PlayerHungerRefill()
+    {
+        hungerBar.fillAmount = initialHunger / maxHunger;
+    }
+
+    private void PlayerThirstRefill(float amount)
+    {
+        thirstBar.fillAmount = initialThirst / amount;
+        // Refill thirst by 30 
+    }
+
+    private void PlayerEnergyRefill()
+    {
+        energySlider.value = initialEnergy;
+        energyProgressText.text = $"{initialEnergy} %";
     }
 
     private void DecreaseHunger(float amount)
