@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class FishingSceneUIManager : MonoBehaviour
 {
     [SerializeField]
-    private Slider _hungerBar;
+    private Slider hungerBar;
     [SerializeField]
-    private Slider _staminaBar;
+    private Slider staminaBar;
     [SerializeField]
-    private Slider _thirstBar;
+    private Slider thirstBar;
     //[SerializeField]
     //private PlayerData playerData;
 
     // Start is called before the first frame update
     void Start()
     {
-        _hungerBar.value = 0;
-        _staminaBar.value = 0;
-        _thirstBar.value = 0;
+        hungerBar.value = 0;
+        staminaBar.value = 0;
+        thirstBar.value = 0;
     }
 
     // Update is called once per frame

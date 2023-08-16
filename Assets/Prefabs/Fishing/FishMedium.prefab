@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointContainer: {fileID: 0}
-  minDistToNextPoint: 1
+  minDistToNextPoint: 1.5
   swimState: 0
   maxSwimInterval: 0.5
+  rotationMultipler: 1.8
   movementSpeed: 0.5

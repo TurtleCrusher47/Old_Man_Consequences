@@ -11,14 +11,14 @@ public class FishBehaviour : MonoBehaviour
     // For fish physics and swimming
     private Rigidbody2D rb;
     // Waypoints to swim to
-    [SerializeField]
-    private GameObject wayPointContainer;
+    public GameObject wayPointContainer;
 
     private GameObject fishingPoint;
     private List<GameObject> waypointList = new List<GameObject>();
 
     // Current waypoint index
-    private int currWaypointIndex;
+    [SerializeField]
+    private int currWaypointIndex = 0;
     // Current waypoint location
     private Vector3 currWaypointLoc;
     // Minimum distance to next point
@@ -36,6 +36,10 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField]
     private SwimState swimState;
 
+    // Bool to check if the fish is schooling or not
+    public bool schooling = false;
+
+
     // Timers for ALL states
     // Idle state
     private float idleTimer;
@@ -43,13 +47,19 @@ public class FishBehaviour : MonoBehaviour
     // max time between swims
     [SerializeField]
     private float maxSwimInterval = 2;
+    private float maxTurnInterval;
+    [SerializeField]
+    private float rotationMultipler = 1.0f;
     // Timer that counts down time till next swim
     private float swimForwardTimer;
+    private float swimTurnTimer;
     // No idea for now
-    private float biteTimer;
+    //private float biteTimer;
+    // Has the fish reached its current destination?
+    public bool destReached;
 
 
-    void Awake()
+    public void Init()
     {
         // Get components
         sr = GetComponent<SpriteRenderer>();
@@ -61,19 +71,23 @@ public class FishBehaviour : MonoBehaviour
         targetDir = new Vector3(0, 0, 0);
         // Get map children from map container object
         int children = wayPointContainer.transform.childCount;
-        Debug.Log(children);
         for (int i = 0; i < children; i++)
         {
             if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
                 waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);
+            
             else
                 fishingPoint = wayPointContainer.transform.GetChild(i).gameObject;
+            Debug.Log("Index " + i + " X: " + wayPointContainer.transform.GetChild(i).position.x + " Y: " + wayPointContainer.transform.GetChild(i).position.y);
         }
-        currWaypointIndex = Random.Range(0, waypointList.Count);
+        if (!schooling)
+            currWaypointIndex = Random.Range(0, waypointList.Count);
         currWaypointLoc = waypointList[currWaypointIndex].transform.position;
+        swimForwardTimer = 0;
+        swimTurnTimer = 0;
+        maxTurnInterval = maxSwimInterval / 2;
 
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -84,7 +98,6 @@ public class FishBehaviour : MonoBehaviour
                 Idle();
                 break;
             case SwimState.SWIM:
-                LookTowardsDest();
                 Swim();
                 UpdateSpriteDirection();
                 break;
@@ -98,7 +111,7 @@ public class FishBehaviour : MonoBehaviour
     {
         // Just chill until you hit the maxmimum number of seconds allowed in a state.
         idleTimer += Time.deltaTime;
-        if (idleTimer > 1)
+        if (idleTimer > 5)
         {
             ChangeState(SwimState.SWIM);
         }
@@ -107,7 +120,13 @@ public class FishBehaviour : MonoBehaviour
     private float movementSpeed = 1f;
     protected void Swim()
     {
+        
         swimForwardTimer += Time.deltaTime;
+        swimTurnTimer += Time.deltaTime;
+        if (swimTurnTimer > maxTurnInterval)
+        {
+            LookTowardsDest();
+        }
         if (swimForwardTimer > maxSwimInterval)
         {
             swimForwardTimer = 0;
@@ -116,10 +135,15 @@ public class FishBehaviour : MonoBehaviour
             rb.AddForce(transform.right.normalized * movementSpeed, ForceMode2D.Impulse);
             
         }
-        // If the fish is within 5 units of next way point, move to next waypoint.
-        if (Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint)
+        // If the fish is within minDistToBextPoint units of next way point, move to next waypoint.
+        destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
+        if (destReached)
         {
-            currWaypointIndex = Random.Range(0, waypointList.Count);
+            if (schooling == false)
+            {
+                currWaypointIndex = Random.Range(0, waypointList.Count);
+                Debug.Log("Changed by self");
+            }
             currWaypointLoc = waypointList[currWaypointIndex].transform.position;
             ChangeState(SwimState.IDLE);
         }
@@ -129,9 +153,8 @@ public class FishBehaviour : MonoBehaviour
     {
         targetDir = currWaypointLoc - gameObject.transform.position;
         var angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-        var angleToTurn = angle / swimForwardTimer;
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, movementSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, movementSpeed * rotationMultipler * Time.deltaTime);
     }
   
     protected void Bite()
@@ -143,7 +166,8 @@ public class FishBehaviour : MonoBehaviour
     // make da fishy look in right direction
     protected void UpdateSpriteDirection()
     {
-        sr.flipY = currWaypointLoc.x < transform.position.x;
+        // Flip the sprite if the rotation angle of the sprite is > 90
+        sr.flipY = Mathf.Abs(gameObject.transform.localRotation.eulerAngles.z) > 90;
     }
     protected void ChangeState(SwimState newState)
     {
@@ -154,12 +178,21 @@ public class FishBehaviour : MonoBehaviour
                 break;
             case SwimState.SWIM:
                 swimForwardTimer = 0;
+                swimTurnTimer = 0;
                 break;
             case SwimState.BITE:
-                biteTimer = 0;
+                //biteTimer = 0;
                 break;
         }
         swimState = newState;
     } 
-
+    public void SetDestination(int index)
+    {
+        currWaypointIndex = index;
+        currWaypointLoc = waypointList[currWaypointIndex].transform.position;
+    }
+    public void SetDestination(Vector3 newDest)
+    {
+        currWaypointLoc = newDest;
+    }
 }
