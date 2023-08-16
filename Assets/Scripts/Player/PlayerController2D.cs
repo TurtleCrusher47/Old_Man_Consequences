@@ -20,6 +20,7 @@ public class PlayerController2D : MonoBehaviour
         ar = GetComponent<Animator>();
 
         ar.SetBool("FacingRight", isFacingRight);
+        ar.SetBool("FacingLeft", !isFacingRight);
     }
 
     // Update is called once per frame
@@ -48,11 +49,12 @@ public class PlayerController2D : MonoBehaviour
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= - 1f;
-            transform.localScale = localScale;
+            // Vector3 localScale = transform.localScale;
+            // localScale.x *= - 1f;
+            // transform.localScale = localScale;
 
             ar.SetBool("FacingRight", isFacingRight);
+            ar.SetBool("FacingLeft", !isFacingRight);
         }
     }
 }
