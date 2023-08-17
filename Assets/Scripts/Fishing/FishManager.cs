@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FishManager : MonoBehaviour
@@ -25,15 +26,20 @@ public class FishManager : MonoBehaviour
 
         for (int i = 0; i < fishCount; i++)
         {
-
+            // Instantiate each fish
             GameObject newFish = Instantiate(fishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
             newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
             newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
             newFish.transform.parent = gameObject.transform;
         }
+        // Set all fish's schooling status
         SetAllFishSchooling(schooling);
         foreach (Transform fish in gameObject.transform)
         {
+            // Add each fish to the fishList
             fishList.Add(fish.gameObject);
         }
         if (schooling)
@@ -48,20 +54,10 @@ public class FishManager : MonoBehaviour
     void Update()
     {
         destTimer += Time.deltaTime;
-        int counter = 0;
         // Check if all fish have reached their destination
-        for (int i = 0; i < fishList.Count; i++)
-        {
-            if (!fishList[i].GetComponent<FishBehaviour>().destReached)
-            {
-                break;
-            }
-            else
-            {
-                counter++;
-            }
-        }
-        if (counter == fishCount || destTimer > maxTimePerDest)
+        // Searches the list and counts the number of fish that have reached their destination
+        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count 
+            || destTimer > maxTimePerDest)
         {
             SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
             destTimer = 0;
