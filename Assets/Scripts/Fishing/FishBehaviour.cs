@@ -88,7 +88,7 @@ public class FishBehaviour : MonoBehaviour
         currWaypointLoc = waypointList[currWaypointIndex].transform.position;
         swimForwardTimer = 0;
         swimTurnTimer = 0;
-        maxTurnInterval = maxSwimInterval / 2;
+        maxTurnInterval = maxSwimInterval / 3;
         biteTimer = 0;
         fishingPoint = GameObject.Find("FishingPoint");
     }
@@ -124,9 +124,20 @@ public class FishBehaviour : MonoBehaviour
     private float movementSpeed = 1f;
     protected void Swim()
     {
-        
-       
-        SwimTowardsTarget();
+        swimForwardTimer += Time.deltaTime;
+        swimTurnTimer += Time.deltaTime;
+        if (swimTurnTimer > maxTurnInterval)
+        {
+            LookTowardsDest();
+        }
+        if (swimForwardTimer > maxSwimInterval)
+        {
+            swimForwardTimer = 0;
+
+            // Swim forward in the direction the fish is facing.
+            rb.AddForce(transform.right.normalized * movementSpeed, ForceMode2D.Impulse);
+
+        }
         // If the fish is within minDistToBextPoint units of next way point, move to next waypoint.
         destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
         if (destReached)
@@ -214,5 +225,9 @@ public class FishBehaviour : MonoBehaviour
     {
         currWaypointIndex = -1;
         currWaypointLoc = newDest;
+    }
+    public SwimState GetState()
+    {
+        return swimState;
     }
 }

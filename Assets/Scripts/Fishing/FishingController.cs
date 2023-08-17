@@ -84,17 +84,19 @@ public class FishingController : MonoBehaviour
 
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
+        // Move based on that direction
+        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
+            fishingStrength = 0;
+            fishingPoint.transform.position = newPos;
             isCasted = false;
         }
-        // Move based on that direction
-        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
         // Transform the position based on the direction
         transform.position = newPos;
         // Reset the fishing point's position
-        //  fishingPoint.transform.position = newPos;
+
         UpdateSpriteDirection();
     }
     void BuildRodStrength()
@@ -110,6 +112,7 @@ public class FishingController : MonoBehaviour
     void CastRod()
     {
         fishingElapsedTime = 0;
+        //fishingStrength = 0;
         // Take rod strength
         // Calculate X position of rod based on rod strength
         Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y, 0);

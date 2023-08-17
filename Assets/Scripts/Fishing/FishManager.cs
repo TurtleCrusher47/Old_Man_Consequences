@@ -71,14 +71,15 @@ public class FishManager : MonoBehaviour
         destTimer += Time.deltaTime;
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
-        if (!player.isCasted)
+        if (player.isCasted == false)
         {
+            //UpdateFishState(SwimState.SWIM);
             if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
-                || destTimer > maxTimePerDest)
-            {
-                SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
-                destTimer = 0;
-            }
+            || destTimer > maxTimePerDest)
+        {
+            SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
+            destTimer = 0;
+        }
         }
         else
         {
@@ -101,7 +102,7 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(destinationIndex);
-            Debug.Log("Changed by SetAllFishDest");
+            Debug.Log("Changed by SetAllFishDest Index");
         }
     }
     void SetAllFishDestinations(Vector3 newDest)
@@ -110,15 +111,18 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(newDest);
-            Debug.Log("Changed by SetAllFishDest");
+            Debug.Log("Changed by SetAllFishDest Vec3");
         }
     }
     void UpdateFishState(SwimState newState)
     {
         foreach (Transform fish in gameObject.transform)
         {
-            fish.gameObject.GetComponent<FishBehaviour>().ChangeState(newState);
-            Debug.Log("Changed by SetAllFishDest");
+            if (fish.gameObject.GetComponent<FishBehaviour>().GetState() != newState)
+            {
+                fish.gameObject.GetComponent<FishBehaviour>().ChangeState(newState);
+                Debug.Log("State Updated");
+            }
         }
     }
 }
