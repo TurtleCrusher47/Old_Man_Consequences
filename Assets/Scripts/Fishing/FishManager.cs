@@ -83,7 +83,7 @@ public class FishManager : MonoBehaviour
         }
         else
         {
-            UpdateFishState(SwimState.BITE);
+            UpdateFishState(SwimState.LURED);
         }
     }
     // Set the schooling status of each fish

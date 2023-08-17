@@ -8,10 +8,17 @@ namespace FishStates
     {
         IDLE = 0,
         SWIM = 1,
-        BITE = 2,
+        LURED = 2,
         FLEE = 3,
         NUM_SWIMSTATE
     }
+    enum LuredState
+    { 
+        LURE,
+        BITE,
+        NUM_LUREDSTATE
+    }
+
 }
 public class FishBehaviour : MonoBehaviour
 {
@@ -38,7 +45,8 @@ public class FishBehaviour : MonoBehaviour
    
     [SerializeField]
     private SwimState swimState;
-
+    [SerializeField]
+    private LuredState luredState;
     // Bool to check if the fish is schooling or not
     public bool schooling = false;
 
@@ -72,6 +80,7 @@ public class FishBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Set initial swim state
         swimState = SwimState.IDLE;
+        luredState = LuredState.LURE;
         // Set initial direction
         targetDir = new Vector3(0, 0, 0);
         // Get map children from map container object
@@ -105,8 +114,8 @@ public class FishBehaviour : MonoBehaviour
                 Swim();
                 UpdateSpriteDirection();
                 break;
-            case SwimState.BITE:
-                Bite();
+            case SwimState.LURED:
+                Lured();
                 break;
         }
     }
@@ -163,12 +172,38 @@ public class FishBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, movementSpeed * rotationMultipler * Time.deltaTime);
     }
   
-    protected void Bite()
+    protected void Lured()
     {
         // Charge towards fishing rod...?
-        SwimTowardsTarget();
+        switch (luredState)
+        {
+            case LuredState.LURE:
+                SwimTowardsTarget();
+                break;
+            case LuredState.BITE:
+                LookTowardsDest();
+                Vector3 fishDir = (transform.position - fishingPoint.transform.position).normalized;
+                float dotProd = Vector3.Dot(fishDir, gameObject.transform.right);
+                Debug.Log("DotProd: " + dotProd);
+                if (Mathf.Abs(dotProd) > 0.9)
+                {
+                    Debug.Log("Swimming to lure");
+                    SwimTowardsTarget();
+                }
+                break;
+
+        }
+      
         destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
-        if (destReached && biteTimer > 10)
+        if (destReached)
+        {
+            int newInt = Random.Range(1, 10);
+            if (newInt < 3)
+            {
+                luredState = LuredState.BITE;
+            }
+        }
+        else if (biteTimer > 10)
         {
             ChangeState(SwimState.SWIM);
         }
@@ -209,7 +244,7 @@ public class FishBehaviour : MonoBehaviour
                 swimForwardTimer = 0;
                 swimTurnTimer = 0;
                 break;
-            case SwimState.BITE:
+            case SwimState.LURED:
                 biteTimer = 0;
                 currWaypointLoc = fishingPoint.transform.position;
                 break;
