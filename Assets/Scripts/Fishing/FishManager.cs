@@ -27,6 +27,10 @@ public class FishManager : MonoBehaviour
     // The number of fish to be spawned
     [SerializeField]
     private float fishCount = 5;
+    [SerializeField]
+    private float smallFishCount = 3;
+    [SerializeField]
+    private float bigFishCount = 2;
 
     private float schoolTimer;
 
@@ -37,7 +41,6 @@ public class FishManager : MonoBehaviour
     {
         destTimer = 0;
         schoolTimer = 0;
-        schooling = true;
 
         for (int i = 0; i < fishCount; i++)
         {

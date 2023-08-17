@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 3680686058251397502}
   - component: {fileID: 3680686058251397503}
   - component: {fileID: 3680686058251397500}
+  - component: {fileID: -5941549455050279240}
   - component: {fileID: 3680686058251397497}
+  - component: {fileID: -2271707838438965227}
   m_Layer: 0
   m_Name: FishMedium
   m_TagString: Untagged
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d08e6c34cd96afa4aad2a16fe038c496, type: 3}
+  m_Sprite: {fileID: 1399894241, guid: b3ffae092e1c63d449228460e6f71ded, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,6 +109,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-5941549455050279240
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680686058251397501}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3680686058251397497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +152,18 @@ MonoBehaviour:
   rotationMultipler: 1.8
   destReached: 0
   movementSpeed: 0.5
+--- !u!111 &-2271707838438965227
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680686058251397501}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f4ffb2c09dfc8284cb1e51a742a5389e, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

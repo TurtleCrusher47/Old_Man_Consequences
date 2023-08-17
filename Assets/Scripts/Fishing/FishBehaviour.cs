@@ -189,6 +189,7 @@ public class FishBehaviour : MonoBehaviour
                 {
                     Debug.Log("Swimming to lure");
                     SwimTowardsTarget();
+                    
                 }
                 break;
 
