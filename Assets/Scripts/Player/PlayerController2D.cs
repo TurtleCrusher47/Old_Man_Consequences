@@ -35,7 +35,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 velocity = new Vector2(horizontal * playerData.MovementSpeed, 0);
+        Vector2 velocity = new Vector2(horizontal * playerData.MovementSpeed, rb.velocity.y);
         rb.velocity = velocity;
 
         if (rb.velocity.magnitude >= 0.1f)
