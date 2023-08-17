@@ -1,7 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FishStates;
+namespace FishStates
+{
+    public enum SwimState
+    {
+        IDLE = 0,
+        SWIM = 1,
+        BITE = 2,
+        FLEE = 3,
+        NUM_SWIMSTATE
+    }
+}
 public class FishBehaviour : MonoBehaviour
 {
     // Sprite and animations
@@ -13,7 +24,6 @@ public class FishBehaviour : MonoBehaviour
     // Waypoints to swim to
     public GameObject wayPointContainer;
 
-    private GameObject fishingPoint;
     private List<GameObject> waypointList = new List<GameObject>();
 
     // Current waypoint index
@@ -25,14 +35,7 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField]
     private float minDistToNextPoint = 1f;
     // FSM for fish swimming 
-    protected enum SwimState
-    {
-        IDLE = 0, 
-        SWIM = 1,
-        BITE = 2,
-        FLEE = 3,
-        NUM_SWIMSTATE
-    }
+   
     [SerializeField]
     private SwimState swimState;
 
@@ -54,9 +57,11 @@ public class FishBehaviour : MonoBehaviour
     private float swimForwardTimer;
     private float swimTurnTimer;
     // No idea for now
-    //private float biteTimer;
+    private float biteTimer;
     // Has the fish reached its current destination?
     public bool destReached;
+    // Point where the fishing is fishing
+    private GameObject fishingPoint;
 
 
     public void Init()
@@ -84,6 +89,7 @@ public class FishBehaviour : MonoBehaviour
         swimForwardTimer = 0;
         swimTurnTimer = 0;
         maxTurnInterval = maxSwimInterval / 2;
+        biteTimer = 0;
         fishingPoint = GameObject.Find("FishingPoint");
     }
     // Update is called once per frame
@@ -119,30 +125,21 @@ public class FishBehaviour : MonoBehaviour
     protected void Swim()
     {
         
-        swimForwardTimer += Time.deltaTime;
-        swimTurnTimer += Time.deltaTime;
-        if (swimTurnTimer > maxTurnInterval)
-        {
-            LookTowardsDest();
-        }
-        if (swimForwardTimer > maxSwimInterval)
-        {
-            swimForwardTimer = 0;
-           
-            // Swim forward in the direction the fish is facing.
-            rb.AddForce(transform.right.normalized * movementSpeed, ForceMode2D.Impulse);
-            
-        }
+       
+        SwimTowardsTarget();
         // If the fish is within minDistToBextPoint units of next way point, move to next waypoint.
         destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
         if (destReached)
         {
-            if (schooling == false)
+            if (swimState == SwimState.SWIM)
             {
-                currWaypointIndex = Random.Range(0, waypointList.Count);
-                Debug.Log("Changed by FishBehaviour");
+                if (schooling == false)
+                {
+                    currWaypointIndex = Random.Range(0, waypointList.Count);
+                    Debug.Log("Changed by FishBehaviour");
+                }
+                currWaypointLoc = waypointList[currWaypointIndex].transform.position;
             }
-            currWaypointLoc = waypointList[currWaypointIndex].transform.position;
             ChangeState(SwimState.IDLE);
         }
     }
@@ -158,7 +155,30 @@ public class FishBehaviour : MonoBehaviour
     protected void Bite()
     {
         // Charge towards fishing rod...?
+        SwimTowardsTarget();
+        destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
+        if (destReached && biteTimer > 10)
+        {
+            ChangeState(SwimState.SWIM);
+        }
+    }
 
+    void SwimTowardsTarget()
+    {
+        swimForwardTimer += Time.deltaTime;
+        swimTurnTimer += Time.deltaTime;
+        if (swimTurnTimer > maxTurnInterval)
+        {
+            LookTowardsDest();
+        }
+        if (swimForwardTimer > maxSwimInterval)
+        {
+            swimForwardTimer = 0;
+
+            // Swim forward in the direction the fish is facing.
+            rb.AddForce(transform.right.normalized * movementSpeed, ForceMode2D.Impulse);
+
+        }
     }
 
     // make da fishy look in right direction
@@ -167,7 +187,7 @@ public class FishBehaviour : MonoBehaviour
         // Flip the sprite if the rotation angle of the sprite is > 90
         sr.flipY = Mathf.Abs(gameObject.transform.localRotation.eulerAngles.z) > 90;
     }
-    protected void ChangeState(SwimState newState)
+    public void ChangeState(SwimState newState)
     {
         switch(newState)
         {
@@ -179,7 +199,8 @@ public class FishBehaviour : MonoBehaviour
                 swimTurnTimer = 0;
                 break;
             case SwimState.BITE:
-                //biteTimer = 0;
+                biteTimer = 0;
+                currWaypointLoc = fishingPoint.transform.position;
                 break;
         }
         swimState = newState;
@@ -191,6 +212,7 @@ public class FishBehaviour : MonoBehaviour
     }
     public void SetDestination(Vector3 newDest)
     {
+        currWaypointIndex = -1;
         currWaypointLoc = newDest;
     }
 }

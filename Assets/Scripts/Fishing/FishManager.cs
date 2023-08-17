@@ -2,26 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using FishStates;
 
 public class FishManager : MonoBehaviour
 {
+    // Prefabs to generate
     [SerializeField]
     private GameObject fishPrefab;
+    // List of points where fishes will flock
     [SerializeField]
     private GameObject pointsContainer;
+    // List of fish
     private List<GameObject> fishList = new List<GameObject>();
+
+    // Bool to store if fish are schooling
     public bool schooling;
 
+    // Maximum time each fish will stay in each location
     [SerializeField]
     private float maxTimePerDest;
 
+    // Timer which stores how long the fish have been chilling
     private float destTimer;
+    // The number of fish to be spawned
     [SerializeField]
     private float fishCount = 5;
-    // Start is called before the first frame update
+
+    private float schoolTimer;
+
+    [SerializeField]
+    private FishingController player;
+
     void Start()
     {
         destTimer = 0;
+        schoolTimer = 0;
         schooling = true;
 
         for (int i = 0; i < fishCount; i++)
@@ -56,11 +71,18 @@ public class FishManager : MonoBehaviour
         destTimer += Time.deltaTime;
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
-        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count 
-            || destTimer > maxTimePerDest)
+        if (!player.isCasted)
         {
-            SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
-            destTimer = 0;
+            if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
+                || destTimer > maxTimePerDest)
+            {
+                SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
+                destTimer = 0;
+            }
+        }
+        else
+        {
+            UpdateFishState(SwimState.BITE);
         }
     }
     // Set the schooling status of each fish
@@ -79,6 +101,23 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(destinationIndex);
+            Debug.Log("Changed by SetAllFishDest");
+        }
+    }
+    void SetAllFishDestinations(Vector3 newDest)
+    {
+
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().SetDestination(newDest);
+            Debug.Log("Changed by SetAllFishDest");
+        }
+    }
+    void UpdateFishState(SwimState newState)
+    {
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().ChangeState(newState);
             Debug.Log("Changed by SetAllFishDest");
         }
     }

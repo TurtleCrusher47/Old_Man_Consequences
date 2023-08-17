@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class FishingController : MonoBehaviour
 {
     // Point where player is fishing
-    [SerializeField]
-    private GameObject fishingPoint;
+    public GameObject fishingPoint;
     private SpriteRenderer sr;
     private Animator ar;
     // vertical direction
@@ -24,7 +24,7 @@ public class FishingController : MonoBehaviour
     private const float baseRodStrengthMult = 2f;
     private float levelStrengthMult;
     // funny bool
-    private bool isCasted;
+    public bool isCasted;
     // funny bool
     bool clicked;
     // Rod strength meter
@@ -33,6 +33,7 @@ public class FishingController : MonoBehaviour
     // Canvas with the crosshair
     [SerializeField]
     private Canvas fishingCrosshairCanvas;
+    private 
     void Awake()
     {
         dirV = 0;
@@ -92,7 +93,8 @@ public class FishingController : MonoBehaviour
         Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
         // Transform the position based on the direction
         transform.position = newPos;
-
+        // Reset the fishing point's position
+        //  fishingPoint.transform.position = newPos;
         UpdateSpriteDirection();
     }
     void BuildRodStrength()
