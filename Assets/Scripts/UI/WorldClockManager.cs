@@ -33,7 +33,7 @@ public class WorldClockManager : MonoBehaviour
     private void Update()
     {
         UpdateTime();
-        UpdateGlobalLight();
+        //UpdateGlobalLight();
     }
 
     private void UpdateTime()
