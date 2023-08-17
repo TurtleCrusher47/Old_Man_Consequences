@@ -1,0 +1,128 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using FishStates;
+
+public class FishManager : MonoBehaviour
+{
+    // Prefabs to generate
+    [SerializeField]
+    private GameObject fishPrefab;
+    // List of points where fishes will flock
+    [SerializeField]
+    private GameObject pointsContainer;
+    // List of fish
+    private List<GameObject> fishList = new List<GameObject>();
+
+    // Bool to store if fish are schooling
+    public bool schooling;
+
+    // Maximum time each fish will stay in each location
+    [SerializeField]
+    private float maxTimePerDest;
+
+    // Timer which stores how long the fish have been chilling
+    private float destTimer;
+    // The number of fish to be spawned
+    [SerializeField]
+    private float fishCount = 5;
+
+    private float schoolTimer;
+
+    [SerializeField]
+    private FishingController player;
+
+    void Start()
+    {
+        destTimer = 0;
+        schoolTimer = 0;
+        schooling = true;
+
+        for (int i = 0; i < fishCount; i++)
+        {
+            // Instantiate each fish
+            GameObject newFish = Instantiate(fishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
+            newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
+            newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
+            newFish.transform.parent = gameObject.transform;
+        }
+        // Set all fish's schooling status
+        SetAllFishSchooling(schooling);
+        foreach (Transform fish in gameObject.transform)
+        {
+            // Add each fish to the fishList
+            fishList.Add(fish.gameObject);
+        }
+        if (schooling)
+        {
+            int newDestination = Random.Range(0, pointsContainer.transform.childCount);
+            Debug.Log(newDestination);  
+            SetAllFishDestinations(newDestination);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        destTimer += Time.deltaTime;
+        // Check if all fish have reached their destination
+        // Searches the list and counts the number of fish that have reached their destination
+        if (player.isCasted == false)
+        {
+            //UpdateFishState(SwimState.SWIM);
+            if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
+            || destTimer > maxTimePerDest)
+        {
+            SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
+            destTimer = 0;
+        }
+        }
+        else
+        {
+            UpdateFishState(SwimState.BITE);
+        }
+    }
+    // Set the schooling status of each fish
+    void SetAllFishSchooling(bool isSchooling)
+    {
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().schooling = isSchooling;
+            Debug.Log("Changed by SetAllFishSchool");
+        }
+    }
+    // Set the new destination index of each fish
+    void SetAllFishDestinations(int destinationIndex)
+    {
+
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().SetDestination(destinationIndex);
+            Debug.Log("Changed by SetAllFishDest Index");
+        }
+    }
+    void SetAllFishDestinations(Vector3 newDest)
+    {
+
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().SetDestination(newDest);
+            Debug.Log("Changed by SetAllFishDest Vec3");
+        }
+    }
+    void UpdateFishState(SwimState newState)
+    {
+        foreach (Transform fish in gameObject.transform)
+        {
+            if (fish.gameObject.GetComponent<FishBehaviour>().GetState() != newState)
+            {
+                fish.gameObject.GetComponent<FishBehaviour>().ChangeState(newState);
+                Debug.Log("State Updated");
+            }
+        }
+    }
+}
