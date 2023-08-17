@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using TMPro;
 
 public class WorldClockManager : MonoBehaviour
@@ -11,7 +12,12 @@ public class WorldClockManager : MonoBehaviour
 
     [Header("Time Settings")]
     [SerializeField] private float secondsPerMinute = 6.0f; // Adjust this to control time speed
-    
+
+    [Header("Global Light Settings")]
+    [SerializeField] private Light2D globalLight;
+    [SerializeField] private float minDensity = 0.3f;
+    [SerializeField] private float maxDensity = 1.2f;
+    [SerializeField] private float intensityChangeInterval = 600f;
 
     private int currentDay = 1;
     private int currentDayIndex = 1; // Index of the current day
@@ -22,10 +28,12 @@ public class WorldClockManager : MonoBehaviour
     private bool isMorning = true; // AM
 
     private float timeCounter = 0.0f;
+    private float intensityChangeCounter = 0.0f;
 
     private void Update()
     {
         UpdateTime();
+        UpdateGlobalLight();
     }
 
     private void UpdateTime()
@@ -59,8 +67,6 @@ public class WorldClockManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Time: " + hours + ":" + minutes + " " + timeCounter);
-
         if (minutes % 10 == 0)
         {
             // Update UI
@@ -77,5 +83,26 @@ public class WorldClockManager : MonoBehaviour
 
         // Update timeText UI element
         timeText.text = formattedTime;
+
+        // Debug the time, days and numOfTheDays
+        Debug.Log("Time " + formattedTime + " " + daysOfWeek[currentDayIndex] + " Day " + currentDayIndex);
     }
+
+    /*
+    private void UpdateGlobalLight()
+    {
+        intensityChangeCounter += Time.deltaTime;
+
+        if(intensityChangeCounter >= intensityChangeInterval)
+        {
+            intensityChangeCounter -= intensityChangeInterval;
+
+            float normalizedTime = hours * 60.0f + minutes;
+            float intensityRatio = Mathf.Clamp01(normalizedTime / (12 * 60));
+            float newIntensity = Mathf.Lerp(minDensity, maxDensity, intensityRatio);
+
+            globalLight.intensity = newIntensity;
+        }
+    }
+    */
 }

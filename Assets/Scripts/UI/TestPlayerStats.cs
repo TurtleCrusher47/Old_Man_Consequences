@@ -6,18 +6,20 @@ using TMPro;
 
 public class TestPlayerStats : MonoBehaviour
 {
-    [Header("Hunger")]
-    [SerializeField] private Image hungerBar;
-    [SerializeField] private float maxHunger = 100f;
+    [Header("Hunger Elements")]
+    [SerializeField] private Image hungerBar; // Assign image object
+    [Header("Hunger Variables")]
+    [SerializeField] private float maxHunger = 100f; // assign a max amount of hunger
     [SerializeField] private float hungerDecreaseAmountOnClick = 5f; // Decrease hunger on mouse click
-    [SerializeField] private float hungerDecreaseInterval = 8f; // Decrease energy every 8 seconds
-    [SerializeField] private float hungerDecreasePerSecond = 10f;
+    [SerializeField] private float hungerDecreaseInterval = 8f; // Decrease energy every certain
+    [SerializeField] private float hungerDecreasePerSecond = 10f; // Decrease hunger a certain amount
 
-    [Header("Thirst")]
-    [SerializeField] private Image thirstBar;
-    [SerializeField] private float maxThirst = 100f; // Increase max thirst to 100f
-    [SerializeField] private float thirstDecreaseInterval = 5f; // Decrease thirst every 5 seconds
-    [SerializeField] private float thirstDecreaseAmount = 5f;
+    [Header("Thirst Elements")]
+    [SerializeField] private Image thirstBar; // Assign image object
+    [Header("Thirst Variables")]
+    [SerializeField] private float maxThirst = 100f; // assign a max amount of hunger
+    [SerializeField] private float thirstDecreaseInterval = 5f; // Decrease thirst every certain seconds
+    [SerializeField] private float thirstDecreaseAmount = 5f; // Decrease thirst a certain amount
 
     // Scrap idea but c first
     /*
@@ -40,7 +42,7 @@ public class TestPlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Handle hunger decrease on mouse click
+        // Handle hunger decrease on enter click
         if (Input.GetKeyDown(KeyCode.Return))
         {
             DecreaseHunger(hungerDecreaseAmountOnClick);
