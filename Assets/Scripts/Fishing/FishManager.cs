@@ -98,6 +98,12 @@ public class FishManager : MonoBehaviour
     void Update()
     {
         destTimer += Time.deltaTime;
+
+        // Check if any fish has been bitten
+        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0)
+        {
+            player.isReeling = true;
+        }
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
         if (player.isCasted == false)
@@ -131,6 +137,7 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(destinationIndex);
+            fish.gameObject.GetComponent<FishBehaviour>().destReached = false;
             Debug.Log("Changed by SetAllFishDest Index");
         }
     }
@@ -140,6 +147,7 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(newDest);
+            fish.gameObject.GetComponent<FishBehaviour>().destReached = false;
             Debug.Log("Changed by SetAllFishDest Vec3");
         }
     }
@@ -152,6 +160,14 @@ public class FishManager : MonoBehaviour
                 fish.gameObject.GetComponent<FishBehaviour>().ChangeState(newState);
                 Debug.Log("State Updated");
             }
+        }
+    }
+    void SetAllFishCanBite(bool canIBite)
+    {
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().canBite = canIBite;
+            Debug.Log("Changed by SetAllFishCanBite");
         }
     }
 }

@@ -70,8 +70,9 @@ public class FishBehaviour : MonoBehaviour
     public bool destReached;
     // Point where the fishing is fishing
     private GameObject fishingPoint;
-
-
+    public bool isBiting;
+    public bool canBite;
+    private float movementSpeed = 1f;
     public void Init()
     {
         // Get components
@@ -100,23 +101,29 @@ public class FishBehaviour : MonoBehaviour
         maxTurnInterval = maxSwimInterval / 3;
         biteTimer = 0;
         fishingPoint = GameObject.Find("FishingPoint");
+        isBiting = false;
+        destReached = false;
+        canBite = true;
+        movementSpeed += (Random.Range(0, 10) / 10);
     }
     // Update is called once per frame
     void Update()
     {
-
-        switch (swimState)
+        if (!isBiting)
         {
-            case SwimState.IDLE:
-                Idle();
-                break;
-            case SwimState.SWIM:
-                Swim();
-                UpdateSpriteDirection();
-                break;
-            case SwimState.LURED:
-                Lured();
-                break;
+            switch (swimState)
+            {
+                case SwimState.IDLE:
+                    Idle();
+                    break;
+                case SwimState.SWIM:
+                    Swim();
+                    UpdateSpriteDirection();
+                    break;
+                case SwimState.LURED:
+                    Lured();
+                    break;
+            }
         }
     }
 
@@ -131,8 +138,7 @@ public class FishBehaviour : MonoBehaviour
             ChangeState(SwimState.SWIM);
         }
     }
-    [SerializeField]
-    private float movementSpeed = 1f;
+
     protected void Swim()
     {
         if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
@@ -185,15 +191,16 @@ public class FishBehaviour : MonoBehaviour
                 SwimTowardsTarget();
                 break;
             case LuredState.BITE:
-                LookTowardsDest();
-                Vector3 fishDir = (transform.position - fishingPoint.transform.position).normalized;
-                float dotProd = Vector3.Dot(fishDir, gameObject.transform.right);
-                Debug.Log("DotProd: " + dotProd);
-                if (Mathf.Abs(dotProd) > 0.9)
+                if (Vector3.Distance(fishingPoint.transform.position, transform.position) > 0.05f)
                 {
-                    Debug.Log("Swimming to lure");
-                    SwimTowardsTarget();
-                    
+                    LookTowardsDest();
+                    Vector3 fishDir = (transform.position - fishingPoint.transform.position).normalized;
+                    float dotProd = Vector3.Dot(fishDir, gameObject.transform.right);
+                    if (Mathf.Abs(dotProd) > 0.9)
+                    {
+                        Debug.Log("Swimming to lure");
+                        SwimTowardsTarget();
+                    }
                 }
                 break;
 
@@ -269,5 +276,15 @@ public class FishBehaviour : MonoBehaviour
     public SwimState GetState()
     {
         return swimState;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "FishingPoint" && canBite)
+        {
+            isBiting = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+            fishingPoint.SetActive(false);
+        }
     }
 }

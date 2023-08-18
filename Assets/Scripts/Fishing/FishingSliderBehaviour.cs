@@ -14,12 +14,35 @@ public class FishingSliderBehaviour : MonoBehaviour
     [SerializeField]
     private Slider playerRodSlider;
 
+    [SerializeField]
+    private Image fishingCatchImage;
+
     private float elaspedTime;
     public float a = 0.6f;
+    public bool fishCaught;
+
+    Gradient sliderColorGrad = new Gradient();
+    GradientColorKey[] sliderColor = new GradientColorKey[3];
+    GradientAlphaKey[] sliderAlpha = new GradientAlphaKey[3];
+    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        elaspedTime = 11.526f;
+        //elaspedTime = 11.526f;
+        elaspedTime = 0;
+        fishCaught = false;
+        sliderColor[0] = new GradientColorKey(Color.red, 0.0f);
+        sliderColor[1] = new GradientColorKey(new Color(1, 1, 0), 0.5f);
+        sliderColor[2] = new GradientColorKey(Color.green, 1.0f);
+
+        sliderAlpha[0] = new GradientAlphaKey(1, 0.0f);
+        sliderAlpha[1] = new GradientAlphaKey(1, 0.5f);
+        sliderAlpha[2] = new GradientAlphaKey(1, 1.0f);
+
+        sliderColorGrad.SetKeys(sliderColor, sliderAlpha);
+
+        fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
+
     }
 
     // Update is called once per frame
@@ -45,7 +68,19 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
         {
-            fishCatchPercentSlider.value += Time.deltaTime;
+            fishCatchPercentSlider.value += 0.5f * Time.deltaTime;
         }
+        else if (fishCatchPercentSlider.value > 0)
+        {
+            fishCatchPercentSlider.value -= 0.01f * Time.deltaTime;
+        }
+        if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
+        {
+            fishCaught = true;
+        }
+    }
+    void SetFishCatchColor()
+    {
+        fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
     }
 }
