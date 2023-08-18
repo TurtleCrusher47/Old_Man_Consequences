@@ -223,6 +223,8 @@ GameObject:
   - component: {fileID: 708931786660532299}
   - component: {fileID: 708931786660532301}
   - component: {fileID: 708931786660532298}
+  - component: {fileID: 708931787846061124}
+  - component: {fileID: 708931787846061125}
   m_Layer: 5
   m_Name: Shop Item Template
   m_TagString: Untagged
@@ -293,6 +295,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &708931787846061124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708931786660532296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb55e8a604fa8b4ba3cccf2c01775ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: {fileID: 708931785849104760}
+  description: {fileID: 0}
+  cost: {fileID: 708931787751277414}
+  sprite: {fileID: 708931787120643714}
+--- !u!114 &708931787846061125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708931786660532296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94eeca91e81e35f41a860c4026821aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: hehexdhehexdhehexd
 --- !u!1 &708931787120643712
 GameObject:
   m_ObjectHideFlags: 0
