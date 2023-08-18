@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 using UnityEngine.EventSystems;
@@ -8,9 +9,15 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu]
 public class EdibleItemSO : ItemSO, IDestroyableItem, IItemAction
 {
+    [SerializeField] private int purchasePrice;
+    public int PurchasePrice 
+    {
+        get => purchasePrice;
 
-    [SerializeField]
-    private List<ModifierData> modifiersData = new List<ModifierData>();
+        set => purchasePrice = value;
+    }
+    
+    [SerializeField] private List<ModifierData> modifiersData = new List<ModifierData>();
     public string ActionName => "Consume";
 
     public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
