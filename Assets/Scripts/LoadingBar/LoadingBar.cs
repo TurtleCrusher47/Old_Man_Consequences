@@ -7,9 +7,13 @@ using TMPro;
 
 public class LoadingBar : MonoBehaviour
 {
+    [Header("Loading Bar Element")]
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text progressText;
+    [Header("Main Scene")]
     [SerializeField] string sceneName;
+    [Header("Add UI Scene")]
+    [SerializeField] private string uiSceneName;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,7 @@ public class LoadingBar : MonoBehaviour
     IEnumerator LoadLevelAsync(string sceneName)
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(uiSceneName, LoadSceneMode.Additive);
 
         while (op.isDone == false)
         {

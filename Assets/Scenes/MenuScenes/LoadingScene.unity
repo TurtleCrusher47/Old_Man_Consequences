@@ -361,7 +361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 2053883964}
   progressText: {fileID: 1465534561}
-  sceneName: BoatScene
+  sceneName: BeachScene
+  uiSceneName: UIScene
 --- !u!4 &1436787924
 Transform:
   m_ObjectHideFlags: 0

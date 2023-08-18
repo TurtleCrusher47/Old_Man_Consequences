@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b9fdfacd7cd3c4cb0be0c1e4a32012, type: 3}
-  m_Name: New Player Data
+  m_Script: {fileID: 11500000, guid: 2ea2eca7fe880e146bd383503e981230, type: 3}
+  m_Name: WorldClockData
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  sprintSpeed: 6.5
-  maxStamina: 10
-  currentStamina: 10
-  maxHunger: 10
-  currentHunger: 10
-  maxHydration: 10
-  currentHydration: 10
-  balance: 0
-  debt: 100000
+  secondsPerMinute: 0.2
