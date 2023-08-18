@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d388659a2586ece4d91b3516b8f3ac22
+guid: 4c9b3f0d059d4dd489c14e8a6b341d47
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,106 +129,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FIshSilhouetteMediumV.3_0
+      name: FIshSilhouetteSmall_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 72
-        width: 29
-        height: 17
+        x: 7
+        y: 75
+        width: 17
+        height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94bbaf308499653448309a30e180d80c
-      internalID: 484911399
+      spriteID: 4d7fc2f63578e474ebe70cdcee3de6f7
+      internalID: 1620354303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIshSilhouetteMediumV.3_1
+      name: FIshSilhouetteSmall_1
       rect:
         serializedVersion: 2
-        x: 33
-        y: 73
-        width: 30
-        height: 17
+        x: 39
+        y: 76
+        width: 17
+        height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a83e8d6bf326d3499bc9ebe9c2f77f5
-      internalID: 1354274826
+      spriteID: c2d58c16f4cff1b49b899efffabe2578
+      internalID: 1645021113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIshSilhouetteMediumV.3_2
+      name: FIshSilhouetteSmall_2
       rect:
         serializedVersion: 2
-        x: 1
+        x: 71
+        y: 77
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 396ac2b2830380b438fa88e09e6e1325
+      internalID: -1718962839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FIshSilhouetteSmall_3
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 44
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5afaab19b4e654547831ce7c9e84fadc
+      internalID: 113533320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FIshSilhouetteSmall_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 43
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e363c94159bfa347b7f4074a4459ad9
+      internalID: -1720448741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FIshSilhouetteSmall_5
+      rect:
+        serializedVersion: 2
+        x: 71
         y: 41
-        width: 29
-        height: 17
+        width: 17
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678e27391ebf4914f9ca8a7897f1a8ed
-      internalID: -1856926363
+      spriteID: a04942e1eb6f6fe468c2e6adebd2c1bc
+      internalID: 647998908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIshSilhouetteMediumV.3_3
+      name: FIshSilhouetteSmall_6
       rect:
         serializedVersion: 2
-        x: 34
-        y: 39
-        width: 29
-        height: 17
+        x: 7
+        y: 10
+        width: 17
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0e4ba1f6a3d79e4da30d26e2955a29f
-      internalID: 1879458308
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FIshSilhouetteMediumV.3_4
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 6
-        width: 28
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34d89634714cca841939e24a825ada08
-      internalID: -1502638715
+      spriteID: 8fb6e72be6f4f6b47ba57a0b3c9cfeb5
+      internalID: -258040970
       vertices: []
       indices: 
       edges: []
@@ -244,11 +286,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      FIshSilhouetteMediumV.3_0: 484911399
-      FIshSilhouetteMediumV.3_1: 1354274826
-      FIshSilhouetteMediumV.3_2: -1856926363
-      FIshSilhouetteMediumV.3_3: 1879458308
-      FIshSilhouetteMediumV.3_4: -1502638715
+      FIshSilhouetteSmall_0: 1620354303
+      FIshSilhouetteSmall_1: 1645021113
+      FIshSilhouetteSmall_2: -1718962839
+      FIshSilhouetteSmall_3: 113533320
+      FIshSilhouetteSmall_4: -1720448741
+      FIshSilhouetteSmall_5: 647998908
+      FIshSilhouetteSmall_6: -258040970
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
