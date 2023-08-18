@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77b9fdfacd7cd3c4cb0be0c1e4a32012, type: 3}
-  m_Name: New Player Data
+  m_Name: Player Data
   m_EditorClassIdentifier: 
   movementSpeed: 5
   sprintSpeed: 6.5
@@ -20,5 +20,5 @@ MonoBehaviour:
   currentHunger: 10
   maxHydration: 10
   currentHydration: 10
-  balance: 0
+  balance: 10000
   debt: 100000
