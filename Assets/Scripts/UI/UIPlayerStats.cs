@@ -14,8 +14,23 @@ public class UIPlayerStats : MonoBehaviour
     [Header("PlayerStats")]
     [SerializeField] private PlayerData playerStats;
 
+    public static UIPlayerStats Instance { get; private set; }
+
     private float nextThirstDecreaseTime;
     private float nextHungerDecreaseTime;
+
+    private void Awake()
+    {
+        // Ensure there is only one instance of UIPlayerStats
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,25 +42,6 @@ public class UIPlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Handle Test reset of players Hunger
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayerHungerRefill();
-        }
-
-        // Handle Test reset of players Thirst
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            PlayerThirstRefill();
-        }
-
-        // Handle Test reset of players Energy
-        /*
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            PlayerEnergyRefill();
-        }*/
-
         // Handle thirst decrease over time
         if (Time.time >= nextThirstDecreaseTime)
         {
@@ -72,13 +68,6 @@ public class UIPlayerStats : MonoBehaviour
         thirstBar.fillAmount = newThirstValue;
     }
 
-    /*
-    private void PlayerEnergyRefill()
-    {
-        energySlider.value = initialEnergy;
-        energyProgressText.text = $"{initialEnergy} %";
-    } */
-
     public void DecreaseHunger(float amount)
     {
         // Update hunger UI
@@ -91,12 +80,4 @@ public class UIPlayerStats : MonoBehaviour
         // Update thirst UI
         thirstBar.fillAmount -= amount / playerStats.maxThirst; 
     }
-
-    /*
-    private void DecreaseEnergy(float amount)
-    {
-        // Update energy UI
-        energySlider.value -= amount;     
-        energyProgressText.text = $"{energySlider.value} %";
-    } */
 }
