@@ -122,6 +122,8 @@ public class FishBehaviour : MonoBehaviour
 
     protected void Idle()
     {
+        if(!ar.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            ar.Play("Idle");
         // Just chill until you hit the maxmimum number of seconds allowed in a state.
         idleTimer += Time.deltaTime;
         if (idleTimer > 5)
@@ -133,6 +135,8 @@ public class FishBehaviour : MonoBehaviour
     private float movementSpeed = 1f;
     protected void Swim()
     {
+        if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
+            ar.Play("Swim");
         swimForwardTimer += Time.deltaTime;
         swimTurnTimer += Time.deltaTime;
         if (swimTurnTimer > maxTurnInterval)
