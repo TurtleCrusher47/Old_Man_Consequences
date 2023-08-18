@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5941549455050279240}
   - component: {fileID: 3680686058251397497}
   m_Layer: 0
-  m_Name: FishMedium
+  m_Name: FishSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1399894241, guid: b3ffae092e1c63d449228460e6f71ded, type: 3}
+  m_Sprite: {fileID: 1620354303, guid: 4c9b3f0d059d4dd489c14e8a6b341d47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,7 +118,7 @@ Animator:
   m_GameObject: {fileID: 3680686058251397501}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec9e6625fe6ff7d47989f34b7e58bc80, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1f8d975989855ee43a45965ef3efe0ca, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

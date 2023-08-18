@@ -8,7 +8,11 @@ public class FishManager : MonoBehaviour
 {
     // Prefabs to generate
     [SerializeField]
-    private GameObject fishPrefab;
+    private GameObject bigFishPrefab;
+    [SerializeField]
+    private GameObject medFishPrefab;
+    [SerializeField]
+    private GameObject smallFishPrefab;
     // List of points where fishes will flock
     [SerializeField]
     private GameObject pointsContainer;
@@ -26,9 +30,9 @@ public class FishManager : MonoBehaviour
     private float destTimer;
     // The number of fish to be spawned
     [SerializeField]
-    private float fishCount = 5;
+    private float medFishCount = 2;
     [SerializeField]
-    private float smallFishCount = 3;
+    private float smallFishCount = 2;
     [SerializeField]
     private float bigFishCount = 2;
 
@@ -42,10 +46,32 @@ public class FishManager : MonoBehaviour
         destTimer = 0;
         schoolTimer = 0;
 
-        for (int i = 0; i < fishCount; i++)
+        for (int i = 0; i < smallFishCount; i++)
         {
             // Instantiate each fish
-            GameObject newFish = Instantiate(fishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            GameObject newFish = Instantiate(smallFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
+            newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
+            newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
+            newFish.transform.parent = gameObject.transform;
+        }
+        for (int i = 0; i < medFishCount; i++)
+        {
+            // Instantiate each fish
+            GameObject newFish = Instantiate(medFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
+            newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
+            newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
+            newFish.transform.parent = gameObject.transform;
+        }
+        for (int i = 0; i < bigFishCount; i++)
+        {
+            // Instantiate each fish
+            GameObject newFish = Instantiate(bigFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
             // Set each fish's waypoints
             newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
             // Initialise each fish

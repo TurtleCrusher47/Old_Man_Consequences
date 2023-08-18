@@ -3931,11 +3931,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3ce0d1e9daa634381e8f6d47129194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishPrefab: {fileID: 3680686058251397501, guid: 25096520badb2da45ad7063f3cb688b2, type: 3}
+  medFishPrefab: {fileID: 3680686058251397501, guid: 25096520badb2da45ad7063f3cb688b2, type: 3}
+  smallFishPrefab: {fileID: 3680686058251397501, guid: 91cbb1f76e6b6a94eb4ae346f325fb38, type: 3}
   pointsContainer: {fileID: 1904539271}
   schooling: 0
   maxTimePerDest: 25
-  fishCount: 5
+  medFishCount: 3
   smallFishCount: 3
   bigFishCount: 2
   player: {fileID: 999580859}
