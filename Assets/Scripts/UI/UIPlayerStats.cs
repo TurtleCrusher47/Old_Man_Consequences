@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIPlayerStats : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class UIPlayerStats : MonoBehaviour
 
     [Header("PlayerStats")]
     [SerializeField] private PlayerData playerStats;
+
+    [Header("Players Money")]
+    [SerializeField] private TMP_Text playerMoney;
 
     public static UIPlayerStats Instance { get; private set; }
 
@@ -55,6 +59,8 @@ public class UIPlayerStats : MonoBehaviour
             DecreaseHunger(playerStats.hungerDecreasePerSecond);
             nextHungerDecreaseTime = Time.time + playerStats.hungerDecreaseInterval;
         }
+
+        UpdateMoneyText();
     }
 
     private void PlayerHungerRefill()
@@ -79,5 +85,31 @@ public class UIPlayerStats : MonoBehaviour
     {
         // Update thirst UI
         thirstBar.fillAmount -= amount / playerStats.maxThirst; 
+    }
+
+    private void UpdateMoneyText()
+    {
+        playerMoney.text = playerStats.Debt.ToString();
+        DynamicTextFontSize(playerMoney);
+    }
+
+    private void DynamicTextFontSize(TMP_Text textComponent)
+    {
+        float originalFontSize = textComponent.fontSize;
+        TMP_TextInfo textInfo = textComponent.textInfo;
+
+        float preferredWidth = textComponent.preferredWidth;
+        float availableWidth = textComponent.rectTransform.rect.width;
+
+        while (preferredWidth > availableWidth && textComponent.fontSize > 1)
+        {
+            textComponent.fontSize--;
+            preferredWidth = textComponent.preferredWidth;
+        }
+
+        if (preferredWidth > availableWidth)
+        {
+            textComponent.fontSize = originalFontSize; // Reset to original size if necessary
+        }
     }
 }

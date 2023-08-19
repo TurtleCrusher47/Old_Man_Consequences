@@ -17,6 +17,9 @@ public class PlayerData : ScriptableObject
     public float thirstDecreaseInterval = 5f; // Decrease thirst every certain seconds
     public float thirstDecreaseAmount = 5f; // Decrease thirst a certain amount
 
+    [Header("Player's Money")]
+    public float currMoney;
+
     [Header("Miscellaneous")]
 
     [SerializeField] private int movementSpeed = 5;

@@ -1162,6 +1162,7 @@ MonoBehaviour:
   hungerBar: {fileID: 914623851}
   thirstBar: {fileID: 1688938732}
   playerStats: {fileID: 11400000, guid: 13b13e88c3a36744a86bd9e450251137, type: 2}
+  playerMoney: {fileID: 874734392}
 --- !u!1 &455668004
 GameObject:
   m_ObjectHideFlags: 0
