@@ -8,7 +8,11 @@ public class FishManager : MonoBehaviour
 {
     // Prefabs to generate
     [SerializeField]
-    private GameObject fishPrefab;
+    private GameObject bigFishPrefab;
+    [SerializeField]
+    private GameObject medFishPrefab;
+    [SerializeField]
+    private GameObject smallFishPrefab;
     // List of points where fishes will flock
     [SerializeField]
     private GameObject pointsContainer;
@@ -26,7 +30,11 @@ public class FishManager : MonoBehaviour
     private float destTimer;
     // The number of fish to be spawned
     [SerializeField]
-    private float fishCount = 5;
+    private float medFishCount = 2;
+    [SerializeField]
+    private float smallFishCount = 2;
+    [SerializeField]
+    private float bigFishCount = 2;
 
     private float schoolTimer;
 
@@ -37,12 +45,33 @@ public class FishManager : MonoBehaviour
     {
         destTimer = 0;
         schoolTimer = 0;
-        schooling = true;
 
-        for (int i = 0; i < fishCount; i++)
+        for (int i = 0; i < smallFishCount; i++)
         {
             // Instantiate each fish
-            GameObject newFish = Instantiate(fishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            GameObject newFish = Instantiate(smallFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
+            newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
+            newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
+            newFish.transform.parent = gameObject.transform;
+        }
+        for (int i = 0; i < medFishCount; i++)
+        {
+            // Instantiate each fish
+            GameObject newFish = Instantiate(medFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
+            // Set each fish's waypoints
+            newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
+            // Initialise each fish
+            newFish.GetComponent<FishBehaviour>().Init();
+            // Set each fish's parent
+            newFish.transform.parent = gameObject.transform;
+        }
+        for (int i = 0; i < bigFishCount; i++)
+        {
+            // Instantiate each fish
+            GameObject newFish = Instantiate(bigFishPrefab, new Vector3(Random.Range(-9, 8), Random.Range(-5, 5), 0), Quaternion.identity);
             // Set each fish's waypoints
             newFish.GetComponent<FishBehaviour>().wayPointContainer = pointsContainer;
             // Initialise each fish
@@ -69,6 +98,13 @@ public class FishManager : MonoBehaviour
     void Update()
     {
         destTimer += Time.deltaTime;
+
+        // Check if any fish has been bitten
+        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0)
+        {
+            player.isReeling = true;
+            SetAllFishCanBite(false);
+        }
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
         if (player.isCasted == false)
@@ -83,7 +119,7 @@ public class FishManager : MonoBehaviour
         }
         else
         {
-            UpdateFishState(SwimState.BITE);
+            UpdateFishState(SwimState.LURED);
         }
     }
     // Set the schooling status of each fish
@@ -102,6 +138,7 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(destinationIndex);
+            fish.gameObject.GetComponent<FishBehaviour>().destReached = false;
             Debug.Log("Changed by SetAllFishDest Index");
         }
     }
@@ -111,6 +148,7 @@ public class FishManager : MonoBehaviour
         foreach (Transform fish in gameObject.transform)
         {
             fish.gameObject.GetComponent<FishBehaviour>().SetDestination(newDest);
+            fish.gameObject.GetComponent<FishBehaviour>().destReached = false;
             Debug.Log("Changed by SetAllFishDest Vec3");
         }
     }
@@ -124,5 +162,18 @@ public class FishManager : MonoBehaviour
                 Debug.Log("State Updated");
             }
         }
+    }
+    void SetAllFishCanBite(bool canIBite)
+    {
+        foreach (Transform fish in gameObject.transform)
+        {
+            fish.gameObject.GetComponent<FishBehaviour>().canBite = canIBite;
+            Debug.Log("Changed by SetAllFishCanBite");
+        }
+    }
+    public void FishAddedToInventory()
+    {
+        var fishToAdd = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
+        Destroy(fishToAdd);
     }
 }
