@@ -15,6 +15,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void Credits(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void ExitScene()
     {
         Application.Quit();

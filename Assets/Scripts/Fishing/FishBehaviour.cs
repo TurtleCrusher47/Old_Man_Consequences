@@ -8,10 +8,17 @@ namespace FishStates
     {
         IDLE = 0,
         SWIM = 1,
-        BITE = 2,
+        LURED = 2,
         FLEE = 3,
         NUM_SWIMSTATE
     }
+    enum LuredState
+    { 
+        LURE,
+        BITE,
+        NUM_LUREDSTATE
+    }
+
 }
 public class FishBehaviour : MonoBehaviour
 {
@@ -38,7 +45,8 @@ public class FishBehaviour : MonoBehaviour
    
     [SerializeField]
     private SwimState swimState;
-
+    [SerializeField]
+    private LuredState luredState;
     // Bool to check if the fish is schooling or not
     public bool schooling = false;
 
@@ -62,8 +70,9 @@ public class FishBehaviour : MonoBehaviour
     public bool destReached;
     // Point where the fishing is fishing
     private GameObject fishingPoint;
-
-
+    public bool isBiting;
+    public bool canBite;
+    private float movementSpeed = 1f;
     public void Init()
     {
         // Get components
@@ -72,6 +81,7 @@ public class FishBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Set initial swim state
         swimState = SwimState.IDLE;
+        luredState = LuredState.LURE;
         // Set initial direction
         targetDir = new Vector3(0, 0, 0);
         // Get map children from map container object
@@ -91,28 +101,36 @@ public class FishBehaviour : MonoBehaviour
         maxTurnInterval = maxSwimInterval / 3;
         biteTimer = 0;
         fishingPoint = GameObject.Find("FishingPoint");
+        isBiting = false;
+        destReached = false;
+        canBite = true;
+        movementSpeed += (Random.Range(0, 10) / 10);
     }
     // Update is called once per frame
     void Update()
     {
-
-        switch (swimState)
+        if (!isBiting)
         {
-            case SwimState.IDLE:
-                Idle();
-                break;
-            case SwimState.SWIM:
-                Swim();
-                UpdateSpriteDirection();
-                break;
-            case SwimState.BITE:
-                Bite();
-                break;
+            switch (swimState)
+            {
+                case SwimState.IDLE:
+                    Idle();
+                    break;
+                case SwimState.SWIM:
+                    Swim();
+                    UpdateSpriteDirection();
+                    break;
+                case SwimState.LURED:
+                    Lured();
+                    break;
+            }
         }
     }
 
     protected void Idle()
     {
+        if(!ar.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            ar.Play("Idle");
         // Just chill until you hit the maxmimum number of seconds allowed in a state.
         idleTimer += Time.deltaTime;
         if (idleTimer > 5)
@@ -120,10 +138,11 @@ public class FishBehaviour : MonoBehaviour
             ChangeState(SwimState.SWIM);
         }
     }
-    [SerializeField]
-    private float movementSpeed = 1f;
+
     protected void Swim()
     {
+        if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
+            ar.Play("Swim");
         swimForwardTimer += Time.deltaTime;
         swimTurnTimer += Time.deltaTime;
         if (swimTurnTimer > maxTurnInterval)
@@ -163,12 +182,42 @@ public class FishBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, movementSpeed * rotationMultipler * Time.deltaTime);
     }
   
-    protected void Bite()
+    protected void Lured()
     {
+        if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
+            ar.Play("Swim");
         // Charge towards fishing rod...?
-        SwimTowardsTarget();
+        switch (luredState)
+        {
+            case LuredState.LURE:
+                SwimTowardsTarget();
+                break;
+            case LuredState.BITE:
+                if (Vector3.Distance(fishingPoint.transform.position, transform.position) > 0.05f)
+                {
+                    LookTowardsDest();
+                    Vector3 fishDir = (transform.position - fishingPoint.transform.position).normalized;
+                    float dotProd = Vector3.Dot(fishDir, gameObject.transform.right);
+                    if (Mathf.Abs(dotProd) > 0.9)
+                    {
+                        Debug.Log("Swimming to lure");
+                        SwimTowardsTarget();
+                    }
+                }
+                break;
+
+        }
+      
         destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
-        if (destReached && biteTimer > 10)
+        if (destReached)
+        {
+            int newInt = Random.Range(1, 10);
+            if (newInt < 3)
+            {
+                luredState = LuredState.BITE;
+            }
+        }
+        else if (biteTimer > 10)
         {
             ChangeState(SwimState.SWIM);
         }
@@ -209,7 +258,7 @@ public class FishBehaviour : MonoBehaviour
                 swimForwardTimer = 0;
                 swimTurnTimer = 0;
                 break;
-            case SwimState.BITE:
+            case SwimState.LURED:
                 biteTimer = 0;
                 currWaypointLoc = fishingPoint.transform.position;
                 break;
@@ -229,5 +278,15 @@ public class FishBehaviour : MonoBehaviour
     public SwimState GetState()
     {
         return swimState;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "FishingPoint" && canBite)
+        {
+            isBiting = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+            fishingPoint.SetActive(false);
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Header("Menu Elementsx")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
 
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Pressing Esc will pause and unpause
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameIsPaused)

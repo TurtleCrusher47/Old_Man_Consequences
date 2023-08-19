@@ -33,7 +33,17 @@ public class FishingController : MonoBehaviour
     // Canvas with the crosshair
     [SerializeField]
     private Canvas fishingCrosshairCanvas;
-    private 
+
+    public bool isReeling;
+
+    // Canvas with fishing rods
+    [SerializeField]
+    private Canvas fishingCanvas;
+
+    [SerializeField] public InventoryItemStruct testItem;
+
+    [SerializeField] private InventorySO inventoryData;
+
     void Awake()
     {
         dirV = 0;
@@ -45,6 +55,7 @@ public class FishingController : MonoBehaviour
         levelDistMult = 1f;
         levelStrengthMult = 1f;
         isCasted = false;
+        isReeling = false;
     }
     // Update is called once per frame
     void Update()
@@ -54,26 +65,33 @@ public class FishingController : MonoBehaviour
         // Show or hide the slider depending on if the olayer is clicking or not
         slider.enabled = clicked;
         // On player click
-        if (Input.GetMouseButton(0))
+        if (isReeling == false)
         {
-            if (!clicked)
-                clicked = true;
-        }
-        else
-        {
-            clicked = false;
-            if (fishingStrength > 0)
+            if (Input.GetMouseButton(0))
             {
-                CastRod();
+                if (!clicked)
+                    clicked = true;
+            }
+            else
+            {
+                clicked = false;
+                if (fishingStrength > 0)
+                {
+                    CastRod();
+                }
+            }
+            if (clicked)
+            {
+                BuildRodStrength();
+            }
+            else
+            {
+                Walking();
             }
         }
-        if (clicked)
-        {
-            BuildRodStrength();
-        }
         else
         {
-            Walking();
+            fishingCanvas.gameObject.SetActive(true);
         }
            
 
@@ -81,7 +99,6 @@ public class FishingController : MonoBehaviour
 
     void Walking()
     {
-
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
         // Move based on that direction
@@ -89,6 +106,7 @@ public class FishingController : MonoBehaviour
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
+            fishingPoint.SetActive(false);
             fishingStrength = 0;
             fishingPoint.transform.position = newPos;
             isCasted = false;
@@ -111,6 +129,7 @@ public class FishingController : MonoBehaviour
     }
     void CastRod()
     {
+        fishingPoint.SetActive(true);
         fishingElapsedTime = 0;
         //fishingStrength = 0;
         // Take rod strength
@@ -138,5 +157,16 @@ public class FishingController : MonoBehaviour
         {
             ar.Play("Idle Left");
         }
+    }
+    public void AddToInventory()
+    {
+        isReeling = false;
+        fishingCanvas.gameObject.SetActive(false);
+        // add item to inventory
+    //    inventoryData.AddItem(testItem);
+    //    foreach (var item in inventoryData.GetCurrentInventoryState())
+    //    {
+    //        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+    //    }
     }
 }
