@@ -8,7 +8,12 @@ using TMPro;
 public class ShopTemplate : MonoBehaviour
 {
     public TMP_Text name;
-    public TMP_Text description;
+    public HoverTip hoverTip;
     public TMP_Text price;
     public Image sprite;
+
+    void Start()
+    {
+        hoverTip = gameObject.GetComponent<HoverTip>();
+    }
 }

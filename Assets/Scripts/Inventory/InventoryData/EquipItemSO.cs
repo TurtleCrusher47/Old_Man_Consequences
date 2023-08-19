@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class EquipItemSO : ItemSO, IDestroyableItem, IItemAction
+public class EquipItemSO : PurchaseableItemSO, IDestroyableItem, IItemAction
 {
-    
     public string ActionName => "Equip";
 
     public bool PerformAction(GameObject character, List<ItemParameter> itemState)
