@@ -103,6 +103,7 @@ public class FishManager : MonoBehaviour
         if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0)
         {
             player.isReeling = true;
+            SetAllFishCanBite(false);
         }
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
@@ -169,5 +170,10 @@ public class FishManager : MonoBehaviour
             fish.gameObject.GetComponent<FishBehaviour>().canBite = canIBite;
             Debug.Log("Changed by SetAllFishCanBite");
         }
+    }
+    public void FishAddedToInventory()
+    {
+        var fishToAdd = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
+        Destroy(fishToAdd);
     }
 }

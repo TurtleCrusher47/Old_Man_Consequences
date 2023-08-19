@@ -40,6 +40,10 @@ public class FishingController : MonoBehaviour
     [SerializeField]
     private Canvas fishingCanvas;
 
+    [SerializeField] public InventoryItemStruct testItem;
+
+    [SerializeField] private InventorySO inventoryData;
+
     void Awake()
     {
         dirV = 0;
@@ -153,5 +157,16 @@ public class FishingController : MonoBehaviour
         {
             ar.Play("Idle Left");
         }
+    }
+    public void AddToInventory()
+    {
+        isReeling = false;
+        fishingCanvas.gameObject.SetActive(false);
+        // add item to inventory
+    //    inventoryData.AddItem(testItem);
+    //    foreach (var item in inventoryData.GetCurrentInventoryState())
+    //    {
+    //        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+    //    }
     }
 }

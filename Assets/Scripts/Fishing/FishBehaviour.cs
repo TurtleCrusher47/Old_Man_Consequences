@@ -184,6 +184,8 @@ public class FishBehaviour : MonoBehaviour
   
     protected void Lured()
     {
+        if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
+            ar.Play("Swim");
         // Charge towards fishing rod...?
         switch (luredState)
         {

@@ -13,6 +13,8 @@ public class FishingSliderBehaviour : MonoBehaviour
     private Slider fishSpriteSlider;
     [SerializeField]
     private Slider playerRodSlider;
+    [SerializeField]
+    private Button addButton;
 
     [SerializeField]
     private Image fishingCatchImage;
@@ -42,6 +44,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         sliderColorGrad.SetKeys(sliderColor, sliderAlpha);
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
+        addButton.gameObject.SetActive(false);
 
     }
 
@@ -77,6 +80,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
         {
             fishCaught = true;
+            addButton.gameObject.SetActive(true);
         }
     }
     void SetFishCatchColor()
