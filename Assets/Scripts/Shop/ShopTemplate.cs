@@ -12,7 +12,7 @@ public class ShopTemplate : MonoBehaviour
     public TMP_Text price;
     public Image sprite;
 
-    void Awake()
+    void Start()
     {
         hoverTip = gameObject.GetComponent<HoverTip>();
     }

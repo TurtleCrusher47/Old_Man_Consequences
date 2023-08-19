@@ -1741,10 +1741,6 @@ PrefabInstance:
       propertyPath: price
       value: 
       objectReference: {fileID: 714029829}
-    - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
-      propertyPath: hoverTip
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 708931787899749951, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2470,10 +2466,6 @@ PrefabInstance:
       propertyPath: price
       value: 
       objectReference: {fileID: 1225588963}
-    - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
-      propertyPath: hoverTip
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 708931787899749951, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
