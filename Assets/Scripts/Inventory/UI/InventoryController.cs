@@ -73,7 +73,7 @@ public class InventoryController : MonoBehaviour
     private string PrepareDescrip(InventoryItemStruct inventoryItem)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(inventoryItem.item.Descrip);
+        sb.Append(inventoryItem.item.Description);
         sb.AppendLine();
         for (int i = 0; i < inventoryItem.itemState.Count; i++)
         {
