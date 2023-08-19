@@ -8,14 +8,8 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu]
 public class EdibleItemSO : PurchaseableItemSO, IDestroyableItem, IItemAction
 {
-<<<<<<< Updated upstream:Assets/Scripts/Inventory/InventoryData/EdibleItemSO.cs
-
-    [SerializeField]
-    private List<ModifierData> modifiersData = new List<ModifierData>();
-=======
     
     [SerializeField] private List<ModifierData> modifiersData = new List<ModifierData>();
->>>>>>> Stashed changes:Assets/ScriptableObjects/Scripts/Inventory/EdibleItemSO.cs
     public string ActionName => "Consume";
 
     public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
