@@ -342,6 +342,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 208.0347
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template (5)
@@ -430,6 +442,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
@@ -537,8 +557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: $10000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+  m_sharedMaterial: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -680,8 +700,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+  m_sharedMaterial: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -765,6 +785,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 208.0346
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template (2)
@@ -853,6 +885,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
@@ -1489,6 +1529,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 208.0347
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template (3)
@@ -1577,6 +1629,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
@@ -1649,6 +1709,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 216.0693
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template (1)
@@ -1737,6 +1809,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
@@ -1798,6 +1878,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 210.7128
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template (4)
@@ -1886,6 +1978,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
@@ -2374,6 +2474,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 221864231}
     m_Modifications:
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104760, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931785849104761, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 213.3911
+      objectReference: {fileID: 0}
     - target: {fileID: 708931786660532296, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: m_Name
       value: Shop Item Template
@@ -2462,6 +2574,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
+    - target: {fileID: 708931787751277414, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7220389653152938680, guid: 3c35767fd6a2494478b3fa1b03af64f8, type: 2}
     - target: {fileID: 708931787846061124, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
       propertyPath: price
       value: 
