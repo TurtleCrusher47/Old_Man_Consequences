@@ -21,6 +21,8 @@ public class ShopManager : MonoBehaviour
     public GameObject[] sellShopPanelGO;
     public ShopTemplate[] sellShopPanel;
     public Button[] sellButtons;
+     
+    //private Dictionary<int, InventoryItemStruct> inventoryList;
 
     void Awake()
     {
@@ -35,7 +37,7 @@ public class ShopManager : MonoBehaviour
             buyShopPanelGO[i].SetActive(true);
         }
 
-        for (int i = 0; i < sellableItemSO.Length; i ++)
+        for (int i = 0; i < sellableItemSO.Length - 1; i++)
         {
             sellShopPanelGO[i].SetActive(true);
         }
@@ -66,10 +68,28 @@ public class ShopManager : MonoBehaviour
     {
         // Check whether the player still has any of the items left
 
-        // else
-        // {
-        //     sellableButtons[i].interactable = false;
-        // }
+        //loop through the list of sellable items
+        //find if the correspondng slot in the inventory has a quantity > 0
+        //if > 0, button that corresponds to item being checked set active
+        //else, button that corresponds set to inactive
+
+        for (int i = 0; i < sellableItemSO.Length; i++)
+        {
+            for (int j = 0; j < inventoryData.InventoryItems.Count; j++)
+            {
+                if (inventoryData.InventoryItems[j].item == sellableItemSO[i] && inventoryData.InventoryItems[j].quantity > 0)
+                {
+                    sellButtons[i].interactable = true;
+                }
+
+                 else
+                {
+                    Debug.Log("Sell Button" + i + "inactive");   
+                    sellButtons[i].interactable = false;
+                }
+            }
+        }
+        
     }
 
     // Purchase the item
@@ -96,6 +116,35 @@ public class ShopManager : MonoBehaviour
     public void SellItem(int buttonNumber)
     {
         // For Tania: delete the item, add to player's balance
+
+        playerData.Balance += sellableItemSO[buttonNumber].SellPrice;
+
+        int itemIndex = -1;
+
+        for (int i = 0; i < inventoryData.Size; i++)
+        {
+            if (inventoryData.InventoryItems[i].item == sellableItemSO[buttonNumber])
+            {
+                itemIndex = i;
+                break;
+            }
+        }
+
+        if (inventoryData.InventoryItems[itemIndex].quantity > 1)
+        {
+            int oldQuantity = inventoryData.InventoryItems[itemIndex].quantity;
+            inventoryData.InventoryItems[itemIndex].ChangeQuantity(oldQuantity - 1);
+        }
+
+        else
+        {
+            InventoryItemStruct emptyItemStruct = InventoryItemStruct.GetEmptyItem();
+            inventoryData.InventoryItems[itemIndex] = emptyItemStruct;
+        }
+
+        inventoryData.RemoveItem(itemIndex, 1);
+        
+        //UpdateInventoryList();
         UpdateBalance();
         CheckSellable();
     }
@@ -103,7 +152,8 @@ public class ShopManager : MonoBehaviour
     public void SellAllItems()
     {
         // For each sellable item in the inventory, remove it from inventory and add to player balance
-        
+
+        //UpdateInventoryList();
         UpdateBalance();
         CheckSellable();
     }
@@ -123,12 +173,21 @@ public class ShopManager : MonoBehaviour
     // Loop through the player's inventory and add the fish to the list of sellable items
     public void LoadInventoryItems()
     {
-        // For Tania: loop through the inventory, check if the item is sellable, if it is, add it to the list
-
-        // for (int i = 0; i < inventoryList.Length; i++)
-        // {
-
-        // }
+        //inventoryList = inventoryData.GetCurrentInventoryState();
+        int j = 0;
+        for (int i = 0; i < inventoryData.InventoryItems.Count; i++)
+        {
+            
+            if (inventoryData.InventoryItems[i].item is SellableItemSO)
+            {
+                if (j < sellableItemSO.Length)
+                {
+                    sellableItemSO[j] = inventoryData.InventoryItems[i].item as SellableItemSO; 
+                    j++;
+                }
+            
+            }
+        }
     }
 
     // Load a panel for each of the sellable items
@@ -147,4 +206,5 @@ public class ShopManager : MonoBehaviour
     {
         balance.text = "$" + playerData.Balance.ToString();
     }
+
 }
