@@ -6,11 +6,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [CreateAssetMenu]
-public class EdibleItemSO : ItemSO, IDestroyableItem, IItemAction
+public class EdibleItemSO : PurchaseableItemSO, IDestroyableItem, IItemAction
 {
-
-    [SerializeField]
-    private List<ModifierData> modifiersData = new List<ModifierData>();
+    
+    [SerializeField] private List<ModifierData> modifiersData = new List<ModifierData>();
     public string ActionName => "Consume";
 
     public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
