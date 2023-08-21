@@ -17,9 +17,9 @@ MonoBehaviour:
   name: Atlantic Salmon
   description: A classic staple in food, the Atlantic Salmon is well known for travelling
     up rivers to spawn in freshwater, despite living in saltwater as an adult.
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 593181275, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
   defaultParameterList: []
-  sellPrice: 135
+  sellPrice: 150
   flavourPrefScale: {x: 0.35, y: 0.2}
   sizeMultiplier: []
-  spawnChance: 0.55
+  spawnChance: 0.6

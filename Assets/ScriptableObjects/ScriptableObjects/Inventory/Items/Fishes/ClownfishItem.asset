@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6faf83d60df4b5499b84af2272b0455, type: 3}
-  m_Name: BluefinTunaFishItem
+  m_Name: ClownfishItem
   m_EditorClassIdentifier: 
   canStack: 1
   maxStackSize: 64
-  name: Bluefin Tuna
-  description: A versatile fish used in a variety of dishes all over the world. Their
-    meat is tender and absorbent, making marinading it popular.
-  itemImage: {fileID: 191462756, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
+  name: Clownfish
+  description: 'Easily recognisable, the loveable clownfish makes its home inside
+    sea anenomes, protecting its host from unwanted predators. In return, the anenome
+    provides shelter for the fish. '
+  itemImage: {fileID: 1442777922, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
   defaultParameterList: []
-  sellPrice: 400
-  flavourPrefScale: {x: -0.5, y: -0.7}
-  sizeMultiplier:
-  - 0.8
-  - 1
-  - 1.2
-  spawnChance: 0.2
+  sellPrice: 70
+  flavourPrefScale: {x: 0, y: 0}
+  sizeMultiplier: []
+  spawnChance: 0.9
