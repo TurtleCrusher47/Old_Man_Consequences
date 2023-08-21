@@ -64,33 +64,33 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void CheckSellable()
-    {
-        // Check whether the player still has any of the items left
+    // public void CheckSellable()
+    // {
+    //     // Check whether the player still has any of the items left
 
-        //loop through the list of sellable items
-        //find if the correspondng slot in the inventory has a quantity > 0
-        //if > 0, button that corresponds to item being checked set active
-        //else, button that corresponds set to inactive
+    //     //loop through the list of sellable items
+    //     //find if the correspondng slot in the inventory has a quantity > 0
+    //     //if > 0, button that corresponds to item being checked set active
+    //     //else, button that corresponds set to inactive
 
-        for (int i = 0; i < sellableItemSO.Length; i++)
-        {
-            for (int j = 0; j < inventoryData.InventoryItems.Count; j++)
-            {
-                // if (inventoryData.InventoryItems[j].item == sellableItemSO[i] && inventoryData.InventoryItems[j].quantity > 0)
-                // {
-                //     sellButtons[i].interactable = true;
-                // }
+    //     for (int i = 0; i < sellableItemSO.Length; i++)
+    //     {
+    //         for (int j = 0; j < inventoryData.InventoryItems.Count; j++)
+    //         {
+    //             // if (inventoryData.InventoryItems[j].item == sellableItemSO[i] && inventoryData.InventoryItems[j].quantity > 0)
+    //             // {
+    //             //     sellButtons[i].interactable = true;
+    //             // }
 
-                //  else
-                // {
-                //     Debug.Log("Sell Button" + i + "inactive");   
-                //     sellButtons[i].interactable = false;
-                // }
-            }
-        }
+    //             //  else
+    //             // {
+    //             //     Debug.Log("Sell Button" + i + "inactive");   
+    //             //     sellButtons[i].interactable = false;
+    //             // }
+    //         }
+    //     }
         
-    }
+    // }
 
     // Purchase the item
     public void PurchaseItem(int buttonNumber)
@@ -148,7 +148,7 @@ public class ShopManager : MonoBehaviour
             
             //UpdateInventoryList();
             UpdateBalance();
-            CheckSellable();
+            //CheckSellable();
         }
 
     }
@@ -159,7 +159,7 @@ public class ShopManager : MonoBehaviour
 
         //UpdateInventoryList();
         UpdateBalance();
-        CheckSellable();
+        //CheckSellable();
     }
 
     // Load a panel for each of the purchasable items
