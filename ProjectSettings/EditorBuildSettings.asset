@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UIScene/UIScene.unity
     guid: c0505a097bc3e6943bd64dda0878e914
+  - enabled: 1
+    path: Assets/Scenes/VillageScene.unity
+    guid: 1f9dfd2c3052ee64ab9dec4414aef4ca
+  - enabled: 1
+    path: Assets/Scenes/BeachScene.unity
+    guid: 2084f6b35870fe446a2c9e025958f446
   m_configObjects: {}

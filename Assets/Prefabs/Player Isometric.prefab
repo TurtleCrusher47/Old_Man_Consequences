@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 13b13e88c3a36744a86bd9e450251137, type: 2}
+  startingPosition: {fileID: 11400000, guid: b8e9a11ee2353034a9f072ac24ffb72c, type: 2}
 --- !u!61 &3842781375259037499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,7 +225,7 @@ MonoBehaviour:
   - {x: 0.0709278, y: -0.3140697, z: 0}
   m_ShapePathHash: -1090530888
   m_Mesh: {fileID: 0}
-  m_InstanceId: 28658
+  m_InstanceId: -150766
   m_LocalBounds:
     m_Center: {x: -0.017517656, y: -0.003028214, z: 0}
     m_Extent: {x: 0.14829484, y: 0.31104147, z: 0}
