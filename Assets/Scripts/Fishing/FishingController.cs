@@ -67,7 +67,7 @@ public class FishingController : MonoBehaviour
         // On player click
         if (isReeling == false)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetAxis("Fire3") > 0)
             {
                 if (!clicked)
                     clicked = true;
@@ -158,5 +158,6 @@ public class FishingController : MonoBehaviour
         fishingStrength = 0;
         fishingPoint.transform.position = newPos;
         isCasted = false;
+        slider.value = 0;
     }
 }

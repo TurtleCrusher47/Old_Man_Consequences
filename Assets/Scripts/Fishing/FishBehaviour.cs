@@ -100,7 +100,7 @@ public class FishBehaviour : MonoBehaviour
             if (wayPointContainer.transform.GetChild(i).gameObject.name != "FishingPoint")
                 waypointList.Add(wayPointContainer.transform.GetChild(i).gameObject);
            
-            Debug.Log("Index " + i + " X: " + wayPointContainer.transform.GetChild(i).position.x + " Y: " + wayPointContainer.transform.GetChild(i).position.y);
+            //Debug.Log("Index " + i + " X: " + wayPointContainer.transform.GetChild(i).position.x + " Y: " + wayPointContainer.transform.GetChild(i).position.y);
         }
         if (!schooling)
             currWaypointIndex = Random.Range(0, waypointList.Count);

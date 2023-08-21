@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FishingSliderBehaviour : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class FishingSliderBehaviour : MonoBehaviour
     private Slider playerRodSlider;
     [SerializeField]
     private Button addButton;
+    [SerializeField]
+    private Button releaseButton;
+
+    [SerializeField]
+    private TMP_Text catchText;
 
     [SerializeField]
     private Image fishingCatchImage;
@@ -46,6 +52,7 @@ public class FishingSliderBehaviour : MonoBehaviour
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
         addButton.gameObject.SetActive(false);
+        releaseButton.gameObject.SetActive(false);
 
     }
 
@@ -72,7 +79,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
         {
-            fishCatchPercentSlider.value += 0.5f * Time.deltaTime;
+            fishCatchPercentSlider.value += Time.deltaTime;
         }
         else if (fishCatchPercentSlider.value > 0)
         {
@@ -82,17 +89,11 @@ public class FishingSliderBehaviour : MonoBehaviour
         {
             fishCaught = true;
             addButton.gameObject.SetActive(true);
+            releaseButton.gameObject.SetActive(true);
         }
     }
     void SetFishCatchColor()
     {
         fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
-    }
-    void AddToInventory()
-    {
-        SellableItemSO fishItem = new SellableItemSO();
-        //inventoryData.AddItem(fishItem, 1);
-        Debug.Log("Added!");
-        
     }
 }

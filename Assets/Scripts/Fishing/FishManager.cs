@@ -303,13 +303,14 @@ public class FishManager : MonoBehaviour
     /// </summary>
     void InitFishingSO()
     {
-        float currentWeight = 0;
+        weightList.Add(0);
         foreach (FishItemSO fishItem in fishItems)
         {
             totalWeight += fishItem.SpawnChance;
-            weightList.Add(currentWeight + fishItem.SpawnChance);
-            currentWeight = fishItem.SpawnChance;
+            weightList.Add(totalWeight);
+          
         }
+
     }
 
     /// <summary>
@@ -318,11 +319,13 @@ public class FishManager : MonoBehaviour
     void GenerateFishingSO(FishBehaviour fishBehaviour)
     {
         float randomVal = Random.Range(0, totalWeight);
-        for (int i = 1; i < weightList.Count; i++)
+        Debug.Log("Random val: " + randomVal);
+        for (int i = 1; i < weightList.Count + 1; i++)
         {
-            if (randomVal < weightList[i] && randomVal > weightList[i - 1])
+            if (randomVal < weightList[i])
             {
                 fishBehaviour.fishData = fishItems[i - 1];
+                Debug.Log("Assigned!");
                 break;
             }
         }
@@ -339,8 +342,10 @@ public class FishManager : MonoBehaviour
         SellableItemSO fishItem = bitingFish.fishData;
         // Add it to inventory
         inventoryData.AddItem(fishItem, 1);
+        Debug.Log("Added to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
         // Remove from the fishList and the fishList gameobject's child
         DisableBitingFish(true);
+        FinishedFishing();
     }
 
     /// <summary>
