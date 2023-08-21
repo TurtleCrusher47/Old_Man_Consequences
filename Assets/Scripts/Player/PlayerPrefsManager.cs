@@ -7,8 +7,9 @@ public static class PlayerPrefsManager
 
     }
 
+    /*
     public static float Load(string key)
     {
 
-    }
+    }*/
 }

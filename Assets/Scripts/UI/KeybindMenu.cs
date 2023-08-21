@@ -14,7 +14,6 @@ public class KeybindMenu : MonoBehaviour
     [SerializeField] private GameObject keybindMenu;
 
     private GameObject currKey;
-    private bool keybindIsOpened = false;
 
     // Start is called before the first frame update
     void Start()
