@@ -7,6 +7,7 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
+    public GameObject choicePanel;
     public TextMeshProUGUI dialogueText;
     public string[] dialogue;
     private int index;
@@ -68,6 +69,8 @@ public class NPC : MonoBehaviour
         }
         else
         {
+            choicePanel.SetActive(true);
+
             ResetText();
         }
     }
