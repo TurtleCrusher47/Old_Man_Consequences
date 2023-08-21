@@ -24,11 +24,11 @@ public class KeybindMenu : MonoBehaviour
         keys.Add("Right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D")));
         keys.Add("Interact", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "E")));
 
-        up.text = keys["Up"].ToString();
-        down.text = keys["Down"].ToString();
-        left.text = keys["Left"].ToString();
-        right.text = keys["Right"].ToString();
-        interact.text = keys["Interact"].ToString();
+        up.SetText(keys["Up"].ToString());
+        down.SetText(keys["Down"].ToString());
+        left.SetText(keys["Left"].ToString());
+        right.SetText(keys["Right"].ToString());
+        interact.SetText(keys["Interact"].ToString());
     }
 
     // Update is called once per frame
@@ -64,7 +64,9 @@ public class KeybindMenu : MonoBehaviour
             if (e.isKey)
             {
                 keys[currKey.name] = e.keyCode;
-                currKey.transform.GetChild(0).GetComponent<TMP_Text>().text = e.keyCode.ToString();
+                TMP_Text keyText = currKey.transform.GetChild(0).GetComponent<TMP_Text>();
+                keyText.text = e.keyCode.ToString();
+                PlayerPrefs.SetString(currKey.name, e.keyCode.ToString()); // Save the key change
                 currKey = null;
             }
         }
@@ -73,11 +75,13 @@ public class KeybindMenu : MonoBehaviour
     public void ChangeKey(GameObject clicked)
     {
         currKey = clicked;
+        TMP_Text keyText = currKey.transform.GetChild(0).GetComponent<TMP_Text>();
+        keyText.text = "Press a Key...";
     }
 
     public void SaveKeys()
     {
-        foreach(var key in keys)
+        foreach (var key in keys)
         {
             PlayerPrefs.SetString(key.Key, key.Value.ToString());
         }

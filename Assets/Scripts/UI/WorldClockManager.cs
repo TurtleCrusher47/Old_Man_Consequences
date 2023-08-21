@@ -59,7 +59,7 @@ public class WorldClockManager : MonoBehaviour
         }
 
         // Debug the time, days and numOfTheDays
-        Debug.Log("Time " + timeText.text + " " + worldClockData.daysOfWeek[worldClockData.currentDayIndex] + " Day " + worldClockData.currentDayIndex);
+        //Debug.Log("Time " + timeText.text + " " + worldClockData.daysOfWeek[worldClockData.currentDayIndex] + " Day " + worldClockData.currentDayIndex);
     }
 
     private void UpdateUI()

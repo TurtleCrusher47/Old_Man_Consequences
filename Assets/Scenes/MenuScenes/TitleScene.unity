@@ -233,7 +233,7 @@ MonoBehaviour:
   left: {fileID: 1914985816}
   right: {fileID: 245743689}
   interact: {fileID: 400425190}
-  keybindMenu: {fileID: 0}
+  keybindMenu: {fileID: 310332488}
 --- !u!4 &75176665
 Transform:
   m_ObjectHideFlags: 0
