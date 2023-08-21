@@ -19,11 +19,11 @@ MonoBehaviour:
   - quantity: 4
     item: {fileID: 11400000, guid: e69ab8e2b2daeac4995cdaa358d90bf2, type: 2}
     itemState: []
-  - quantity: 3
+  - quantity: 10
     item: {fileID: 11400000, guid: 6f4b484f40af4234fb75486928dd56df, type: 2}
     itemState: []
   - quantity: 10
-    item: {fileID: 11400000, guid: bfb37b046488d934bbacf863a242c102, type: 2}
+    item: {fileID: 11400000, guid: ec34ec32706ccfb499401281dffc53df, type: 2}
     itemState: []
   - quantity: 0
     item: {fileID: 0}

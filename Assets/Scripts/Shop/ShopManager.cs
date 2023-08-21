@@ -77,16 +77,16 @@ public class ShopManager : MonoBehaviour
         {
             for (int j = 0; j < inventoryData.InventoryItems.Count; j++)
             {
-                if (inventoryData.InventoryItems[j].item == sellableItemSO[i] && inventoryData.InventoryItems[j].quantity > 0)
-                {
-                    sellButtons[i].interactable = true;
-                }
+                // if (inventoryData.InventoryItems[j].item == sellableItemSO[i] && inventoryData.InventoryItems[j].quantity > 0)
+                // {
+                //     sellButtons[i].interactable = true;
+                // }
 
-                 else
-                {
-                    Debug.Log("Sell Button" + i + "inactive");   
-                    sellButtons[i].interactable = false;
-                }
+                //  else
+                // {
+                //     Debug.Log("Sell Button" + i + "inactive");   
+                //     sellButtons[i].interactable = false;
+                // }
             }
         }
         
@@ -130,23 +130,27 @@ public class ShopManager : MonoBehaviour
             }
         }
 
-        if (inventoryData.InventoryItems[itemIndex].quantity > 1)
+        if (itemIndex > -1)
         {
-            int oldQuantity = inventoryData.InventoryItems[itemIndex].quantity;
-            inventoryData.InventoryItems[itemIndex].ChangeQuantity(oldQuantity - 1);
+             if (inventoryData.InventoryItems[itemIndex].quantity > 1)
+            {
+                int oldQuantity = inventoryData.InventoryItems[itemIndex].quantity;
+                inventoryData.InventoryItems[itemIndex].ChangeQuantity(oldQuantity - 1);
+            }
+
+            else
+            {
+                InventoryItemStruct emptyItemStruct = InventoryItemStruct.GetEmptyItem();
+                inventoryData.InventoryItems[itemIndex] = emptyItemStruct;
+            }
+
+            inventoryData.RemoveItem(itemIndex, 1);
+            
+            //UpdateInventoryList();
+            UpdateBalance();
+            CheckSellable();
         }
 
-        else
-        {
-            InventoryItemStruct emptyItemStruct = InventoryItemStruct.GetEmptyItem();
-            inventoryData.InventoryItems[itemIndex] = emptyItemStruct;
-        }
-
-        inventoryData.RemoveItem(itemIndex, 1);
-        
-        //UpdateInventoryList();
-        UpdateBalance();
-        CheckSellable();
     }
 
     public void SellAllItems()
@@ -196,6 +200,7 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < sellableItemSO.Length; i++)
         {
             sellShopPanel[i].name.text = sellableItemSO[i].Name;
+            Debug.Log(sellShopPanel[i] == null);
             sellShopPanel[i].price.text = "$" + sellableItemSO[i].SellPrice.ToString();
             sellShopPanel[i].sprite.sprite = sellableItemSO[i].ItemImage;
             sellShopPanel[i].hoverTip.tipToShow = sellableItemSO[i].Description;
