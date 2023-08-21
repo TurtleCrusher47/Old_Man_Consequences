@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FishStates;
-namespace FishStates
+using FishEnums;
+namespace FishEnums
 {
     public enum SwimState
     {
@@ -13,15 +13,23 @@ namespace FishStates
         NUM_SWIMSTATE
     }
     enum LuredState
-    { 
+    {
         LURE,
         BITE,
         NUM_LUREDSTATE
     }
-
+    public enum FishType
+    {
+        TYPE_SMALL = 0,
+        TYPE_MEDIUM = 1,
+        TYPE_BIG = 2,
+        NUM_TYPE
+    }
 }
 public class FishBehaviour : MonoBehaviour
 {
+   
+    public FishType fishType;
     // Sprite and animations
     private SpriteRenderer sr;
     private Animator ar;
@@ -73,6 +81,7 @@ public class FishBehaviour : MonoBehaviour
     public bool isBiting;
     public bool canBite;
     private float movementSpeed = 1f;
+    public FishItemSO fishData;
     public void Init()
     {
         // Get components
@@ -104,6 +113,7 @@ public class FishBehaviour : MonoBehaviour
         isBiting = false;
         destReached = false;
         canBite = true;
+        // Randomize the movement speed
         movementSpeed += (Random.Range(0, 10) / 10);
     }
     // Update is called once per frame
@@ -212,7 +222,7 @@ public class FishBehaviour : MonoBehaviour
         if (destReached)
         {
             int newInt = Random.Range(1, 10);
-            if (newInt < 3)
+            if (newInt < 3 /*&& fishData.FlavourPrefScale*/)
             {
                 luredState = LuredState.BITE;
             }

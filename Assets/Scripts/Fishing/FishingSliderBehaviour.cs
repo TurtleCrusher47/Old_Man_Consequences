@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FishingSliderBehaviour : MonoBehaviour
 {
+
     [SerializeField]
     private Slider staminaSlider;
     [SerializeField]
@@ -59,7 +60,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         //fishSpriteSlider.value = 0.5f * Mathf.Cos(a * elaspedTime * (Mathf.Cos(a * elaspedTime))) + 0.5f;
 
         // Value = sin(dt)
-        Debug.Log(Mathf.Sin(elaspedTime));
+        // Debug.Log(Mathf.Sin(elaspedTime));
         fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
         if (Input.GetMouseButton(0))
         {
@@ -86,5 +87,12 @@ public class FishingSliderBehaviour : MonoBehaviour
     void SetFishCatchColor()
     {
         fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
+    }
+    void AddToInventory()
+    {
+        SellableItemSO fishItem = new SellableItemSO();
+        //inventoryData.AddItem(fishItem, 1);
+        Debug.Log("Added!");
+        
     }
 }
