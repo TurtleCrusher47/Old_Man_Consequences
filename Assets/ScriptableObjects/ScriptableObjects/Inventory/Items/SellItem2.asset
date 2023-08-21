@@ -18,4 +18,4 @@ MonoBehaviour:
   description: wawawa
   itemImage: {fileID: -1479179544, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   defaultParameterList: []
-  sellPrice: 0
+  sellPrice: 50

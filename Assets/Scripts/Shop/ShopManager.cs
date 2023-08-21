@@ -37,9 +37,13 @@ public class ShopManager : MonoBehaviour
             buyShopPanelGO[i].SetActive(true);
         }
 
-        for (int i = 0; i < sellableItemSO.Length - 1; i++)
+        for (int i = 0; i < sellableItemSO.Length; i++)
         {
-            sellShopPanelGO[i].SetActive(true);
+            if (sellableItemSO[i] != null)
+            {
+                sellShopPanelGO[i].SetActive(true);
+
+            }
         }
 
         LoadPurchaseablePanels();
@@ -142,6 +146,7 @@ public class ShopManager : MonoBehaviour
             {
                 InventoryItemStruct emptyItemStruct = InventoryItemStruct.GetEmptyItem();
                 inventoryData.InventoryItems[itemIndex] = emptyItemStruct;
+                sellButtons[buttonNumber].interactable = false;
             }
 
             inventoryData.RemoveItem(itemIndex, 1);
@@ -200,7 +205,6 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < sellableItemSO.Length; i++)
         {
             sellShopPanel[i].name.text = sellableItemSO[i].Name;
-            Debug.Log(sellShopPanel[i] == null);
             sellShopPanel[i].price.text = "$" + sellableItemSO[i].SellPrice.ToString();
             sellShopPanel[i].sprite.sprite = sellableItemSO[i].ItemImage;
             sellShopPanel[i].hoverTip.tipToShow = sellableItemSO[i].Description;
