@@ -107,7 +107,6 @@ public class FishManager : MonoBehaviour
         if (schooling)
         {
             int newDestination = Random.Range(0, pointsContainer.transform.childCount);
-            Debug.Log(newDestination);  
             SetAllFishDestinations(newDestination);
         }
     }
@@ -120,6 +119,8 @@ public class FishManager : MonoBehaviour
         // Check if any fish has been bitten
         if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0 && player.isReeling == false)
         {
+            SetAllFishCanBite(false);
+            int fishCount = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count;
             OnFishBite();
         }
         // Check if all fish have reached their destination
@@ -292,6 +293,7 @@ public class FishManager : MonoBehaviour
     /// </summary>
     public void FinishedFishing()
     {
+        Debug.Log("Canvas set inactive by finished fishing");
         fishingCanvas.gameObject.SetActive(false);
         player.isReeling = false;
         SetAllFishCanBite(true);
@@ -319,13 +321,11 @@ public class FishManager : MonoBehaviour
     void GenerateFishingSO(FishBehaviour fishBehaviour)
     {
         float randomVal = Random.Range(0, totalWeight);
-        Debug.Log("Random val: " + randomVal);
         for (int i = 1; i < weightList.Count + 1; i++)
         {
             if (randomVal < weightList[i])
             {
                 fishBehaviour.fishData = fishItems[i - 1];
-                Debug.Log("Assigned!");
                 break;
             }
         }
@@ -342,18 +342,21 @@ public class FishManager : MonoBehaviour
         SellableItemSO fishItem = bitingFish.fishData;
         // Add it to inventory
         inventoryData.AddItem(fishItem, 1);
-        Debug.Log("Added to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
+        Debug.Log("Added a "+ fishItem.Name + " to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
+        FinishedFishing();
         // Remove from the fishList and the fishList gameobject's child
         DisableBitingFish(true);
-        FinishedFishing();
+
     }
 
     /// <summary>
-    /// Release the biting fish back into the sea
+    /// Release the biting fish back into the sea. I.e, re-enable the fish in the list.
     /// </summary>
     public void Release()
     {
-        EnableBitingFish();
+        Debug.Log("Fish released!");
+        
         FinishedFishing();
+        EnableBitingFish();
     }
 }

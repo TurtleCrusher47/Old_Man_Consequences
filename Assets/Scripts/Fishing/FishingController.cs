@@ -44,6 +44,10 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private InventorySO inventoryData;
 
+    // List of sellable items
+    [SerializeField]
+    private List<BaitItemSO> fishItems;
+
     void Awake()
     {
         dirV = 0;

@@ -73,7 +73,7 @@ public class FishBehaviour : MonoBehaviour
     private float swimForwardTimer;
     private float swimTurnTimer;
     // No idea for now
-    private float biteTimer;
+    private float lureTimer;
     // Has the fish reached its current destination?
     public bool destReached;
     // Point where the fishing is fishing
@@ -108,13 +108,13 @@ public class FishBehaviour : MonoBehaviour
         swimForwardTimer = 0;
         swimTurnTimer = 0;
         maxTurnInterval = maxSwimInterval / 3;
-        biteTimer = 0;
+        lureTimer = 5;
         fishingPoint = GameObject.Find("FishingPoint");
         isBiting = false;
         destReached = false;
         canBite = true;
         // Randomize the movement speed
-        movementSpeed += (Random.Range(0, 10) / 10);
+        movementSpeed = Random.Range(1, 3);
     }
     // Update is called once per frame
     void Update()
@@ -194,6 +194,7 @@ public class FishBehaviour : MonoBehaviour
   
     protected void Lured()
     {
+        lureTimer += Time.deltaTime;
         if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
             ar.Play("Swim");
         // Charge towards fishing rod...?
@@ -222,12 +223,12 @@ public class FishBehaviour : MonoBehaviour
         if (destReached)
         {
             int newInt = Random.Range(1, 10);
-            if (newInt < 3 /*&& fishData.FlavourPrefScale*/)
+            if (newInt < 3 && canBite == true)
             {
                 luredState = LuredState.BITE;
             }
         }
-        else if (biteTimer > 10)
+        else if (lureTimer > 10)
         {
             ChangeState(SwimState.SWIM);
         }
@@ -269,8 +270,8 @@ public class FishBehaviour : MonoBehaviour
                 swimTurnTimer = 0;
                 break;
             case SwimState.LURED:
-                biteTimer = 0;
-                currWaypointLoc = fishingPoint.transform.position;
+                lureTimer = 0;
+                currWaypointLoc = fishingPoint.transform.position + Random.insideUnitSphere;
                 break;
         }
         swimState = newState;
@@ -291,8 +292,9 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "FishingPoint" && canBite)
+        if (collision.gameObject == fishingPoint && canBite == true)
         {
+            Debug.Log(gameObject.name + "biting");
             isBiting = true;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0;
