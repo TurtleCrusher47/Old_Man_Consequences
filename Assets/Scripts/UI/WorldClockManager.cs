@@ -13,9 +13,25 @@ public class WorldClockManager : MonoBehaviour
     [Header("World Clock Stats")]
     [SerializeField] private WorldClockData worldClockData;
 
+    public static WorldClockManager Instance { get; private set; }
+
     private bool isMorning = true; // AM
 
     private float timeCounter = 0.0f;
+
+    private void Awake()
+    {
+        // Ensure there is only one instance of UIPlayerStats
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+    }
 
     private void Update()
     {

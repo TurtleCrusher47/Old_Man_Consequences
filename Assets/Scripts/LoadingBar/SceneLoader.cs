@@ -5,13 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [Header("Add UI Scene")]
-    [SerializeField] private string uiSceneName;
-
-    private void Start()
-    {
-        SceneManager.LoadScene(uiSceneName, LoadSceneMode.Additive);
-    }
     public void NewGame(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
