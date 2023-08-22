@@ -2849,7 +2849,7 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: eb97e20639c29a04a930a784a553431c, type: 2}
   playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
   baitItems:
-  - {fileID: 11400000, guid: e6f9ed826848ac64dab74c17f0f8c548, type: 2}
+  - {fileID: 11400000, guid: 1f359c8d0f6720d4db012d90690b4a29, type: 2}
   - {fileID: 11400000, guid: 2444c7bdaa7a89e45afd8b1a8eee5b1a, type: 2}
   - {fileID: 11400000, guid: 66d335953f569c64083dc72bea605602, type: 2}
   - {fileID: 11400000, guid: 1f359c8d0f6720d4db012d90690b4a29, type: 2}

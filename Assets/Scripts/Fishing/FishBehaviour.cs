@@ -233,15 +233,18 @@ public class FishBehaviour : MonoBehaviour
             if (biteTimer > 2)
             {
                 // Check: how different are the flavour profiles between the bait and the fish?
-                float baitPrefDiff = Vector2.Distance(fishData.FlavourPrefScale, player.GetComponent<FishingController>().selectedBait.FlavourProfile);
+                float baitPrefDiff = (Vector2.Distance(fishData.FlavourPrefScale, player.GetComponent<FishingController>().selectedBait.FlavourProfile));
+                Debug.Log("Pref diff: " + baitPrefDiff * 10);
                 // Calculate chances to bite 
-                float biteChance = 100 - baitPrefDiff;
+                float biteChance = 100 - (baitPrefDiff * 10);
+                Debug.Log("Bite chance: " + biteChance);
                 int newInt = Random.Range(0, 100);
                 if (newInt < biteChance)
                 {
-                    luredState = LuredState.BITE;
+                    //luredState = LuredState.BITE;
+                    Debug.Log("Would've bitten.");
                 }
-
+                biteTimer = 0;
             }
         }
         else if (lureTimer > 10)
@@ -311,7 +314,7 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == fishingPoint && canBite == true)
+        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE)
         {
             Debug.Log(gameObject.name + "biting");
             isBiting = true;
