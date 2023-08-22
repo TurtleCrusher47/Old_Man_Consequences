@@ -909,6 +909,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 583329999}
+        m_TargetAssemblyTypeName: FishingSliderBehaviour, Assembly-CSharp
+        m_MethodName: ResetSliderValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &485260562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,6 +2854,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 66d335953f569c64083dc72bea605602, type: 2}
   - {fileID: 11400000, guid: 1f359c8d0f6720d4db012d90690b4a29, type: 2}
   - {fileID: 11400000, guid: f4a6bb593045bbc43a7ed9ad689e7f40, type: 2}
+  selectedBait: {fileID: 0}
 --- !u!1 &1076495361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,6 +3889,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2032072415}
         m_TargetAssemblyTypeName: FishManager, Assembly-CSharp
         m_MethodName: Release
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 583329999}
+        m_TargetAssemblyTypeName: FishingSliderBehaviour, Assembly-CSharp
+        m_MethodName: ResetSliderValues
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

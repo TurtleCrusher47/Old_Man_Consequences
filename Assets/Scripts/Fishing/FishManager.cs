@@ -223,6 +223,7 @@ public class FishManager : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Set the "canbite" boolean of all fish. Determines if they can bite or not.
     /// </summary>

@@ -51,10 +51,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         sliderColorGrad.SetKeys(sliderColor, sliderAlpha);
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
-        addButton.gameObject.SetActive(false);
-        releaseButton.gameObject.SetActive(false);
-        fishCatchPercentSlider.value = 0;
-        staminaSlider.value = 1;
+        ResetSliderValues();
     }
 
     // Update is called once per frame
@@ -98,8 +95,13 @@ public class FishingSliderBehaviour : MonoBehaviour
     {
         fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
     }
-    public void Reset()
+    public void ResetSliderValues()
     {
+      
+        addButton.gameObject.SetActive(false);
+        releaseButton.gameObject.SetActive(false);
         fishCatchPercentSlider.value = 0;
+        staminaSlider.value = 1;
+        elaspedTime = 0.6f;
     }
 }

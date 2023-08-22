@@ -19,7 +19,7 @@ public class FishingController : MonoBehaviour
     // used for later
     private float levelDistMult;
     // base multipler for how far the rod will be thrown
-    private const float baseXMultipler = 8f;
+    private const float baseXMultipler = 13f;
     // base multipler for how fast the rod strength changes
     private const float baseRodStrengthMult = 2f;
     private float levelStrengthMult;

@@ -185,7 +185,7 @@ public class FishBehaviour : MonoBehaviour
             }
             ChangeState(SwimState.IDLE);
         }
-        if (Vector3.Distance(gameObject.transform.position, fishingPoint.transform.position) < 2 * minDistToNextPoint)
+        if (Vector3.Distance(gameObject.transform.position, fishingPoint.transform.position) < 2 * minDistToNextPoint && canBite)
         {
             ChangeState(SwimState.LURED);
         }
@@ -280,11 +280,13 @@ public class FishBehaviour : MonoBehaviour
         {
             case SwimState.IDLE:
                 idleTimer = 0;
+                luredState = LuredState.LURE;
                 break;
             case SwimState.SWIM:
                 swimForwardTimer = 0;
                 swimTurnTimer = 0;
                 currWaypointIndex = Random.Range(0, waypointList.Count);
+                luredState = LuredState.LURE;
                 break;
             case SwimState.LURED:
                 lureTimer = 0;
