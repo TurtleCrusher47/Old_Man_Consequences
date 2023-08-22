@@ -154,6 +154,7 @@ public class ShopManager : MonoBehaviour
             
             //UpdateInventoryList();
             UpdateBalance();
+            CheckPurchaseable();
             //CheckSellable();
         }
 
