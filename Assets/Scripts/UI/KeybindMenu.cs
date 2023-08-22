@@ -29,6 +29,12 @@ public class KeybindMenu : MonoBehaviour
         left.SetText(keys["Left"].ToString());
         right.SetText(keys["Right"].ToString());
         interact.SetText(keys["Interact"].ToString());
+
+        // Print dictionary contents
+        foreach (var keyValuePair in keys)
+        {
+            Debug.Log("Key: " + keyValuePair.Key + " - KeyCode: " + keyValuePair.Value);
+        }
     }
 
     // Update is called once per frame
@@ -87,5 +93,6 @@ public class KeybindMenu : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        Debug.Log("Keybinds Saved");
     }
 }
