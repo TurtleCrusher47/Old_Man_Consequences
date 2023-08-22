@@ -21,6 +21,8 @@ public class ShopManager : MonoBehaviour
     public GameObject[] sellShopPanelGO;
     public ShopTemplate[] sellShopPanel;
     public Button[] sellButtons;
+
+    private int existingSellableItems;
      
     //private Dictionary<int, InventoryItemStruct> inventoryList;
 
@@ -186,15 +188,16 @@ public class ShopManager : MonoBehaviour
         int j = 0;
         for (int i = 0; i < inventoryData.InventoryItems.Count; i++)
         {
-            
             if (inventoryData.InventoryItems[i].item is SellableItemSO)
             {
                 if (j < sellableItemSO.Length)
                 {
                     sellableItemSO[j] = inventoryData.InventoryItems[i].item as SellableItemSO; 
+
+                    existingSellableItems ++;
+
                     j++;
                 }
-            
             }
         }
     }
@@ -202,7 +205,7 @@ public class ShopManager : MonoBehaviour
     // Load a panel for each of the sellable items
     public void LoadSellablePanels()
     {
-        for (int i = 0; i < sellableItemSO.Length; i++)
+        for (int i = 0; i < existingSellableItems; i++)
         {
             sellShopPanel[i].name.text = sellableItemSO[i].Name;
             sellShopPanel[i].price.text = "$" + sellableItemSO[i].SellPrice.ToString();
