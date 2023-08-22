@@ -67,7 +67,7 @@ public class FishingController : MonoBehaviour
         // On player click
         if (isReeling == false)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetAxis("Fire3") > 0)
             {
                 if (!clicked)
                     clicked = true;
@@ -89,10 +89,6 @@ public class FishingController : MonoBehaviour
                 Walking();
             }
         }
-        else
-        {
-            fishingCanvas.gameObject.SetActive(true);
-        }
            
 
     }
@@ -106,10 +102,7 @@ public class FishingController : MonoBehaviour
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
-            fishingPoint.SetActive(false);
-            fishingStrength = 0;
-            fishingPoint.transform.position = newPos;
-            isCasted = false;
+            ResetFishingPoint();
         }
         // Transform the position based on the direction
         transform.position = newPos;
@@ -158,15 +151,13 @@ public class FishingController : MonoBehaviour
             ar.Play("Idle Left");
         }
     }
-    public void AddToInventory()
+    public void ResetFishingPoint()
     {
-        isReeling = false;
-        fishingCanvas.gameObject.SetActive(false);
-        // add item to inventory
-    //    inventoryData.AddItem(testItem);
-    //    foreach (var item in inventoryData.GetCurrentInventoryState())
-    //    {
-    //        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
-    //    }
+        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
+        fishingPoint.SetActive(false);
+        fishingStrength = 0;
+        fishingPoint.transform.position = newPos;
+        isCasted = false;
+        slider.value = 0;
     }
 }

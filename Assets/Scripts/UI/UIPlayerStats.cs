@@ -89,7 +89,7 @@ public class UIPlayerStats : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        playerMoney.text = playerStats.Debt.ToString();
+        playerMoney.text = playerStats.BankDebt.ToString();
         DynamicTextFontSize(playerMoney);
     }
 

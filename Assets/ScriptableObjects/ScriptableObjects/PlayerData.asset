@@ -26,5 +26,5 @@ MonoBehaviour:
   currentStamina: 10
   currentHunger: 10
   currentHydration: 10
-  balance: 7000
-  debt: 100000
+  balance: 0
+  debt: 1000000
