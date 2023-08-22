@@ -31,10 +31,11 @@ public class KeybindMenu : MonoBehaviour
         interact.SetText(keys["Interact"].ToString());
 
         // Print dictionary contents
+        /*
         foreach (var keyValuePair in keys)
         {
             Debug.Log("Key: " + keyValuePair.Key + " - KeyCode: " + keyValuePair.Value);
-        }
+        }*/
     }
 
     // Update is called once per frame

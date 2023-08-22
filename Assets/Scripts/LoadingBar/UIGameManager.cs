@@ -8,6 +8,7 @@ public class UIGameManager : MonoBehaviour
     [Header("Add UI Scene")]
     [SerializeField] private string uiSceneName = "UIScene";
 
+
     // Start is called before the first frame update
     void Start()
     {

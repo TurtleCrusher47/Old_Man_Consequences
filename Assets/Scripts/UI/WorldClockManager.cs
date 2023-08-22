@@ -16,8 +16,8 @@ public class WorldClockManager : MonoBehaviour
     public static WorldClockManager Instance { get; private set; }
 
     private bool isMorning = true; // AM
-
     private float timeCounter = 0.0f;
+
 
     private void Awake()
     {
