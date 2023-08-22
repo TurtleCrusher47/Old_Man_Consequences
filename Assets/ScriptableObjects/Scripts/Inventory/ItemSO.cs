@@ -5,26 +5,49 @@ using UnityEngine;
 
 public abstract class ItemSO : ScriptableObject
 {
-   [field: SerializeField]
-   public bool CanStack { get; set; }
+    [field: SerializeField] private bool canStack;
+    public bool CanStack
+    {
+        get => canStack;
+        set => canStack = value;
+    }
 
     public int ID => GetInstanceID();
 
-    [field: SerializeField]
-    public int MaxStackSize { get; set; } = 1;
+    [field: SerializeField] private int maxStackSize;
+    public int MaxStackSize
+    { 
+        get => maxStackSize;
+        set => maxStackSize = value; 
+    }
 
-    [field: SerializeField]
-    public string Name { get; set; }
+    [field: SerializeField] private string name;
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
 
-    [field: SerializeField]
-    [field: TextArea]
-    public string Descrip { get; set; }
+    [field: SerializeField] [field: TextArea] private string description;
+    public string Description
+    {
+        get => description;
+        set => description = value;
+    }
 
-    [field: SerializeField]
-    public Sprite ItemImage { get; set; }
+    [field: SerializeField] private Sprite itemImage;
+    public Sprite ItemImage
+    {
+        get => itemImage;
+        set => itemImage = value;
+    }
 
-    [field: SerializeField]
-    public List<ItemParameter> DefaultParameterList { get; set; }
+    [field: SerializeField] private List<ItemParameter> defaultParameterList;
+    public List<ItemParameter> DefaultParameterList
+    {
+        get => defaultParameterList;
+        set => defaultParameterList = value;
+    }
 
 
 }

@@ -1,11 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
-    // Movement
+    [Header("Hunger Variables")]
+    public float maxHunger = 100f; // assign a max amount of hunger
+    public float hungerDecreaseAmountOnClick = 5f; // Decrease hunger on mouse click
+    public float hungerDecreaseInterval = 8f; // Decrease energy every certain
+    public float hungerDecreasePerSecond = 10f; // Decrease hunger a certain amount
+
+    [Header("Thirst Variables")]
+    public float maxThirst = 100f; // assign a max amount of hunger
+    public float thirstDecreaseInterval = 5f; // Decrease thirst every certain seconds
+    public float thirstDecreaseAmount = 5f; // Decrease thirst a certain amount
+
+    [Header("Player's Money")]
+    public float currMoney;
+
+    [Header("Miscellaneous")]
+
     [SerializeField] private int movementSpeed = 5;
     public int MovementSpeed => movementSpeed;
 
@@ -23,18 +39,12 @@ public class PlayerData : ScriptableObject
         set => currentStamina = value;
     }
 
-    [SerializeField] private float maxHunger = 10f;
-    public float MaxHunger => maxHunger;
-
     [SerializeField] private float currentHunger = 10f;
     public float CurrentHunger
     {
         get => currentHunger;
         set => currentHunger = value;
     }
-
-    [SerializeField] private float maxHydration = 10f;
-    public float MaxHydration => maxHydration;
 
     [SerializeField] private float currentHydration = 10f;
     public float CurrentHydration
@@ -50,10 +60,19 @@ public class PlayerData : ScriptableObject
         set => balance = value;
     }
 
-    [SerializeField] private int debt = 100000;
-    public int Debt
+    [SerializeField] private int sharkDebt = 0;
+    public int SharkDebt
     {
-        get => debt;
-        set => debt = value;
+        get => sharkDebt;
+        set => sharkDebt = value;
     }
+
+    [SerializeField] private int bankDebt = 100000;
+    public int BankDebt
+    {
+        get => bankDebt;
+        set => bankDebt = value;
+    }
+
+
 }
