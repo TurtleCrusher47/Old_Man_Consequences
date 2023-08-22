@@ -18,11 +18,11 @@ public class KeybindMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        keys.Add("Up", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Up", "W")));
-        keys.Add("Down", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Down", "S")));
-        keys.Add("Left", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "A")));
-        keys.Add("Right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D")));
-        keys.Add("Interact", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "E")));
+        keys.Add("Up", (KeyCode)PlayerPrefs.GetInt("Up", (int)KeyCode.W));
+        keys.Add("Down", (KeyCode)PlayerPrefs.GetInt("Down", (int)KeyCode.S));
+        keys.Add("Left", (KeyCode)PlayerPrefs.GetInt("Left", (int)KeyCode.A));
+        keys.Add("Right", (KeyCode)PlayerPrefs.GetInt("Right", (int)KeyCode.D));
+        keys.Add("Interact", (KeyCode)PlayerPrefs.GetInt("Interact", (int)KeyCode.E));
 
         up.SetText(keys["Up"].ToString());
         down.SetText(keys["Down"].ToString());
@@ -90,7 +90,7 @@ public class KeybindMenu : MonoBehaviour
     {
         foreach (var key in keys)
         {
-            PlayerPrefs.SetString(key.Key, key.Value.ToString());
+            PlayerPrefs.SetInt(key.Key, (int)key.Value);
         }
 
         PlayerPrefs.Save();
