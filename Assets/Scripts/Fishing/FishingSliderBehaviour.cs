@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FishingSliderBehaviour : MonoBehaviour
 {
+
     [SerializeField]
     private Slider staminaSlider;
     [SerializeField]
@@ -15,6 +17,11 @@ public class FishingSliderBehaviour : MonoBehaviour
     private Slider playerRodSlider;
     [SerializeField]
     private Button addButton;
+    [SerializeField]
+    private Button releaseButton;
+
+    [SerializeField]
+    private TMP_Text catchText;
 
     [SerializeField]
     private Image fishingCatchImage;
@@ -45,6 +52,7 @@ public class FishingSliderBehaviour : MonoBehaviour
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
         addButton.gameObject.SetActive(false);
+        releaseButton.gameObject.SetActive(false);
 
     }
 
@@ -59,7 +67,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         //fishSpriteSlider.value = 0.5f * Mathf.Cos(a * elaspedTime * (Mathf.Cos(a * elaspedTime))) + 0.5f;
 
         // Value = sin(dt)
-        Debug.Log(Mathf.Sin(elaspedTime));
+        // Debug.Log(Mathf.Sin(elaspedTime));
         fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
         if (Input.GetMouseButton(0))
         {
@@ -71,7 +79,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
         {
-            fishCatchPercentSlider.value += 0.5f * Time.deltaTime;
+            fishCatchPercentSlider.value += Time.deltaTime;
         }
         else if (fishCatchPercentSlider.value > 0)
         {
@@ -81,6 +89,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         {
             fishCaught = true;
             addButton.gameObject.SetActive(true);
+            releaseButton.gameObject.SetActive(true);
         }
     }
     void SetFishCatchColor()
