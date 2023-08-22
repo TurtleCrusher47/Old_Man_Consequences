@@ -67,5 +67,4 @@ public class PlayerData : ScriptableObject
         set => debt = value;
     }
 
-
 }

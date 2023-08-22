@@ -29,12 +29,9 @@ public class FishManager : MonoBehaviour
     // Timer which stores how long the fish have been chilling
     private float destTimer;
     // The number of fish to be spawned
-    [SerializeField]
-    private float medFishCount = 2;
-    [SerializeField]
-    private float smallFishCount = 2;
-    [SerializeField]
-    private float bigFishCount = 2;
+    private float medFishCount;
+    private float smallFishCount;
+    private float bigFishCount;
 
     private float schoolTimer;
 
@@ -59,10 +56,13 @@ public class FishManager : MonoBehaviour
     
     void Start()
     {
+        Random.InitState((int)Time.time);
         InitFishingSO();
         destTimer = 0;
         schoolTimer = 0;
-
+        smallFishCount = Random.Range(2, 5);
+        medFishCount = Random.Range(2, 5);
+        bigFishCount = Random.Range(2, 5);
         for (int i = 0; i < smallFishCount; i++)
         {
             // Instantiate each fish
@@ -102,6 +102,7 @@ public class FishManager : MonoBehaviour
         {
             // Add each fish to the fishList
             fishList.Add(fish.gameObject);
+            fish.GetComponent<FishBehaviour>().player = player;
 
         }
         if (schooling)
@@ -133,10 +134,6 @@ public class FishManager : MonoBehaviour
                 SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
                 destTimer = 0;
             }
-        }
-        else if(player.fishingPoint.activeInHierarchy)
-        {
-            SetAllFishStates(SwimState.LURED);
         }
     }
 
@@ -309,7 +306,6 @@ public class FishManager : MonoBehaviour
         {
             totalWeight += fishItem.SpawnChance;
             weightList.Add(totalWeight);
-          
         }
 
     }

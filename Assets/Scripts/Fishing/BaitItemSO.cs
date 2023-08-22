@@ -3,8 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class BaitItemSO : SellableItemSO
+public class BaitItemSO : SellableItemSO, IItemAction
 {
+    [SerializeField] private List<ModifierData> modifierData = new List<ModifierData>();
+    public string ActionName => "Use";
+
+    public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
+    {
+        foreach (ModifierData data in modifierData)
+        {
+            data.statModifier.AffectCharacter(character, data.value);
+        }
+        return true;
+    }
     // Where does the bait sit on the bait flavour scale?
     [field: SerializeField] private Vector2 flavourProfile;
     // X value: crunchy or chewy, Y value: sweet or salty

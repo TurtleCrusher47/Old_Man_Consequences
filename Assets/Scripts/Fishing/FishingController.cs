@@ -44,9 +44,13 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private InventorySO inventoryData;
 
+    [SerializeField] private PlayerData playerData;
+
     // List of sellable items
     [SerializeField]
-    private List<BaitItemSO> fishItems;
+    private List<BaitItemSO> baitItems;
+    [HideInInspector]
+    public BaitItemSO selectedBait;
 
     void Awake()
     {
@@ -60,6 +64,7 @@ public class FishingController : MonoBehaviour
         levelStrengthMult = 1f;
         isCasted = false;
         isReeling = false;
+        selectedBait = baitItems[0];
     }
     // Update is called once per frame
     void Update()
@@ -163,5 +168,9 @@ public class FishingController : MonoBehaviour
         fishingPoint.transform.position = newPos;
         isCasted = false;
         slider.value = 0;
+    }
+    public BaitItemSO GetCurrentBait()
+    {
+        return selectedBait;
     }
 }
