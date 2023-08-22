@@ -196,7 +196,7 @@ public class ShopManager : MonoBehaviour
                     existingSellableItems++;
 
                     j++;
-                []
+                }
             }
         }
     }
