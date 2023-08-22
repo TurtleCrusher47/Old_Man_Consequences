@@ -236,7 +236,7 @@ public class FishBehaviour : MonoBehaviour
                 float baitPrefDiff = (Vector2.Distance(fishData.FlavourPrefScale, player.GetComponent<FishingController>().selectedBait.FlavourProfile));
                 Debug.Log("Pref diff: " + baitPrefDiff * 10);
                 // Calculate chances to bite 
-                float biteChance = 100 - (baitPrefDiff * 10);
+                float biteChance = Mathf.Abs((10 - (baitPrefDiff * 10)) * 10);
                 Debug.Log("Bite chance: " + biteChance);
                 int newInt = Random.Range(0, 100);
                 if (newInt < biteChance)

@@ -56,7 +56,6 @@ public class FishManager : MonoBehaviour
     
     void Start()
     {
-        Random.InitState((int)Time.time);
         InitFishingSO();
         destTimer = 0;
         schoolTimer = 0;
