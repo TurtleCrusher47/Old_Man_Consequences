@@ -268,6 +268,7 @@ public class FishBehaviour : MonoBehaviour
             case SwimState.SWIM:
                 swimForwardTimer = 0;
                 swimTurnTimer = 0;
+                currWaypointIndex = Random.Range(0, waypointList.Count);
                 break;
             case SwimState.LURED:
                 lureTimer = 0;

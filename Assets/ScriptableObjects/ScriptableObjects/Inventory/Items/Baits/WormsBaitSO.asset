@@ -15,9 +15,9 @@ MonoBehaviour:
   canStack: 1
   maxStackSize: 64
   name: Blood Worms
-  description: 'Commonly used for bait and fish feed, they won''t be particularly
-    attractive to anything. '
+  description: Commonly used for bait and fish feed, they won't be particularly attractive
+    to anything. They're slightly chewy.
   itemImage: {fileID: 0}
   defaultParameterList: []
   sellPrice: 50
-  flavourProfile: {x: 0, y: 0}
+  flavourProfile: {x: 0, y: -0.15}
