@@ -4,7 +4,7 @@ using UnityEngine;
 using FishEnums;
 
 [CreateAssetMenu]
-public class FishItemSO : SellableItemSO, IDestroyableItem
+public class FishItemSO : SellableItemSO
 {
     // Where does the fish sit on the bait flavour scale?
     [field: SerializeField] private Vector2 flavourPrefScale;

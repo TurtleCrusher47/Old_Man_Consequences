@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class BaitItemSO : PurchaseableItemSO, IItemAction
+public class BaitItemSO : SellableItemSO, IItemAction
 {
     [SerializeField] private List<ModifierData> modifierData = new List<ModifierData>();
     public string ActionName => "Use";
 
-    //addAction to item in inventoryController wahoo
     public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
     {
         foreach (ModifierData data in modifierData)

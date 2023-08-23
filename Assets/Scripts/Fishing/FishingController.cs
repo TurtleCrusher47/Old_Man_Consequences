@@ -49,13 +49,6 @@ public class FishingController : MonoBehaviour
     // List of sellable items
     [SerializeField]
     private List<BaitItemSO> baitItems;
-
-    [HideInInspector]
-    public List<BaitItemSO> BaitItems
-    {
-        get => baitItems;
-    }
-
     [HideInInspector]
     public BaitItemSO selectedBait;
 
