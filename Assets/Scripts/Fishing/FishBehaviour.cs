@@ -241,7 +241,7 @@ public class FishBehaviour : MonoBehaviour
                 int newInt = Random.Range(0, 100);
                 if (newInt < biteChance)
                 {
-                    //luredState = LuredState.BITE;
+                    luredState = LuredState.BITE;
                     Debug.Log("Would've bitten.");
                 }
                 biteTimer = 0;
