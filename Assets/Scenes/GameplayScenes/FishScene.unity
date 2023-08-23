@@ -2309,7 +2309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614958359}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 9.1, y: 0, z: 0}
+  m_LocalPosition: {x: 8.96, y: 0, z: 0}
   m_LocalScale: {x: 3.6, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2346,12 +2346,12 @@ PolygonCollider2D:
       - {x: -1.4997722, y: -0.4907797}
       - {x: -0.13829625, y: -0.5362391}
       - {x: -0.13834348, y: -1.3453269}
-      - {x: 0.1748818, y: -1.3432333}
-      - {x: 0.17438416, y: -0.5218285}
+      - {x: 0.30223256, y: -1.3232715}
+      - {x: 0.3291949, y: -0.5188098}
       - {x: 1.4912931, y: -0.49141032}
       - {x: 1.4901841, y: -0.43073946}
-      - {x: 0.15340447, y: -0.49587667}
-      - {x: 0.1537557, y: -1.2832845}
+      - {x: 0.31911737, y: -0.49285725}
+      - {x: 0.2907178, y: -1.309901}
       - {x: -0.0070882714, y: -1.2860928}
       - {x: -0.116694994, y: -1.2880067}
       - {x: -0.12407459, y: -0.4919523}
@@ -3586,7 +3586,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &999580856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3653,7 +3653,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1610452615, guid: f35ef0303b89ccc48ac2bae831dc035e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3673,7 +3673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999580853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.17, y: 0.01, z: 0}
+  m_LocalPosition: {x: 9.245, y: 0.397, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6062,7 +6062,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!1 &2071033660
 GameObject:
@@ -6243,7 +6243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094714101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.15, y: 0.062, z: 0}
+  m_LocalPosition: {x: 9.91, y: 0.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6275,7 +6275,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6331,7 +6331,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: -523417211, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
