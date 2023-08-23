@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class BaitItemSO : PurchaseableItemSO, IItemAction
+public class BaitItemSO : PurchaseableItemSO, IItemAction, IDestroyableItem
 {
     [SerializeField] private List<ModifierData> modifierData = new List<ModifierData>();
     public string ActionName => "Use";
