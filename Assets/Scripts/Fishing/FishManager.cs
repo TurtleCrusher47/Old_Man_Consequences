@@ -29,12 +29,9 @@ public class FishManager : MonoBehaviour
     // Timer which stores how long the fish have been chilling
     private float destTimer;
     // The number of fish to be spawned
-    [SerializeField]
-    private float medFishCount = 2;
-    [SerializeField]
-    private float smallFishCount = 2;
-    [SerializeField]
-    private float bigFishCount = 2;
+    private float medFishCount;
+    private float smallFishCount;
+    private float bigFishCount;
 
     private float schoolTimer;
 
@@ -56,13 +53,20 @@ public class FishManager : MonoBehaviour
     [SerializeField]
     private Canvas fishingCanvas;
 
+    bool canFishBite;
+    float biteTimer;
+    int schoolingCounter;
+
     
     void Start()
     {
         InitFishingSO();
         destTimer = 0;
         schoolTimer = 0;
-
+        schoolingCounter = 0;
+        smallFishCount = Random.Range(2, 5);
+        medFishCount = Random.Range(2, 5);
+        bigFishCount = Random.Range(2, 5);
         for (int i = 0; i < smallFishCount; i++)
         {
             // Instantiate each fish
@@ -102,29 +106,41 @@ public class FishManager : MonoBehaviour
         {
             // Add each fish to the fishList
             fishList.Add(fish.gameObject);
+            fish.GetComponent<FishBehaviour>().player = player;
 
         }
         if (schooling)
         {
             int newDestination = Random.Range(0, pointsContainer.transform.childCount);
-            Debug.Log(newDestination);  
             SetAllFishDestinations(newDestination);
         }
+        canFishBite = true;
+        biteTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         destTimer += Time.deltaTime;
-
+        
         // Check if any fish has been bitten
         if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0 && player.isReeling == false)
         {
+            canFishBite = false;
+            SetAllFishCanBite(canFishBite);
             OnFishBite();
+            schooling = false;
+            SetAllFishSchooling(schooling);
         }
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
-        if (player.isCasted == false)
+        if (schoolingCounter > 4)
+        {
+            schooling = false;
+            SetAllFishSchooling(schooling);
+            schoolingCounter = 0;
+        }
+        else if (player.isCasted == false && schooling)
         {
             //UpdateFishState(SwimState.SWIM);
             if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
@@ -132,11 +148,30 @@ public class FishManager : MonoBehaviour
             {
                 SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
                 destTimer = 0;
+                schoolingCounter++;
             }
         }
-        else if(player.fishingPoint.activeInHierarchy)
+        
+        // Let fish roam around first instead of biting again right after release
+        if (canFishBite == false)
         {
-            SetAllFishStates(SwimState.LURED);
+            biteTimer += Time.deltaTime;
+            if (biteTimer > 5)
+            {
+                canFishBite = true;
+                biteTimer = 0;
+            }
+        }
+        // Make fish school after 30 seconds of not schooling
+        if (schooling == false)
+        {
+            schoolTimer += Time.deltaTime;
+            if (schoolTimer > 30)
+            {
+                schooling = true;
+                SetAllFishSchooling(schooling);
+                schoolTimer = 0;
+            }
         }
     }
 
@@ -226,6 +261,7 @@ public class FishManager : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Set the "canbite" boolean of all fish. Determines if they can bite or not.
     /// </summary>
@@ -269,9 +305,11 @@ public class FishManager : MonoBehaviour
 
     private void EnableBitingFish()
     {
-        var fishToRemove = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
-        fishToRemove.SetActive(true);
-        fishToRemove.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
+        // Find the biting fish
+        GameObject bitingFish = fishList.Find(f => f.GetComponent<FishBehaviour>().isBiting);
+        bitingFish.SetActive(true);
+        bitingFish.GetComponent<FishBehaviour>().ResetFish();
+        bitingFish.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
     }
 
     /// <summary>
@@ -286,16 +324,20 @@ public class FishManager : MonoBehaviour
         }
         DisableBitingFish(false);
         SetAllFishStates(SwimState.SWIM);
+        SetAllFishCanBite(false);
     }
     /// <summary>
     /// Call this function when the player either releases the fish back into the water OR adds the fish to their inventory
     /// </summary>
     public void FinishedFishing()
     {
+        Debug.Log("Canvas set inactive by finished fishing");
         fishingCanvas.gameObject.SetActive(false);
         player.isReeling = false;
-        SetAllFishCanBite(true);
+        //SetAllFishCanBite(true);
         player.ResetFishingPoint();
+        //reset bait to worm bait after fishing is complete
+        player.selectedBait = player.BaitItems[0];
     }
 
     /// <summary>
@@ -308,7 +350,6 @@ public class FishManager : MonoBehaviour
         {
             totalWeight += fishItem.SpawnChance;
             weightList.Add(totalWeight);
-          
         }
 
     }
@@ -319,13 +360,11 @@ public class FishManager : MonoBehaviour
     void GenerateFishingSO(FishBehaviour fishBehaviour)
     {
         float randomVal = Random.Range(0, totalWeight);
-        Debug.Log("Random val: " + randomVal);
         for (int i = 1; i < weightList.Count + 1; i++)
         {
             if (randomVal < weightList[i])
             {
                 fishBehaviour.fishData = fishItems[i - 1];
-                Debug.Log("Assigned!");
                 break;
             }
         }
@@ -342,18 +381,21 @@ public class FishManager : MonoBehaviour
         SellableItemSO fishItem = bitingFish.fishData;
         // Add it to inventory
         inventoryData.AddItem(fishItem, 1);
-        Debug.Log("Added to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
+        Debug.Log("Added a "+ fishItem.Name + " to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
+        FinishedFishing();
         // Remove from the fishList and the fishList gameobject's child
         DisableBitingFish(true);
-        FinishedFishing();
+
     }
 
     /// <summary>
-    /// Release the biting fish back into the sea
+    /// Release the biting fish back into the sea. I.e, re-enable the fish in the list.
     /// </summary>
     public void Release()
     {
-        EnableBitingFish();
+        Debug.Log("Fish released!");
+        
         FinishedFishing();
+        EnableBitingFish();
     }
 }

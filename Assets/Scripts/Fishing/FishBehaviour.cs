@@ -73,6 +73,7 @@ public class FishBehaviour : MonoBehaviour
     private float swimForwardTimer;
     private float swimTurnTimer;
     // No idea for now
+    private float lureTimer;
     private float biteTimer;
     // Has the fish reached its current destination?
     public bool destReached;
@@ -82,6 +83,7 @@ public class FishBehaviour : MonoBehaviour
     public bool canBite;
     private float movementSpeed = 1f;
     public FishItemSO fishData;
+    public FishingController player;
     public void Init()
     {
         // Get components
@@ -108,13 +110,32 @@ public class FishBehaviour : MonoBehaviour
         swimForwardTimer = 0;
         swimTurnTimer = 0;
         maxTurnInterval = maxSwimInterval / 3;
-        biteTimer = 0;
+        lureTimer = 5;
         fishingPoint = GameObject.Find("FishingPoint");
         isBiting = false;
         destReached = false;
         canBite = true;
         // Randomize the movement speed
-        movementSpeed += (Random.Range(0, 10) / 10);
+        movementSpeed = Random.Range(1, 3);
+        biteTimer = 0;
+    }
+    public void ResetFish()
+    {
+        // Set initial swim state
+        swimState = SwimState.IDLE;
+        luredState = LuredState.LURE;
+        // Set initial direction
+        targetDir = new Vector3(0, 0, 0);
+        swimForwardTimer = 0;
+        swimTurnTimer = 0;
+        maxTurnInterval = maxSwimInterval / 3;
+        lureTimer = 5;
+        isBiting = false;
+        destReached = false;
+        canBite = true;
+        // Randomize the movement speed
+        movementSpeed = Random.Range(1, 3);
+        biteTimer = 0;
     }
     // Update is called once per frame
     void Update()
@@ -182,6 +203,10 @@ public class FishBehaviour : MonoBehaviour
             }
             ChangeState(SwimState.IDLE);
         }
+        if (Vector3.Distance(gameObject.transform.position, fishingPoint.transform.position) < 2 * minDistToNextPoint && canBite)
+        {
+            ChangeState(SwimState.LURED);
+        }
     }
 
     protected void LookTowardsDest()
@@ -194,6 +219,7 @@ public class FishBehaviour : MonoBehaviour
   
     protected void Lured()
     {
+        lureTimer += Time.deltaTime;
         if (!ar.GetCurrentAnimatorStateInfo(0).IsName("Swim"))
             ar.Play("Swim");
         // Charge towards fishing rod...?
@@ -203,6 +229,7 @@ public class FishBehaviour : MonoBehaviour
                 SwimTowardsTarget();
                 break;
             case LuredState.BITE:
+                currWaypointLoc = fishingPoint.transform.position;
                 if (Vector3.Distance(fishingPoint.transform.position, transform.position) > 0.05f)
                 {
                     LookTowardsDest();
@@ -210,7 +237,6 @@ public class FishBehaviour : MonoBehaviour
                     float dotProd = Vector3.Dot(fishDir, gameObject.transform.right);
                     if (Mathf.Abs(dotProd) > 0.9)
                     {
-                        Debug.Log("Swimming to lure");
                         SwimTowardsTarget();
                     }
                 }
@@ -221,13 +247,25 @@ public class FishBehaviour : MonoBehaviour
         destReached = Vector2.Distance(currWaypointLoc, gameObject.transform.position) < minDistToNextPoint;
         if (destReached)
         {
-            int newInt = Random.Range(1, 10);
-            if (newInt < 3 /*&& fishData.FlavourPrefScale*/)
+            biteTimer += Time.deltaTime;
+            if (biteTimer > 2)
             {
-                luredState = LuredState.BITE;
+                // Check: how different are the flavour profiles between the bait and the fish?
+                float baitPrefDiff = (Vector2.Distance(fishData.FlavourPrefScale, player.GetComponent<FishingController>().selectedBait.FlavourProfile));
+                Debug.Log("Pref diff: " + baitPrefDiff * 10);
+                // Calculate chances to bite 
+                float biteChance = Mathf.Abs((10 - (baitPrefDiff * 10)) * 10);
+                Debug.Log("Bite chance: " + biteChance);
+                int newInt = Random.Range(0, 100);
+                if (newInt < biteChance)
+                {
+                    luredState = LuredState.BITE;
+                    Debug.Log("Would've bitten.");
+                }
+                biteTimer = 0;
             }
         }
-        else if (biteTimer > 10)
+        else if (lureTimer > 10)
         {
             ChangeState(SwimState.SWIM);
         }
@@ -263,14 +301,17 @@ public class FishBehaviour : MonoBehaviour
         {
             case SwimState.IDLE:
                 idleTimer = 0;
+                luredState = LuredState.LURE;
                 break;
             case SwimState.SWIM:
                 swimForwardTimer = 0;
                 swimTurnTimer = 0;
+                currWaypointIndex = Random.Range(0, waypointList.Count);
+                luredState = LuredState.LURE;
                 break;
             case SwimState.LURED:
-                biteTimer = 0;
-                currWaypointLoc = fishingPoint.transform.position;
+                lureTimer = 0;
+                currWaypointLoc = fishingPoint.transform.position + Random.insideUnitSphere * 5f;
                 break;
         }
         swimState = newState;
@@ -291,8 +332,9 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "FishingPoint" && canBite)
+        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED)
         {
+            Debug.Log(gameObject.name + "biting");
             isBiting = true;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0;

@@ -21,6 +21,6 @@ MonoBehaviour:
   itemImage: {fileID: 120231290, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
   defaultParameterList: []
   sellPrice: 150
-  flavourPrefScale: {x: 0, y: 0}
+  flavourPrefScale: {x: -0.4, y: 0.5}
   sizeMultiplier: []
   spawnChance: 0.6
