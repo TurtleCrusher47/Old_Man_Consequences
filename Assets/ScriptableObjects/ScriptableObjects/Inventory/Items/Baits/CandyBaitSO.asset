@@ -16,8 +16,10 @@ MonoBehaviour:
   maxStackSize: 64
   name: Candy
   description: 
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 1782472469, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   defaultParameterList: []
-  sellPrice: 0
-  modifierData: []
+  purchasePrice: 100
+  modifierData:
+  - statModifier: {fileID: 11400000, guid: 0edf60d8030e57049b0716a7fcafb264, type: 2}
+    value: 3
   flavourProfile: {x: -0.8, y: 0.6}

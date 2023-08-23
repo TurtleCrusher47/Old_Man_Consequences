@@ -18,6 +18,8 @@ MonoBehaviour:
   description: 
   itemImage: {fileID: 0}
   defaultParameterList: []
-  sellPrice: 0
-  modifierData: []
+  purchasePrice: 0
+  modifierData:
+  - statModifier: {fileID: 11400000, guid: 0179551b1d567f349820ee217c83fff9, type: 2}
+    value: 4
   flavourProfile: {x: -0.8, y: 0.7}
