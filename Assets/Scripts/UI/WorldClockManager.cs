@@ -111,6 +111,28 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
+        // Check shark debt
+        if (worldClockData.currentDayIndex == 2)
+        {
+            // Check every tuesday if the player still owes money to the shark
+            if (playerData.SharkDebt > 0)
+            playerData.SharkDebtWeeks ++;
+            else
+            playerData.SharkDebtWeeks = 0;
+
+            if (playerData.SharkDebtWeeks == 2)
+            {
+                // Put in shark debt warning for one week overdue
+            }
+
+            // Check if the player has owed the shark for 2 weeks
+            if (playerData.SharkDebtWeeks >= 3)
+            {
+                // Put in code for what happens when it has been 3 weeks
+                // Debug.Log("Ship has sunk");
+            }
+        }
+
         playerData.CurrentStamina = playerData.MaxStamina;
 
         UpdateUI();
@@ -133,11 +155,6 @@ public class WorldClockManager : MonoBehaviour
     public void NextWeek()
     {
         worldClockData.currentWeek = worldClockData.currentDay / 7;
-
-        if (playerData.SharkDebt > 0)
-        {
-            // Insert what to do if player is in debt of shark
-        }
 
         // Loss condition
         if (worldClockData.currentWeek >= 11)

@@ -23,6 +23,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerFaintHydration()
     {
-
+        worldClockManager.NextWeek();
     }
 }
