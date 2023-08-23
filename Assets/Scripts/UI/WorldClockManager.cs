@@ -6,6 +6,9 @@ using TMPro;
 
 public class WorldClockManager : MonoBehaviour
 {
+    [SerializeField] PlayerData playerData;
+    [SerializeField] UIPlayerStats uIPlayerStats;
+
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
     [SerializeField] private TMP_Text dayText; // Assign the day text
@@ -31,6 +34,9 @@ public class WorldClockManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate instances
         }
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
     }
 
     private void Update()
@@ -62,9 +68,12 @@ public class WorldClockManager : MonoBehaviour
                     if (isMorning && worldClockData.hours == 0) // Transition from 11:59 PM to 12:00 AM
                     {
                         // Move to the next day of the week
-                        worldClockData.currentDay++;
-                        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
-                      
+                        NextDay();
+
+                        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+                        {
+                            NextWeek();
+                        }
                     }
                 }
             }
@@ -93,5 +102,72 @@ public class WorldClockManager : MonoBehaviour
         timeText.text = formattedTime;
         // Update dayText UI element
         dayText.text = worldClockData.daysOfWeek[worldClockData.currentDayIndex] + " " + worldClockData.currentDay;
+    }
+
+    public void NextDay()
+    {
+        worldClockData.currentDay++;
+        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
+        worldClockData.hours = 7;
+        worldClockData.minutes = 0;
+
+        // Check shark debt
+        if (worldClockData.currentDayIndex == 2)
+        {
+            // Check every tuesday if the player still owes money to the shark
+            if (playerData.SharkDebt > 0)
+            playerData.SharkDebtWeeks ++;
+            else
+            playerData.SharkDebtWeeks = 0;
+
+            if (playerData.SharkDebtWeeks == 2)
+            {
+                // Put in shark debt warning for one week overdue
+            }
+
+            // Check if the player has owed the shark for 2 weeks
+            if (playerData.SharkDebtWeeks >= 3)
+            {
+                // Put in code for what happens when it has been 3 weeks
+                // Debug.Log("Ship has sunk");
+            }
+        }
+
+        playerData.CurrentStamina = playerData.MaxStamina;
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+    }
+
+    public void FaintNextDay()
+    {
+        worldClockData.currentDay++;
+        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
+        worldClockData.hours = 7;
+        worldClockData.minutes = 0;
+
+        playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+    }
+
+    public void NextWeek()
+    {
+        worldClockData.currentWeek = worldClockData.currentDay / 7;
+
+        // Loss condition
+        if (worldClockData.currentWeek >= 11)
+        {
+            if (playerData.BankDebt > 0)
+            {
+                // Insert what to do if player loses
+            }
+        }
+
+        // Code to transition to beach scene
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
     }
 }

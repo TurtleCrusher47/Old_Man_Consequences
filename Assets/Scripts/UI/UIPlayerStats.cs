@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIPlayerStats : MonoBehaviour
 {
+    [SerializeField] PlayerManager playerManager;
+    
     [Header("Hunger Elements")]
     [SerializeField] private Image hungerBar; // Assign image object
 
@@ -91,6 +93,10 @@ public class UIPlayerStats : MonoBehaviour
         float newHungerValue = Mathf.Clamp(playerData.CurrentStamina - amount, 0f, playerData.MaxStamina);
         playerData.CurrentStamina = newHungerValue;
         hungerBar.fillAmount = newHungerValue / playerData.MaxStamina;
+
+        if (playerData.CurrentStamina <= 0)
+        playerManager.PlayerFaintStamina();
+
     }
 
     private void DecreaseThirst(float amount)
@@ -99,6 +105,9 @@ public class UIPlayerStats : MonoBehaviour
         float newThirstValue = Mathf.Clamp(playerData.CurrentHydration - amount, 0f, playerData.MaxHydration);
         playerData.CurrentHydration = newThirstValue;
         thirstBar.fillAmount = newThirstValue / playerData.MaxHydration;
+
+        if (playerData.CurrentHydration <= 0)
+        playerManager.PlayerFaintHydration();
     }
 
     private void UpdateMoneyText()

@@ -67,6 +67,13 @@ public class PlayerData : ScriptableObject
         set => sharkDebt = value;
     }
 
+    [SerializeField] private int sharkDebtWeeks = 0;
+    public int SharkDebtWeeks
+    {
+        get => sharkDebtWeeks;
+        set => sharkDebtWeeks = value;
+    }
+
     [SerializeField] private int bankDebt = 100000;
     public int BankDebt
     {
