@@ -94,7 +94,7 @@ public class FishingSliderBehaviour : MonoBehaviour
             addButton.gameObject.SetActive(true);
             releaseButton.gameObject.SetActive(true);
         }
-        staminaSlider.value -= 0.05f * Time.deltaTime;
+        staminaSlider.value -= 0.025f * Time.deltaTime;
         if (staminaSlider.value < 0.001f)
         {
             releaseButton.gameObject.SetActive(true);
