@@ -336,6 +336,8 @@ public class FishManager : MonoBehaviour
         player.isReeling = false;
         //SetAllFishCanBite(true);
         player.ResetFishingPoint();
+        //reset bait to worm bait after fishing is complete
+        player.selectedBait = player.BaitItems[0];
     }
 
     /// <summary>
