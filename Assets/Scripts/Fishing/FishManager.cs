@@ -266,9 +266,11 @@ public class FishManager : MonoBehaviour
 
     private void EnableBitingFish()
     {
-        var fishToRemove = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
-        fishToRemove.SetActive(true);
-        fishToRemove.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
+        // Find the biting fish
+        GameObject bitingFish = fishList.Find(f => f.GetComponent<FishBehaviour>().isBiting);
+        bitingFish.SetActive(true);
+        bitingFish.GetComponent<FishBehaviour>().ResetFish();
+        bitingFish.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
     }
 
     /// <summary>
