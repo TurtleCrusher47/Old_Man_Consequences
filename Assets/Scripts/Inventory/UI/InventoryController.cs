@@ -111,9 +111,13 @@ public class InventoryController : MonoBehaviour
         }
 
         IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
-        if (destroyableItem != null)
+        if (destroyableItem != null )
         {
-            inventoryUI.ShowItemAction(itemIndex);
+            if (itemAction == null)
+            {
+                inventoryUI.ShowItemAction(itemIndex);
+            }
+            
             inventoryUI.AddAction("Drop All", () => DropItem(itemIndex, inventoryItem.quantity));
         }
 
