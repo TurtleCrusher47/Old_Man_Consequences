@@ -7,16 +7,20 @@ public class PlayerManager : MonoBehaviour
     PlayerData playerData;
     DebtManager debtManager;
 
-    // public bool HungerCheck()
-    // {
-    //     if (playerData.currentHunger <= 0)
-    //     return true;
-    //     else
-    //     return false;
-    // }
+    // Constant checks
+    public bool StaminaCheck()
+    {
+        if (playerData.CurrentStamina <= 0)
+        return true;
+        else
+        return false;
+    }
 
-    // public bool ThirstCheck()
-    // {
-    //     if (playerData.current)
-    // }
+    public bool ThirstCheck()
+    {
+        if (playerData.CurrentHydration <= 0)
+        return true;
+        else
+        return false;
+    }
 }

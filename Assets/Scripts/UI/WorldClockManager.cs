@@ -61,7 +61,7 @@ public class WorldClockManager : MonoBehaviour
 
                     if (isMorning && worldClockData.hours == 0) // Transition from 11:59 PM to 12:00 AM
                     {
-                         // Move to the next day of the week
+                        // Move to the next day of the week
                         worldClockData.currentDay++;
                         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
                       
