@@ -1348,8 +1348,9 @@ MonoBehaviour:
   playerRodSlider: {fileID: 1076495363}
   addButton: {fileID: 485260561}
   releaseButton: {fileID: 1700026329}
-  catchText: {fileID: 0}
+  catchText: {fileID: 1745280912}
   fishingCatchImage: {fileID: 672104390}
+  fishManager: {fileID: 2032072415}
   a: 3
   fishCaught: 0
 --- !u!1 &589560783
