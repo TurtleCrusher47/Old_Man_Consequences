@@ -19,5 +19,8 @@ MonoBehaviour:
     bait. They're very chewy and very sweet.
   itemImage: {fileID: 0}
   defaultParameterList: []
-  sellPrice: 0
+  purchasePrice: 0
+  modifierData:
+  - statModifier: {fileID: 11400000, guid: 8096afe7b98f0314ab3163fb07db850d, type: 2}
+    value: 1
   flavourProfile: {x: -0.7, y: -0.65}
