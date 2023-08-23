@@ -19,9 +19,6 @@ MonoBehaviour:
   maxThirst: 100
   thirstDecreaseInterval: 3
   thirstDecreaseAmount: 1
-  currentHunger: 99
-  currentThirst: 100
-  currMoney: 0
   movementSpeed: 5
   sprintSpeed: 6.5
   maxStamina: 10

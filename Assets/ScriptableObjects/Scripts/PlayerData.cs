@@ -6,26 +6,6 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
-    [Header("Hunger Variables")]
-    public float maxHunger = 0f; // assign a max amount of hunger
-    public float hungerDecreaseAmountOnClick = 5f; // Decrease hunger on mouse click
-    public float hungerDecreaseInterval = 8f; // Decrease energy every certain
-    public float hungerDecreasePerSecond = 10f; // Decrease hunger a certain amount
-
-    [Header("Thirst Variables")]
-    public float maxThirst = 0f; // assign a max amount of hunger
-    public float thirstDecreaseInterval = 5f; // Decrease thirst every certain seconds
-    public float thirstDecreaseAmount = 5f; // Decrease thirst a certain amount
-
-    [Header("Hunger and Thirst Data")]
-    public float currentHunger;
-    public float currentThirst;
-
-    [Header("Player's Money")]
-    public float currMoney;
-
-    [Header("Miscellaneous")]
-
     [SerializeField] private int movementSpeed = 5;
     public int MovementSpeed => movementSpeed;
 
@@ -33,9 +13,8 @@ public class PlayerData : ScriptableObject
     public float SprintSpeed => sprintSpeed;
 
     // Stats
-    [SerializeField] private float maxStamina = 10f;
-    public float MaxStamina => maxStamina;
-
+    // Stamina
+    [Header("Stamina")]
     [SerializeField] private float currentStamina = 10f;
     public float CurrentStamina
     {
@@ -43,14 +22,20 @@ public class PlayerData : ScriptableObject
         set => currentStamina = value;
     }
 
-    /*
-    [SerializeField] private float currentHunger = 10f;
-    public float CurrentHunger
-    {
-        get => currentHunger;
-        set => currentHunger = value;
-    }*/
+    [SerializeField] private float maxStamina = 100f;
+    public float MaxStamina => maxStamina;
 
+    [SerializeField] private float staminaDecreaseAmountOnClick = 5f;
+    public float StaminaDecreaseAmountOnClick => staminaDecreaseAmountOnClick;
+
+    [SerializeField] private float staminaDecreaseInterval = 6f;
+    public float StaminaDecreaseInterval => staminaDecreaseInterval;
+
+    [SerializeField] private float staminaDecreasePerSecond = 1f;
+    public float StaminaDecreasePerSecond => staminaDecreasePerSecond;
+
+    // Hydration
+    [Header("Hydration")]
     [SerializeField] private float currentHydration = 10f;
     public float CurrentHydration
     {
@@ -58,6 +43,16 @@ public class PlayerData : ScriptableObject
         set => currentHydration = value;
     }
 
+    [SerializeField] private float maxHydration = 100f;
+    public float MaxHydration => maxHydration;
+
+    [SerializeField] private float hydrationDecreaseInterval = 5f;
+    public float HydrationDecreaseInterval => hydrationDecreaseInterval;
+
+    [SerializeField] private float hydrationDecreasePerSecond = 5f;
+    public float HydrationDecreasePerSecond =>  hydrationDecreasePerSecond;
+
+    [Header("Misc")]
     [SerializeField] private int balance = 0;
     public int Balance
     {

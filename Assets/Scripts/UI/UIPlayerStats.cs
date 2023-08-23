@@ -36,8 +36,8 @@ public class UIPlayerStats : MonoBehaviour
             Destroy(gameObject);
         }
 
-        nextThirstDecreaseTime = Time.time + playerData.thirstDecreaseInterval;
-        nextHungerDecreaseTime = Time.time + playerData.hungerDecreasePerSecond;
+        nextThirstDecreaseTime = Time.time + playerData.HydrationDecreaseInterval;
+        nextHungerDecreaseTime = Time.time + playerData.StaminaDecreasePerSecond;
     }
 
     // Update is called once per frame
@@ -46,15 +46,15 @@ public class UIPlayerStats : MonoBehaviour
         // Handle thirst decrease over time
         if (Time.time >= nextThirstDecreaseTime)
         {
-            DecreaseThirst(playerData.thirstDecreaseAmount);
-            nextThirstDecreaseTime = Time.time + playerData.thirstDecreaseInterval;
+            DecreaseThirst(playerData.HydrationDecreasePerSecond);
+            nextThirstDecreaseTime = Time.time + playerData.HydrationDecreaseInterval;
         }
 
         // Handle hunger decrease over time
         if (Time.time >= nextHungerDecreaseTime)
         {
-            DecreaseHunger(playerData.hungerDecreasePerSecond);
-            nextHungerDecreaseTime = Time.time + playerData.hungerDecreaseInterval;
+            DecreaseHunger(playerData.StaminaDecreasePerSecond);
+            nextHungerDecreaseTime = Time.time + playerData.StaminaDecreaseInterval;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -68,37 +68,37 @@ public class UIPlayerStats : MonoBehaviour
     public void UpdateUIFromPlayerData()
     {
         // Update hunger UI
-        hungerBar.fillAmount = playerData.currentHunger / playerData.maxHunger;
+        hungerBar.fillAmount = playerData.CurrentStamina / playerData.MaxStamina;
 
         // Update thirst UI
-        thirstBar.fillAmount = playerData.currentThirst / playerData.maxThirst;
+        thirstBar.fillAmount = playerData.CurrentHydration / playerData.MaxHydration;
     }
 
     private void PlayerHungerRefill()
     {
-        hungerBar.fillAmount = playerData.maxHunger;
+        hungerBar.fillAmount = playerData.MaxStamina;
     }
 
     private void PlayerThirstRefill()
     {
-        float newThirstValue = Mathf.Clamp(thirstBar.fillAmount + (30f / playerData.maxThirst), 0f, 1f);
+        float newThirstValue = Mathf.Clamp(thirstBar.fillAmount + (30f / playerData.MaxHydration), 0f, 1f);
         thirstBar.fillAmount = newThirstValue;
     }
 
     public void DecreaseHunger(float amount)
     {
         // Update hunger UI
-        float newHungerValue = Mathf.Clamp(playerData.currentHunger - amount, 0f, playerData.maxHunger);
-        playerData.currentHunger = newHungerValue;
-        hungerBar.fillAmount = newHungerValue / playerData.maxHunger;
+        float newHungerValue = Mathf.Clamp(playerData.CurrentStamina - amount, 0f, playerData.MaxStamina);
+        playerData.CurrentStamina = newHungerValue;
+        hungerBar.fillAmount = newHungerValue / playerData.MaxStamina;
     }
 
     private void DecreaseThirst(float amount)
     {
         // Update thirst UI
-        float newThirstValue = Mathf.Clamp(playerData.currentThirst - amount, 0f, playerData.maxThirst);
-        playerData.currentThirst = newThirstValue;
-        thirstBar.fillAmount = newThirstValue / playerData.maxThirst;
+        float newThirstValue = Mathf.Clamp(playerData.CurrentHydration - amount, 0f, playerData.MaxHydration);
+        playerData.CurrentHydration = newThirstValue;
+        thirstBar.fillAmount = newThirstValue / playerData.MaxHydration;
     }
 
     private void UpdateMoneyText()

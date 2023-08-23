@@ -13,3 +13,15 @@ MonoBehaviour:
   m_Name: WorldClockData
   m_EditorClassIdentifier: 
   secondsPerMinute: 0.2
+  currentDay: 1
+  currentDayIndex: 1
+  daysOfWeek:
+  - Sun.
+  - Mon.
+  - Tue.
+  - Wed.
+  - Thu.
+  - Fri.
+  - Sat.
+  hours: 3
+  minutes: 8
