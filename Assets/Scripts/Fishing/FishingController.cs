@@ -61,6 +61,9 @@ public class FishingController : MonoBehaviour
     [HideInInspector]
     public BaitItemSO selectedBait;
 
+    [SerializeField]
+    private GameObject theRod;
+    private LineRenderer lr;
     void Awake()
     {
         dirV = 0;
@@ -75,6 +78,13 @@ public class FishingController : MonoBehaviour
         isCasted = false;
         isReeling = false;
         selectedBait = baitItems[0];
+        lr = theRod.GetComponent<LineRenderer>();
+        lr.startColor = Color.black;
+        lr.endColor = Color.black;
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.startWidth = 0.1f;
+        lr.endWidth = 0.1f;
     }
     // Update is called once per frame
     void Update()
@@ -114,6 +124,7 @@ public class FishingController : MonoBehaviour
 
     void Walking()
     {
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.1f, 0.1f, 0));
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
         // Get player's horizontal direction
@@ -138,8 +149,9 @@ public class FishingController : MonoBehaviour
         // Set the fishing strength
         fishingStrength = Mathf.Abs(Mathf.Sin(baseRodStrengthMult*fishingElapsedTime)); 
         slider.value = fishingStrength;
-        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y);
+        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y);
         fishingCrosshairCanvas.transform.position = newFishingPos;
+        lr.SetPosition(1, fishingCrosshairCanvas.transform.position);
     }
     void CastRod()
     {
@@ -148,12 +160,13 @@ public class FishingController : MonoBehaviour
         //fishingStrength = 0;
         // Take rod strength
         // Calculate X position of rod based on rod strength
-        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y, 0);
+        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y, 0);
         fishingPoint.transform.position = newFishingPtPos;
         if (!isCasted)
         {
             isCasted = true;
         }
+        lr.SetPosition(1, fishingPoint.transform.position);
     }
     void UpdateSpriteDirection()
     {
