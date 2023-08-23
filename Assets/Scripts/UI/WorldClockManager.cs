@@ -34,6 +34,9 @@ public class WorldClockManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate instances
         }
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
     }
 
     private void Update()
