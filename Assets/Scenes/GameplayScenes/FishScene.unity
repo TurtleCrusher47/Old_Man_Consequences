@@ -1064,7 +1064,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 583329995}
-  - {fileID: 951804999}
   - {fileID: 831512826}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -3319,7 +3318,7 @@ RectTransform:
   - {fileID: 611980814}
   - {fileID: 96676717}
   m_Father: {fileID: 287259522}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4324,7 +4323,6 @@ MonoBehaviour:
   inventoryUI: {fileID: 1761691050}
   inventoryData: {fileID: 11400000, guid: eb97e20639c29a04a930a784a553431c, type: 2}
   initialItems: []
-  rodEquipped: 0
 --- !u!1001 &1001604476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5854,28 +5852,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745280910}
   m_CullTransparentMesh: 1
---- !u!1 &1761691048 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8088752988494298385, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
-  m_PrefabInstance: {fileID: 739478891}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1761691050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761691048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 6822967593319603812, guid: ee3cada414485514496efbd91ec53972, type: 3}
-  contentPanel: {fileID: 1405682078}
-  itemDescrip: {fileID: 587759999}
-  mouseFollower: {fileID: 611980816}
-  actionPanel: {fileID: 96676719}
 --- !u!1 &1756555589
 GameObject:
   m_ObjectHideFlags: 0
@@ -5952,6 +5928,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756555589}
   m_CullTransparentMesh: 1
+--- !u!1 &1761691048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8088752988494298385, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
+  m_PrefabInstance: {fileID: 739478891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1761691050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761691048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 6822967593319603812, guid: ee3cada414485514496efbd91ec53972, type: 3}
+  contentPanel: {fileID: 1405682078}
+  itemDescrip: {fileID: 587759999}
+  mouseFollower: {fileID: 611980816}
+  actionPanel: {fileID: 96676719}
 --- !u!1001 &1792491037
 PrefabInstance:
   m_ObjectHideFlags: 0
