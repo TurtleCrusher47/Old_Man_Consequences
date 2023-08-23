@@ -14,7 +14,6 @@ public class InventoryController : MonoBehaviour
 
     public List<InventoryItemStruct> initialItems = new List<InventoryItemStruct>();
 
-
     public void Start()
     {
         PrepareUI();
@@ -112,9 +111,14 @@ public class InventoryController : MonoBehaviour
         }
 
         IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
-        if (destroyableItem != null)
+        if (destroyableItem != null )
         {
-            inventoryUI.AddAction("Drop", () => DropItem(itemIndex, inventoryItem.quantity));
+            if (itemAction == null)
+            {
+                inventoryUI.ShowItemAction(itemIndex);
+            }
+            
+            inventoryUI.AddAction("Drop All", () => DropItem(itemIndex, inventoryItem.quantity));
         }
 
 
