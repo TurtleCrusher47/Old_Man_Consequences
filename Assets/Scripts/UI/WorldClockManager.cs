@@ -69,6 +69,11 @@ public class WorldClockManager : MonoBehaviour
                     {
                         // Move to the next day of the week
                         NextDay();
+
+                        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+                        {
+                            NextWeek();
+                        }
                     }
                 }
             }
@@ -105,8 +110,6 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
-        
-        worldClockData.currentWeek = worldClockData.currentDay / 7;
 
         playerData.CurrentStamina = playerData.MaxStamina;
 
@@ -129,6 +132,25 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextWeek()
     {
+        worldClockData.currentWeek = worldClockData.currentDay / 7;
+
+        if (playerData.SharkDebt > 0)
+        {
+            // Insert what to do if player is in debt of shark
+        }
+
+        // Loss condition
+        if (worldClockData.currentWeek >= 11)
+        {
+            if (playerData.BankDebt > 0)
+            {
+                // Insert what to do if player loses
+            }
+        }
+
+        // Code to transition to beach scene
+
         UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
     }
 }
