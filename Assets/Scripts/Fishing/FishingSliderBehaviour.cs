@@ -26,6 +26,9 @@ public class FishingSliderBehaviour : MonoBehaviour
     [SerializeField]
     private Image fishingCatchImage;
 
+    [SerializeField]
+    private FishManager fishManager;
+
     private float elaspedTime;
     public float a = 0.6f;
     public bool fishCaught;
@@ -66,7 +69,8 @@ public class FishingSliderBehaviour : MonoBehaviour
 
         // Value = sin(dt)
         // Debug.Log(Mathf.Sin(elaspedTime));
-        fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
+        if (fishCatchPercentSlider.value < fishCatchPercentSlider.maxValue && staminaSlider.value > staminaSlider.minValue)
+            fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
         if (Input.GetMouseButton(0))
         {
             playerRodSlider.value += 0.5f * Time.deltaTime;
@@ -89,6 +93,13 @@ public class FishingSliderBehaviour : MonoBehaviour
             fishCaught = true;
             addButton.gameObject.SetActive(true);
             releaseButton.gameObject.SetActive(true);
+        }
+        staminaSlider.value -= 0.025f * Time.deltaTime;
+        if (staminaSlider.value < 0.001f)
+        {
+            releaseButton.gameObject.SetActive(true);
+            releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
+            catchText.text = "Uh oh! You ran out of energy! The fish got away.";
         }
     }
     void SetFishCatchColor()

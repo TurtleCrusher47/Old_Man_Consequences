@@ -12,15 +12,12 @@ public class InventoryController : MonoBehaviour
     [SerializeField]
     private InventorySO inventoryData;
 
-    //private PlayerController playerController;
-
     public List<InventoryItemStruct> initialItems = new List<InventoryItemStruct>();
 
     public void Start()
     {
         PrepareUI();
         PrepareInventoryData();
-        //playerController = GetComponent<PlayerController>();
     }
 
     private void PrepareInventoryData()

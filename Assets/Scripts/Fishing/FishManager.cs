@@ -53,12 +53,17 @@ public class FishManager : MonoBehaviour
     [SerializeField]
     private Canvas fishingCanvas;
 
+    bool canFishBite;
+    float biteTimer;
+    int schoolingCounter;
+
     
     void Start()
     {
         InitFishingSO();
         destTimer = 0;
         schoolTimer = 0;
+        schoolingCounter = 0;
         smallFishCount = Random.Range(2, 5);
         medFishCount = Random.Range(2, 5);
         bigFishCount = Random.Range(2, 5);
@@ -109,22 +114,33 @@ public class FishManager : MonoBehaviour
             int newDestination = Random.Range(0, pointsContainer.transform.childCount);
             SetAllFishDestinations(newDestination);
         }
+        canFishBite = true;
+        biteTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         destTimer += Time.deltaTime;
-
+        
         // Check if any fish has been bitten
         if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0 && player.isReeling == false)
         {
-            SetAllFishCanBite(false);
+            canFishBite = false;
+            SetAllFishCanBite(canFishBite);
             OnFishBite();
+            schooling = false;
+            SetAllFishSchooling(schooling);
         }
         // Check if all fish have reached their destination
         // Searches the list and counts the number of fish that have reached their destination
-        if (player.isCasted == false)
+        if (schoolingCounter > 4)
+        {
+            schooling = false;
+            SetAllFishSchooling(schooling);
+            schoolingCounter = 0;
+        }
+        else if (player.isCasted == false && schooling)
         {
             //UpdateFishState(SwimState.SWIM);
             if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
@@ -132,6 +148,29 @@ public class FishManager : MonoBehaviour
             {
                 SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));
                 destTimer = 0;
+                schoolingCounter++;
+            }
+        }
+        
+        // Let fish roam around first instead of biting again right after release
+        if (canFishBite == false)
+        {
+            biteTimer += Time.deltaTime;
+            if (biteTimer > 5)
+            {
+                canFishBite = true;
+                biteTimer = 0;
+            }
+        }
+        // Make fish school after 30 seconds of not schooling
+        if (schooling == false)
+        {
+            schoolTimer += Time.deltaTime;
+            if (schoolTimer > 30)
+            {
+                schooling = true;
+                SetAllFishSchooling(schooling);
+                schoolTimer = 0;
             }
         }
     }
@@ -266,9 +305,11 @@ public class FishManager : MonoBehaviour
 
     private void EnableBitingFish()
     {
-        var fishToRemove = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
-        fishToRemove.SetActive(true);
-        fishToRemove.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
+        // Find the biting fish
+        GameObject bitingFish = fishList.Find(f => f.GetComponent<FishBehaviour>().isBiting);
+        bitingFish.SetActive(true);
+        bitingFish.GetComponent<FishBehaviour>().ResetFish();
+        bitingFish.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
     }
 
     /// <summary>
@@ -283,6 +324,7 @@ public class FishManager : MonoBehaviour
         }
         DisableBitingFish(false);
         SetAllFishStates(SwimState.SWIM);
+        SetAllFishCanBite(false);
     }
     /// <summary>
     /// Call this function when the player either releases the fish back into the water OR adds the fish to their inventory
@@ -292,7 +334,7 @@ public class FishManager : MonoBehaviour
         Debug.Log("Canvas set inactive by finished fishing");
         fishingCanvas.gameObject.SetActive(false);
         player.isReeling = false;
-        SetAllFishCanBite(true);
+        //SetAllFishCanBite(true);
         player.ResetFishingPoint();
     }
 

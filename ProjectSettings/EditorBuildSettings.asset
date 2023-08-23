@@ -12,15 +12,24 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScenes/LoadingScene.unity
     guid: fdf28f0156af372478c8d685190f1054
   - enabled: 1
-    path: Assets/Scenes/GameplayScenes/BeachScene.unity
-    guid: 2084f6b35870fe446a2c9e025958f446
-  - enabled: 1
     path: Assets/Scenes/GameplayScenes/BoatScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/GameplayScenes/FishScene.unity
-    guid: e98d25fba0379af4f8cbb179201f7568
-  - enabled: 1
     path: Assets/Scenes/UIScene/UIScene.unity
     guid: c0505a097bc3e6943bd64dda0878e914
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/NPCScene.unity
+    guid: 1f9dfd2c3052ee64ab9dec4414aef4ca
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/BeachScene.unity
+    guid: f9a7ea9c8aa71cb4bb5de2aabe1cb25f
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/ShopScene.unity
+    guid: 89111931045af1e498772dc59876fb40
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/FishScene.unity
+    guid: f403ae25d67d408499b3089bec51a9ed
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

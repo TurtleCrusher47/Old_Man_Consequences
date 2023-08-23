@@ -119,6 +119,24 @@ public class FishBehaviour : MonoBehaviour
         movementSpeed = Random.Range(1, 3);
         biteTimer = 0;
     }
+    public void ResetFish()
+    {
+        // Set initial swim state
+        swimState = SwimState.IDLE;
+        luredState = LuredState.LURE;
+        // Set initial direction
+        targetDir = new Vector3(0, 0, 0);
+        swimForwardTimer = 0;
+        swimTurnTimer = 0;
+        maxTurnInterval = maxSwimInterval / 3;
+        lureTimer = 5;
+        isBiting = false;
+        destReached = false;
+        canBite = true;
+        // Randomize the movement speed
+        movementSpeed = Random.Range(1, 3);
+        biteTimer = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -241,7 +259,7 @@ public class FishBehaviour : MonoBehaviour
                 int newInt = Random.Range(0, 100);
                 if (newInt < biteChance)
                 {
-                    //luredState = LuredState.BITE;
+                    luredState = LuredState.BITE;
                     Debug.Log("Would've bitten.");
                 }
                 biteTimer = 0;
@@ -314,7 +332,7 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE)
+        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED)
         {
             Debug.Log(gameObject.name + "biting");
             isBiting = true;
