@@ -13,7 +13,7 @@ public class UIPlayerStats : MonoBehaviour
     [SerializeField] private Image thirstBar; // Assign image object
 
     [Header("PlayerStats")]
-    [SerializeField] private PlayerData playerStats;
+    public PlayerData playerData;
 
     [Header("Players Money")]
     [SerializeField] private TMP_Text playerMoney;
@@ -23,24 +23,21 @@ public class UIPlayerStats : MonoBehaviour
     private float nextThirstDecreaseTime;
     private float nextHungerDecreaseTime;
 
-    private void Awake()
+    // Start is called before the first frame update
+    void Awake()
     {
-        // Ensure there is only one instance of UIPlayerStats
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances
+            Destroy(gameObject);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        nextThirstDecreaseTime = Time.time + playerStats.thirstDecreaseInterval;
-        nextHungerDecreaseTime = Time.time + playerStats.hungerDecreasePerSecond;
+        nextThirstDecreaseTime = Time.time + playerData.thirstDecreaseInterval;
+        nextHungerDecreaseTime = Time.time + playerData.hungerDecreasePerSecond;
     }
 
     // Update is called once per frame
@@ -49,47 +46,64 @@ public class UIPlayerStats : MonoBehaviour
         // Handle thirst decrease over time
         if (Time.time >= nextThirstDecreaseTime)
         {
-            DecreaseThirst(playerStats.thirstDecreaseAmount);
-            nextThirstDecreaseTime = Time.time + playerStats.thirstDecreaseInterval;
+            DecreaseThirst(playerData.thirstDecreaseAmount);
+            nextThirstDecreaseTime = Time.time + playerData.thirstDecreaseInterval;
         }
 
         // Handle hunger decrease over time
         if (Time.time >= nextHungerDecreaseTime)
         {
-            DecreaseHunger(playerStats.hungerDecreasePerSecond);
-            nextHungerDecreaseTime = Time.time + playerStats.hungerDecreaseInterval;
+            DecreaseHunger(playerData.hungerDecreasePerSecond);
+            nextHungerDecreaseTime = Time.time + playerData.hungerDecreaseInterval;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            DecreaseHunger(5);
         }
 
         UpdateMoneyText();
     }
 
+    public void UpdateUIFromPlayerData()
+    {
+        // Update hunger UI
+        hungerBar.fillAmount = playerData.currentHunger / playerData.maxHunger;
+
+        // Update thirst UI
+        thirstBar.fillAmount = playerData.currentThirst / playerData.maxThirst;
+    }
+
     private void PlayerHungerRefill()
     {
-        hungerBar.fillAmount = playerStats.maxHunger;
+        hungerBar.fillAmount = playerData.maxHunger;
     }
 
     private void PlayerThirstRefill()
     {
-        float newThirstValue = Mathf.Clamp(thirstBar.fillAmount + (30f / playerStats.maxThirst), 0f, 1f);
+        float newThirstValue = Mathf.Clamp(thirstBar.fillAmount + (30f / playerData.maxThirst), 0f, 1f);
         thirstBar.fillAmount = newThirstValue;
     }
 
     public void DecreaseHunger(float amount)
     {
         // Update hunger UI
-        float newHungerValue = Mathf.Clamp(hungerBar.fillAmount - (amount / playerStats.maxHunger), 0f, 1f);
-        hungerBar.fillAmount = newHungerValue;
+        float newHungerValue = Mathf.Clamp(playerData.currentHunger - amount, 0f, playerData.maxHunger);
+        playerData.currentHunger = newHungerValue;
+        hungerBar.fillAmount = newHungerValue / playerData.maxHunger;
     }
 
     private void DecreaseThirst(float amount)
     {
         // Update thirst UI
-        thirstBar.fillAmount -= amount / playerStats.maxThirst; 
+        float newThirstValue = Mathf.Clamp(playerData.currentThirst - amount, 0f, playerData.maxThirst);
+        playerData.currentThirst = newThirstValue;
+        thirstBar.fillAmount = newThirstValue / playerData.maxThirst;
     }
 
     private void UpdateMoneyText()
     {
-        playerMoney.text = playerStats.Debt.ToString();
+        playerMoney.text = playerData.BankDebt.ToString();
         DynamicTextFontSize(playerMoney);
     }
 

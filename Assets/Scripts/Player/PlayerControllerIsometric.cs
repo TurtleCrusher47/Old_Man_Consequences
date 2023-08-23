@@ -11,12 +11,14 @@ public class PlayerControllerIsometric : MonoBehaviour
     private Rigidbody2D rb;
     Vector2 moveDirection;
     Vector2 currentPos;
+    public VectorValue startingPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         isometricCharacterRenderer = GetComponent<IsometricCharacterRenderer>();
+        transform.position = startingPosition.initialValue;
     }
 
     // Update is called once per frame
