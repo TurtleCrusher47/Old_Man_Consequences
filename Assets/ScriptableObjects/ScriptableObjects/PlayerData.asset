@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9fdfacd7cd3c4cb0be0c1e4a32012, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxHunger: 100
-  hungerDecreaseAmountOnClick: 5
-  hungerDecreaseInterval: 6
-  hungerDecreasePerSecond: 1
-  maxThirst: 100
-  thirstDecreaseInterval: 3
-  thirstDecreaseAmount: 1
   movementSpeed: 5
   sprintSpeed: 6.5
-  maxStamina: 10
-  currentStamina: 10
-  currentHydration: 10
+  currentStamina: 0
+  maxStamina: 100
+  staminaDecreaseAmountOnClick: 5
+  staminaDecreaseInterval: 6
+  staminaDecreasePerSecond: 1
+  currentHydration: 9
+  maxHydration: 100
+  hydrationDecreaseInterval: 5
+  hydrationDecreasePerSecond: 1
   balance: 0
   sharkDebt: 0
   bankDebt: 100000
