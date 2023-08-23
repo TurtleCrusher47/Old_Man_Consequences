@@ -6,6 +6,9 @@ using TMPro;
 
 public class WorldClockManager : MonoBehaviour
 {
+    [SerializeField] PlayerData playerData;
+    [SerializeField] UIPlayerStats uIPlayerStats;
+
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
     [SerializeField] private TMP_Text dayText; // Assign the day text
@@ -62,9 +65,7 @@ public class WorldClockManager : MonoBehaviour
                     if (isMorning && worldClockData.hours == 0) // Transition from 11:59 PM to 12:00 AM
                     {
                         // Move to the next day of the week
-                        worldClockData.currentDay++;
-                        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
-                      
+                        NextDay();
                     }
                 }
             }
@@ -93,5 +94,38 @@ public class WorldClockManager : MonoBehaviour
         timeText.text = formattedTime;
         // Update dayText UI element
         dayText.text = worldClockData.daysOfWeek[worldClockData.currentDayIndex] + " " + worldClockData.currentDay;
+    }
+
+    public void NextDay()
+    {
+        worldClockData.currentDay++;
+        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
+        worldClockData.hours = 7;
+        worldClockData.minutes = 0;
+        
+        worldClockData.currentWeek = worldClockData.currentDay / 7;
+
+        playerData.CurrentStamina = playerData.MaxStamina;
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+    }
+
+    public void FaintNextDay()
+    {
+        worldClockData.currentDay++;
+        worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
+        worldClockData.hours = 7;
+        worldClockData.minutes = 0;
+
+        playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
+
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+    }
+
+    public void NextWeek()
+    {
+        UpdateUI();
     }
 }

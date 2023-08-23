@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    PlayerData playerData;
-    DebtManager debtManager;
+    [SerializeField] PlayerData playerData;
+    [SerializeField] WorldClockManager worldClockManager;
 
-    // Constant checks
-    public bool StaminaCheck()
+    // Weekly checks
+    public bool SharkCheck()
     {
-        if (playerData.CurrentStamina <= 0)
+        if (playerData.SharkDebt <= 0)
         return true;
         else
         return false;
     }
 
-    public bool ThirstCheck()
+    public void PlayerFaintStamina()
     {
-        if (playerData.CurrentHydration <= 0)
-        return true;
-        else
-        return false;
+        worldClockManager.FaintNextDay();
+    }
+
+    public void PlayerFaintHydration()
+    {
+
     }
 }
