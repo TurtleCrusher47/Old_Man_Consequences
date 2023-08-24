@@ -60,6 +60,11 @@ public class UIPlayerStats : MonoBehaviour
         {
             DecreaseHunger(5);
         }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            playerData.Balance = 5;
+        }
     }
 
     public void UpdateUIFromPlayerData()
