@@ -53,6 +53,8 @@ public class FishManager : MonoBehaviour
     // Canvas with fishing rods
     [SerializeField]
     private Canvas fishingCanvas;
+    [SerializeField]
+    private BGMBehaviour bgmPlayer;
 
     bool canFishBite;
     float biteTimer;
@@ -329,6 +331,8 @@ public class FishManager : MonoBehaviour
         DisableBitingFish(false);
         SetAllFishStates(SwimState.SWIM);
         SetAllFishCanBite(false);
+        bgmPlayer.ChangeSong(1);
+        bgmPlayer.PauseSeaSounds();
     }
     /// <summary>
     /// Call this function when the player either releases the fish back into the water OR adds the fish to their inventory
@@ -342,6 +346,8 @@ public class FishManager : MonoBehaviour
         player.ResetFishingPoint();
         //reset bait to worm bait after fishing is complete
         player.selectedBait = player.BaitItems[0];
+        bgmPlayer.ChangeSong(0);
+        bgmPlayer.PlaySeaSounds();
     }
 
     /// <summary>

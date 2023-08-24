@@ -141,7 +141,7 @@ public class FishingController : MonoBehaviour
         // Get player's horizontal direction
         dirH = Input.GetAxis("Horizontal");
         // Move based on that direction
-        Vector3 newPos = transform.position + new Vector3(dirH, dirV, 0) * Time.deltaTime;
+        Vector3 newPos = transform.position + (new Vector3(dirH, dirV, 0) * Time.deltaTime);
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
