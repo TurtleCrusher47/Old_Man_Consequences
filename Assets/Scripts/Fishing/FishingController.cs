@@ -124,7 +124,7 @@ public class FishingController : MonoBehaviour
 
     void Walking()
     {
-        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.1f, 0.1f, 0));
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
         // Get player's horizontal direction
@@ -135,6 +135,11 @@ public class FishingController : MonoBehaviour
         if (dirV != 0)
         {
             ResetFishingPoint();
+            lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.0f, 0));
+        }
+        if (isCasted)
+        {
+            lr.SetPosition(1, fishingPoint.transform.position);
         }
         // Transform the position based on the direction
         transform.position = newPos;
@@ -201,6 +206,8 @@ public class FishingController : MonoBehaviour
         fishingPoint.transform.position = newPos;
         isCasted = false;
         slider.value = 0;
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
     }
     public BaitItemSO GetCurrentBait()
     {
