@@ -75,7 +75,10 @@ public class FishingSliderBehaviour : MonoBehaviour
         // Value = sin(dt)
         // Debug.Log(Mathf.Sin(elaspedTime));
         if (fishCatchPercentSlider.value < fishCatchPercentSlider.maxValue && staminaSlider.value > staminaSlider.minValue)
-            fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
+        {
+            fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a * elaspedTime)) + 0.5f;
+            staminaSlider.value -= 0.02f * Time.deltaTime;
+        }
         if (Input.GetMouseButton(0))
         {
             playerRodSlider.value += 0.5f * Time.deltaTime;
@@ -97,7 +100,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         {
             OnFishCaught(); 
         }
-        staminaSlider.value -= 0.02f * Time.deltaTime;
+       
         if (staminaSlider.value < 0.001f)
         {
             releaseButton.gameObject.SetActive(true);

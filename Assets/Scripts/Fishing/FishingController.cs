@@ -64,6 +64,12 @@ public class FishingController : MonoBehaviour
     [SerializeField]
     private GameObject theRod;
     private LineRenderer lr;
+
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip plotSoundClip;
+
+    bool audioPlayed;
     void Awake()
     {
         dirV = 0;
@@ -85,6 +91,9 @@ public class FishingController : MonoBehaviour
         lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         lr.startWidth = 0.1f;
         lr.endWidth = 0.1f;
+        audioSource = GetComponent<AudioSource>();
+        audioPlayed = false;
+        audioSource.loop = false;
     }
     // Update is called once per frame
     void Update()
@@ -116,6 +125,7 @@ public class FishingController : MonoBehaviour
             else
             {
                 Walking();
+
             }
         }
            
@@ -124,7 +134,6 @@ public class FishingController : MonoBehaviour
 
     void Walking()
     {
-        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
         // Get player's horizontal direction
@@ -135,6 +144,7 @@ public class FishingController : MonoBehaviour
         if (dirV != 0)
         {
             ResetFishingPoint();
+            lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
             lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.0f, 0));
         }
         if (isCasted)
@@ -162,6 +172,12 @@ public class FishingController : MonoBehaviour
     {
         fishingPoint.SetActive(true);
         fishingElapsedTime = 0;
+
+        if (!audioSource.isPlaying && !audioPlayed) {
+            audioSource.clip = plotSoundClip;
+            audioSource.Play();
+            audioPlayed = true;
+        }
         //fishingStrength = 0;
         // Take rod strength
         // Calculate X position of rod based on rod strength
