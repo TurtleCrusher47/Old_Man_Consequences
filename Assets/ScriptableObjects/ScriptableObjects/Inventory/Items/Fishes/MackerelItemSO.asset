@@ -22,8 +22,5 @@ MonoBehaviour:
   defaultParameterList: []
   sellPrice: 120
   flavourPrefScale: {x: -0.3, y: -0.5}
-  sizeMultiplier:
-  - 0.8
-  - 1
-  - 1.2
+  sizeMultiplier: []
   spawnChance: 0.8

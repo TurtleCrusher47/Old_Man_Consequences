@@ -22,9 +22,14 @@ public class FishingSliderBehaviour : MonoBehaviour
 
     [SerializeField]
     private TMP_Text catchText;
+    [SerializeField]
+    private TMP_Text percentText;
 
     [SerializeField]
-    private Image fishingCatchImage;
+    private Image fishingSliderCatchImage;
+
+    [SerializeField]
+    private Image caughtFishSprite;
 
     [SerializeField]
     private FishManager fishManager;
@@ -90,21 +95,21 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
         {
-            fishCaught = true;
-            addButton.gameObject.SetActive(true);
-            releaseButton.gameObject.SetActive(true);
+            OnFishCaught(); 
         }
-        staminaSlider.value -= 0.025f * Time.deltaTime;
+        staminaSlider.value -= 0.02f * Time.deltaTime;
         if (staminaSlider.value < 0.001f)
         {
             releaseButton.gameObject.SetActive(true);
             releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
             catchText.text = "Uh oh! You ran out of energy! The fish got away.";
         }
+        percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" + 
+        "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
     }
     void SetFishCatchColor()
     {
-        fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
+        fishingSliderCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
     }
     public void ResetSliderValues()
     {
@@ -114,5 +119,17 @@ public class FishingSliderBehaviour : MonoBehaviour
         fishCatchPercentSlider.value = 0;
         staminaSlider.value = 1;
         elaspedTime = 0.6f;
+    }
+    void OnFishCaught()
+    {
+        FishBehaviour caughtFish = fishManager.GetCurrentCaughtFish();
+        if (caughtFish != null)
+        {
+            fishCaught = true;
+            addButton.gameObject.SetActive(true);
+            releaseButton.gameObject.SetActive(true);
+            catchText.text = "We caught a\n" + caughtFish.fishData.Name + " !";
+            caughtFishSprite.sprite = caughtFish.fishData.ItemImage;
+        }
     }
 }
