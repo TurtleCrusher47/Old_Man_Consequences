@@ -75,6 +75,11 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void DisableChoice()
+    {
+        choicePanel.SetActive(false);
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
@@ -89,6 +94,8 @@ public class NPC : MonoBehaviour
         {
             inRange = false;
             ResetText();
+            DisableChoice();
+            choicePanel.SetActive(false);
         }
     }
 }

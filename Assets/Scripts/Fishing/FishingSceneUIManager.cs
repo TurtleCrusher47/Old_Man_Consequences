@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class FishingSceneUIManager : MonoBehaviour
 {
-
     [SerializeField]
     private Slider hungerBar;
     [SerializeField]

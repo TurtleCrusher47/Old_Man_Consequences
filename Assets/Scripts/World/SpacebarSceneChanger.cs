@@ -30,10 +30,6 @@ public class SpacebarSceneChanger : MonoBehaviour
                     SceneChanger.ChangeScene(nextScene);
                 }
             }
-            else if (slider.value > slider.minValue)
-            {
-                slider.value -= Time.deltaTime * 0.5f;
-            }
         }
     }
 
