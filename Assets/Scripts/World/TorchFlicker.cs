@@ -27,7 +27,7 @@ public class TorchFlicker : MonoBehaviour
     {
         for (; ; )
         {
-            float randomIntensity = Random.Range(0.2f, 0.3f);
+            float randomIntensity = Random.Range(0.5f, 0.65f);
             flickerLightComponent.intensity = randomIntensity;
 
 

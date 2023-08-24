@@ -79,7 +79,7 @@ public class WorldClockManager : MonoBehaviour
             }
         }
 
-        if (worldClockData.minutes % 10 == 0)
+        if (worldClockData.minutes % 5 == 0)
         {
             // Update UI
             UpdateUI();

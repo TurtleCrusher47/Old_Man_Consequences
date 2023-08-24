@@ -637,7 +637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685816f91c5ed804d932bd1e1f2be0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notification: []
+  text: {fileID: 176448106}
+  image: {fileID: 1272432569}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0
