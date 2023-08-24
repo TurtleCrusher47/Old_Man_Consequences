@@ -31,7 +31,7 @@ public class DynamicTextSize : MonoBehaviour
 
     private void DynamicTextFontSize(TMP_Text textComponent)
     {
-        float originalFontSize = textComponent.fontSize;
+        float originalFontSize = textComponent.fontSize; // Store the original font size
         TMP_TextInfo textInfo = textComponent.textInfo;
 
         float preferredWidth = textComponent.preferredWidth;
@@ -45,7 +45,10 @@ public class DynamicTextSize : MonoBehaviour
 
         if (preferredWidth > availableWidth)
         {
-            textComponent.fontSize = originalFontSize; // Reset to original size if necessary
+            // Reset to the original size if necessary
+            textComponent.fontSize = originalFontSize;
         }
+
+        Debug.Log(originalFontSize);
     }
 }
