@@ -12,6 +12,8 @@ public class FishingController : MonoBehaviour
     private Animator ar;
     // vertical direction
     private float dirV;
+    // horizontal direction
+    private float dirH;
     // strength at which player is throwing the rod at that point in time
     private float fishingStrength;
     // amt of time that player has been fishinig
@@ -19,7 +21,7 @@ public class FishingController : MonoBehaviour
     // used for later
     private float levelDistMult;
     // base multipler for how far the rod will be thrown
-    private const float baseXMultipler = 8f;
+    private const float baseXMultipler = 13f;
     // base multipler for how fast the rod strength changes
     private const float baseRodStrengthMult = 2f;
     private float levelStrengthMult;
@@ -44,9 +46,25 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private InventorySO inventoryData;
 
+    [SerializeField] private PlayerData playerData;
+
+    // List of sellable items
+    [SerializeField]
+    private List<BaitItemSO> baitItems;
+
+    [HideInInspector]
+    public List<BaitItemSO> BaitItems
+    {
+        get => baitItems;
+    }
+
+    [HideInInspector]
+    public BaitItemSO selectedBait;
+
     void Awake()
     {
         dirV = 0;
+        dirH = 0;
         ar = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         fishingStrength = 0;
@@ -56,6 +74,7 @@ public class FishingController : MonoBehaviour
         levelStrengthMult = 1f;
         isCasted = false;
         isReeling = false;
+        selectedBait = baitItems[0];
     }
     // Update is called once per frame
     void Update()
@@ -67,7 +86,7 @@ public class FishingController : MonoBehaviour
         // On player click
         if (isReeling == false)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetAxis("Fire3") > 0)
             {
                 if (!clicked)
                     clicked = true;
@@ -89,10 +108,6 @@ public class FishingController : MonoBehaviour
                 Walking();
             }
         }
-        else
-        {
-            fishingCanvas.gameObject.SetActive(true);
-        }
            
 
     }
@@ -101,15 +116,14 @@ public class FishingController : MonoBehaviour
     {
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
+        // Get player's horizontal direction
+        dirH = Input.GetAxis("Horizontal");
         // Move based on that direction
-        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
+        Vector3 newPos = transform.position + new Vector3(dirH, dirV, 0) * Time.deltaTime;
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
-            fishingPoint.SetActive(false);
-            fishingStrength = 0;
-            fishingPoint.transform.position = newPos;
-            isCasted = false;
+            ResetFishingPoint();
         }
         // Transform the position based on the direction
         transform.position = newPos;
@@ -153,20 +167,30 @@ public class FishingController : MonoBehaviour
         {
             ar.Play("Walk Up");
         }
+        else if (dirH > 0.001f)
+        {
+            ar.Play("Walk Right");
+        }
+        else if (dirH < -0.001f)
+        {
+            ar.Play("Walk Left");
+        }
         else
         {
             ar.Play("Idle Left");
         }
     }
-    public void AddToInventory()
+    public void ResetFishingPoint()
     {
-        isReeling = false;
-        fishingCanvas.gameObject.SetActive(false);
-        // add item to inventory
-    //    inventoryData.AddItem(testItem);
-    //    foreach (var item in inventoryData.GetCurrentInventoryState())
-    //    {
-    //        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
-    //    }
+        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
+        fishingPoint.SetActive(false);
+        fishingStrength = 0;
+        fishingPoint.transform.position = newPos;
+        isCasted = false;
+        slider.value = 0;
+    }
+    public BaitItemSO GetCurrentBait()
+    {
+        return selectedBait;
     }
 }
