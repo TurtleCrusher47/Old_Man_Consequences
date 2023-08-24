@@ -59,12 +59,13 @@ public class UIPlayerStats : MonoBehaviour
             nextHungerDecreaseTime = Time.time + playerData.StaminaDecreaseInterval;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            DecreaseHunger(5);
-        }
+        // if (Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     DecreaseHunger(5);
+        // }
 
         UpdateMoneyText();
+        UpdateUIFromPlayerData();
     }
 
     public void UpdateUIFromPlayerData()
