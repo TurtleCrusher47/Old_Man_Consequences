@@ -10,6 +10,13 @@ public class InventorySO : ScriptableObject
     [SerializeField]
     private List<InventoryItemStruct> inventoryItems;
 
+    public List<InventoryItemStruct> InventoryItems
+    {
+        get => inventoryItems;
+
+        set => inventoryItems = value;
+    }
+
     [field: SerializeField]
     public int Size { get; private set; } = 10;
 

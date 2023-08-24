@@ -29,7 +29,6 @@ public class LoadingBar : MonoBehaviour
     IEnumerator LoadLevelAsync(string sceneName)
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        SceneManager.LoadScene(uiSceneName, LoadSceneMode.Additive);
 
         while (op.isDone == false)
         {
