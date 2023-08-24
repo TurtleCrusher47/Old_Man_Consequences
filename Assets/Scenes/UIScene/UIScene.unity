@@ -602,7 +602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &188686196
 RectTransform:
   m_ObjectHideFlags: 0
@@ -637,8 +637,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685816f91c5ed804d932bd1e1f2be0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 188686195}
   text: {fileID: 176448106}
   image: {fileID: 1272432569}
+  notificationList:
+  - notificationKey: Margheritaday
+    notification: {fileID: 11400000, guid: d4a81270146f619449cf7d47b79772df, type: 2}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4139,6 +4143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
   uIPlayerStats: {fileID: 1796548733}
+  notificationManager: {fileID: 188686197}
   timeText: {fileID: 648404183}
   dayText: {fileID: 502666790}
   worldClockData: {fileID: 11400000, guid: c595cd7267b336b478dc9bcbc8eedc75, type: 2}

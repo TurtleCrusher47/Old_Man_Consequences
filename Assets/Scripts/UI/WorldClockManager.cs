@@ -8,6 +8,7 @@ public class WorldClockManager : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
     [SerializeField] UIPlayerStats uIPlayerStats;
+    [SerializeField] NotificationManager notificationManager;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
@@ -137,6 +138,8 @@ public class WorldClockManager : MonoBehaviour
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+        
+        StartCoroutine(notificationManager.ShowNotification("Margheritaday"));
     }
 
     public void FaintNextDay()
