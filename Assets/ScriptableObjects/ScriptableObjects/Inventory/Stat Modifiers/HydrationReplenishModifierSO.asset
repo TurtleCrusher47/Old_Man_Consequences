@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbc0c1a1da1772429badeea1fcb4c10, type: 3}
   m_Name: HydrationReplenishModifierSO
   m_EditorClassIdentifier: 
-  playerData: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
   particleEffect: {fileID: 0}

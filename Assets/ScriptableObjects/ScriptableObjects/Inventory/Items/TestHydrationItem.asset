@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c41e739cfd2c644aa944d29b6989ed8, type: 3}
   m_Name: TestHydrationItem
   m_EditorClassIdentifier: 
-  canStack: 0
-  maxStackSize: 0
-  name: 
-  description: 
-  itemImage: {fileID: 0}
+  canStack: 1
+  maxStackSize: 64
+  name: Test Hydration Item
+  description: edit the value under modifier data to change how much it replenishes
+  itemImage: {fileID: -1139920862, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   defaultParameterList: []
   purchasePrice: 0
-  modifiersData: []
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: d309b4ee609227549a9fec13524caa48, type: 2}
+    value: 10
