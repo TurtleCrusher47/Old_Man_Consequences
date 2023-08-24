@@ -68,6 +68,8 @@ public class FishingController : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip plotSoundClip;
+    [SerializeField]
+    private AudioClip walkAudioClip;
 
     bool audioPlayed;
     void Awake()
@@ -146,6 +148,17 @@ public class FishingController : MonoBehaviour
             ResetFishingPoint();
             lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
             lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.0f, 0));
+            audioSource.loop = true;
+            audioSource.clip = walkAudioClip;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+            
+        }
+        else
+        {
+            audioSource.loop = false;
         }
         if (isCasted)
         {
