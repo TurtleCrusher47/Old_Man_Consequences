@@ -643,6 +643,8 @@ MonoBehaviour:
   notificationList:
   - notificationKey: Margheritaday
     notification: {fileID: 11400000, guid: d4a81270146f619449cf7d47b79772df, type: 2}
+  - notificationKey: SharkWarning1
+    notification: {fileID: 11400000, guid: a0e21e5cea3ad054980ef90b84f59a36, type: 2}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0
