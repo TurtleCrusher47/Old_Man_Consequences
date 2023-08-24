@@ -332,7 +332,7 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED)
+        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED && player.isCasted)
         {
             Debug.Log(gameObject.name + "biting");
             isBiting = true;

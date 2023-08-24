@@ -127,7 +127,7 @@ public class FishManager : MonoBehaviour
         
         // Check if any fish has been bitten
         //TODO: use a list of fishbehaviours instead to reduce the number of GetComponent calls
-        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0 && player.isReeling == false)
+        if (fishBehaviours.FindAll(f => f.isBiting ? true : false).Count > 0 && player.isReeling == false)
         {
             canFishBite = false;
             SetAllFishCanBite(canFishBite);
@@ -146,7 +146,7 @@ public class FishManager : MonoBehaviour
         else if (player.isCasted == false && schooling)
         {
             //UpdateFishState(SwimState.SWIM);
-            if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().destReached ? true : false).Count == fishList.Count
+            if (fishBehaviours.FindAll(f => f.destReached ? true : false).Count == fishBehaviours.Count
             || destTimer > maxTimePerDest)
             {
                 SetAllFishDestinations(Random.Range(0, pointsContainer.transform.childCount));

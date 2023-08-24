@@ -2216,6 +2216,8 @@ MonoBehaviour:
   fishingSliderCatchImage: {fileID: 672104390}
   caughtFishSprite: {fileID: 941660121}
   fishManager: {fileID: 2032072415}
+  playerAudioSource: {fileID: 999580862}
+  rodReelClip: {fileID: 8300000, guid: b5805bdf23390824b8b3b14f95f73570, type: 3}
   a: 3
   fishCaught: 0
 --- !u!1 &587759997 stripped

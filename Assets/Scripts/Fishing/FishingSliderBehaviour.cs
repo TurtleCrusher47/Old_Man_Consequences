@@ -34,6 +34,11 @@ public class FishingSliderBehaviour : MonoBehaviour
     [SerializeField]
     private FishManager fishManager;
 
+    [SerializeField]
+    private AudioSource playerAudioSource;
+    [SerializeField]
+    private AudioClip rodReelClip;
+
     private float elaspedTime;
     public float a = 0.6f;
     public bool fishCaught;
@@ -60,6 +65,7 @@ public class FishingSliderBehaviour : MonoBehaviour
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
         ResetSliderValues();
+        playerAudioSource.loop = false;
     }
 
     // Update is called once per frame
@@ -83,9 +89,15 @@ public class FishingSliderBehaviour : MonoBehaviour
         {
             playerRodSlider.value += 0.5f * Time.deltaTime;
             staminaSlider.value -= 0.05f * Time.deltaTime;
+            if (!playerAudioSource.isPlaying)
+            {
+                playerAudioSource.clip = rodReelClip;
+                playerAudioSource.Play();
+            }
         }
         else
         {
+            playerAudioSource.Pause();
             playerRodSlider.value -= 0.5f * Time.deltaTime;
         }
         if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
