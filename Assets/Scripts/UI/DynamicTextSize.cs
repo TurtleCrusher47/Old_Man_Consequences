@@ -10,6 +10,8 @@ public class DynamicTextSize : MonoBehaviour
 
     [Header("Money Text")]
     [SerializeField] private TMP_Text playerMoney;
+    [SerializeField] private TMP_Text playerShark;
+    [SerializeField] private TMP_Text playerBank;
 
     // Update is called once per frame
     void Update()
@@ -19,8 +21,12 @@ public class DynamicTextSize : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        playerMoney.text = playerData.BankDebt.ToString();
+        playerMoney.text = playerData.Balance.ToString();
+        playerShark.text = playerData.SharkDebt.ToString();
+        playerBank.text = playerData.BankDebt.ToString();
         DynamicTextFontSize(playerMoney);
+        DynamicTextFontSize(playerShark);
+        DynamicTextFontSize(playerBank);
     }
 
     private void DynamicTextFontSize(TMP_Text textComponent)
