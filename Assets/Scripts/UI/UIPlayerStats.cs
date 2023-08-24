@@ -60,6 +60,13 @@ public class UIPlayerStats : MonoBehaviour
         {
             DecreaseHunger(5);
         }
+        // if (Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     DecreaseHunger(5);
+        // }
+
+        UpdateMoneyText();
+        UpdateUIFromPlayerData();
     }
 
     public void UpdateUIFromPlayerData()
