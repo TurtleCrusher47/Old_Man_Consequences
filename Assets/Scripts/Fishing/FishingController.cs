@@ -12,8 +12,6 @@ public class FishingController : MonoBehaviour
     private Animator ar;
     // vertical direction
     private float dirV;
-    // horizontal direction
-    private float dirH;
     // strength at which player is throwing the rod at that point in time
     private float fishingStrength;
     // amt of time that player has been fishinig
@@ -21,7 +19,7 @@ public class FishingController : MonoBehaviour
     // used for later
     private float levelDistMult;
     // base multipler for how far the rod will be thrown
-    private const float baseXMultipler = 13f;
+    private const float baseXMultipler = 8f;
     // base multipler for how fast the rod strength changes
     private const float baseRodStrengthMult = 2f;
     private float levelStrengthMult;
@@ -46,28 +44,9 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private InventorySO inventoryData;
 
-    [SerializeField] private PlayerData playerData;
-
-    // List of sellable items
-    [SerializeField]
-    private List<BaitItemSO> baitItems;
-
-    [HideInInspector]
-    public List<BaitItemSO> BaitItems
-    {
-        get => baitItems;
-    }
-
-    [HideInInspector]
-    public BaitItemSO selectedBait;
-
-    [SerializeField]
-    private GameObject theRod;
-    private LineRenderer lr;
     void Awake()
     {
         dirV = 0;
-        dirH = 0;
         ar = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         fishingStrength = 0;
@@ -77,14 +56,6 @@ public class FishingController : MonoBehaviour
         levelStrengthMult = 1f;
         isCasted = false;
         isReeling = false;
-        selectedBait = baitItems[0];
-        lr = theRod.GetComponent<LineRenderer>();
-        lr.startColor = Color.black;
-        lr.endColor = Color.black;
-        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
-        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
-        lr.startWidth = 0.1f;
-        lr.endWidth = 0.1f;
     }
     // Update is called once per frame
     void Update()
@@ -96,7 +67,7 @@ public class FishingController : MonoBehaviour
         // On player click
         if (isReeling == false)
         {
-            if (Input.GetAxis("Fire3") > 0)
+            if (Input.GetMouseButton(0))
             {
                 if (!clicked)
                     clicked = true;
@@ -118,28 +89,27 @@ public class FishingController : MonoBehaviour
                 Walking();
             }
         }
+        else
+        {
+            fishingCanvas.gameObject.SetActive(true);
+        }
            
 
     }
 
     void Walking()
     {
-        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         // Get player's vertical direction
         dirV = Input.GetAxis("Vertical");
-        // Get player's horizontal direction
-        dirH = Input.GetAxis("Horizontal");
         // Move based on that direction
-        Vector3 newPos = transform.position + new Vector3(dirH, dirV, 0) * Time.deltaTime;
+        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
-            ResetFishingPoint();
-            lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.0f, 0));
-        }
-        if (isCasted)
-        {
-            lr.SetPosition(1, fishingPoint.transform.position);
+            fishingPoint.SetActive(false);
+            fishingStrength = 0;
+            fishingPoint.transform.position = newPos;
+            isCasted = false;
         }
         // Transform the position based on the direction
         transform.position = newPos;
@@ -154,9 +124,8 @@ public class FishingController : MonoBehaviour
         // Set the fishing strength
         fishingStrength = Mathf.Abs(Mathf.Sin(baseRodStrengthMult*fishingElapsedTime)); 
         slider.value = fishingStrength;
-        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y);
+        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y);
         fishingCrosshairCanvas.transform.position = newFishingPos;
-        lr.SetPosition(1, fishingCrosshairCanvas.transform.position);
     }
     void CastRod()
     {
@@ -165,13 +134,12 @@ public class FishingController : MonoBehaviour
         //fishingStrength = 0;
         // Take rod strength
         // Calculate X position of rod based on rod strength
-        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y, 0);
+        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y, 0);
         fishingPoint.transform.position = newFishingPtPos;
         if (!isCasted)
         {
             isCasted = true;
         }
-        lr.SetPosition(1, fishingPoint.transform.position);
     }
     void UpdateSpriteDirection()
     {
@@ -185,32 +153,20 @@ public class FishingController : MonoBehaviour
         {
             ar.Play("Walk Up");
         }
-        else if (dirH > 0.001f)
-        {
-            ar.Play("Walk Right");
-        }
-        else if (dirH < -0.001f)
-        {
-            ar.Play("Walk Left");
-        }
         else
         {
             ar.Play("Idle Left");
         }
     }
-    public void ResetFishingPoint()
+    public void AddToInventory()
     {
-        Vector3 newPos = transform.position + new Vector3(0, dirV, 0) * Time.deltaTime;
-        fishingPoint.SetActive(false);
-        fishingStrength = 0;
-        fishingPoint.transform.position = newPos;
-        isCasted = false;
-        slider.value = 0;
-        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
-        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
-    }
-    public BaitItemSO GetCurrentBait()
-    {
-        return selectedBait;
+        isReeling = false;
+        fishingCanvas.gameObject.SetActive(false);
+        // add item to inventory
+    //    inventoryData.AddItem(testItem);
+    //    foreach (var item in inventoryData.GetCurrentInventoryState())
+    //    {
+    //        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+    //    }
     }
 }

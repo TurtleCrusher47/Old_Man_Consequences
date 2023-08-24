@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class FishingSliderBehaviour : MonoBehaviour
 {
-
     [SerializeField]
     private Slider staminaSlider;
     [SerializeField]
@@ -17,22 +15,9 @@ public class FishingSliderBehaviour : MonoBehaviour
     private Slider playerRodSlider;
     [SerializeField]
     private Button addButton;
-    [SerializeField]
-    private Button releaseButton;
 
     [SerializeField]
-    private TMP_Text catchText;
-    [SerializeField]
-    private TMP_Text percentText;
-
-    [SerializeField]
-    private Image fishingSliderCatchImage;
-
-    [SerializeField]
-    private Image caughtFishSprite;
-
-    [SerializeField]
-    private FishManager fishManager;
+    private Image fishingCatchImage;
 
     private float elaspedTime;
     public float a = 0.6f;
@@ -59,7 +44,8 @@ public class FishingSliderBehaviour : MonoBehaviour
         sliderColorGrad.SetKeys(sliderColor, sliderAlpha);
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
-        ResetSliderValues();
+        addButton.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -73,13 +59,11 @@ public class FishingSliderBehaviour : MonoBehaviour
         //fishSpriteSlider.value = 0.5f * Mathf.Cos(a * elaspedTime * (Mathf.Cos(a * elaspedTime))) + 0.5f;
 
         // Value = sin(dt)
-        // Debug.Log(Mathf.Sin(elaspedTime));
-        if (fishCatchPercentSlider.value < fishCatchPercentSlider.maxValue && staminaSlider.value > staminaSlider.minValue)
-            fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
+        Debug.Log(Mathf.Sin(elaspedTime));
+        fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a *elaspedTime)) + 0.5f;
         if (Input.GetMouseButton(0))
         {
             playerRodSlider.value += 0.5f * Time.deltaTime;
-            staminaSlider.value -= 0.05f * Time.deltaTime;
         }
         else
         {
@@ -87,7 +71,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
         {
-            fishCatchPercentSlider.value += Time.deltaTime * 1.5f;
+            fishCatchPercentSlider.value += 0.5f * Time.deltaTime;
         }
         else if (fishCatchPercentSlider.value > 0)
         {
@@ -95,41 +79,12 @@ public class FishingSliderBehaviour : MonoBehaviour
         }
         if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
         {
-            OnFishCaught(); 
+            fishCaught = true;
+            addButton.gameObject.SetActive(true);
         }
-        staminaSlider.value -= 0.02f * Time.deltaTime;
-        if (staminaSlider.value < 0.001f)
-        {
-            releaseButton.gameObject.SetActive(true);
-            releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
-            catchText.text = "Uh oh! You ran out of energy! The fish got away.";
-        }
-        percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" + 
-        "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
     }
     void SetFishCatchColor()
     {
-        fishingSliderCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
-    }
-    public void ResetSliderValues()
-    {
-      
-        addButton.gameObject.SetActive(false);
-        releaseButton.gameObject.SetActive(false);
-        fishCatchPercentSlider.value = 0;
-        staminaSlider.value = 1;
-        elaspedTime = 0.6f;
-    }
-    void OnFishCaught()
-    {
-        FishBehaviour caughtFish = fishManager.GetCurrentCaughtFish();
-        if (caughtFish != null)
-        {
-            fishCaught = true;
-            addButton.gameObject.SetActive(true);
-            releaseButton.gameObject.SetActive(true);
-            catchText.text = "We caught a\n" + caughtFish.fishData.Name + " !";
-            caughtFishSprite.sprite = caughtFish.fishData.ItemImage;
-        }
+        fishingCatchImage.color = sliderColorGrad.Evaluate(fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue);
     }
 }

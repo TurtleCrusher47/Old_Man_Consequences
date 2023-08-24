@@ -21,16 +21,9 @@ MonoBehaviour:
   thirstDecreaseAmount: 1
   movementSpeed: 5
   sprintSpeed: 6.5
-  currentStamina: 24
-  maxStamina: 100
-  staminaDecreaseAmountOnClick: 5
-  staminaDecreaseInterval: 6
-  staminaDecreasePerSecond: 1
-  currentHydration: 11
-  maxHydration: 100
-  hydrationDecreaseInterval: 5
-  hydrationDecreasePerSecond: 1
-  balance: 1000
-  sharkDebt: 200
-  sharkDebtWeeks: 0
-  bankDebt: 100
+  maxStamina: 10
+  currentStamina: 10
+  currentHunger: 10
+  currentHydration: 10
+  balance: 0
+  debt: 100000

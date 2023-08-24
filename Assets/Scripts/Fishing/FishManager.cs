@@ -18,7 +18,6 @@ public class FishManager : MonoBehaviour
     private GameObject pointsContainer;
     // List of fish
     private List<GameObject> fishList = new List<GameObject>();
-    private List<FishBehaviour> fishBehaviours = new List<FishBehaviour>();
 
     // Bool to store if fish are schooling
     public bool schooling;
@@ -86,9 +85,6 @@ public class FishManager : MonoBehaviour
         {
             // Add each fish to the fishList
             fishList.Add(fish.gameObject);
-            fishBehaviours.Add(fish.GetComponent<FishBehaviour>());
-            fish.GetComponent<FishBehaviour>().player = player;
-
         }
         if (schooling)
         {
@@ -104,8 +100,7 @@ public class FishManager : MonoBehaviour
         destTimer += Time.deltaTime;
 
         // Check if any fish has been bitten
-        //TODO: use a list of fishbehaviours instead to reduce the number of GetComponent calls
-        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0 && player.isReeling == false)
+        if (fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting ? true : false).Count > 0)
         {
             player.isReeling = true;
             SetAllFishCanBite(false);
@@ -178,124 +173,7 @@ public class FishManager : MonoBehaviour
     }
     public void FishAddedToInventory()
     {
-        var fishToRemove = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
-        fishToRemove.SetActive(false);
-        if (removeFromLst)
-        {
-            fishList.Remove(fishToRemove);
-            fishBehaviours.Remove(fishToRemove.GetComponent<FishBehaviour>());
-            fishToRemove.transform.parent = null;
-            Destroy(fishToRemove);
-        }
-
+        var fishToAdd = fishList.FindAll(f => f.GetComponent<FishBehaviour>().isBiting)[0];
+        Destroy(fishToAdd);
     }
-
-    private void EnableBitingFish()
-    {
-        // Find the biting fish
-        GameObject bitingFish = fishList.Find(f => f.GetComponent<FishBehaviour>().isBiting);
-        bitingFish.SetActive(true);
-        bitingFish.GetComponent<FishBehaviour>().ResetFish();
-        bitingFish.GetComponent<FishBehaviour>().ChangeState(SwimState.SWIM);
-    }
-
-    /// <summary>
-    /// Call this function when the fish bites the rod.
-    /// </summary>
-    void OnFishBite()
-    {
-        player.isReeling = true;
-        if (!fishingCanvas.gameObject.activeInHierarchy)
-        {
-            fishingCanvas.gameObject.SetActive(true);
-        }
-        DisableBitingFish(false);
-        SetAllFishStates(SwimState.SWIM);
-        SetAllFishCanBite(false);
-    }
-    /// <summary>
-    /// Call this function when the player either releases the fish back into the water OR adds the fish to their inventory
-    /// </summary>
-    public void FinishedFishing()
-    {
-        Debug.Log("Canvas set inactive by finished fishing");
-        fishingCanvas.gameObject.SetActive(false);
-        player.isReeling = false;
-        //SetAllFishCanBite(true);
-        player.ResetFishingPoint();
-        //reset bait to worm bait after fishing is complete
-        player.selectedBait = player.BaitItems[0];
-    }
-
-    /// <summary>
-    /// Initialise the fishing SO list
-    /// </summary>
-    void InitFishingSO()
-    {
-        weightList.Add(0);
-        foreach (FishItemSO fishItem in fishItems)
-        {
-            totalWeight += fishItem.SpawnChance;
-            weightList.Add(totalWeight);
-        }
-
-    }
-
-    /// <summary>
-    /// Pick a random fish SO to assign to the each fish, do this based on weight.
-    /// </summary>
-    void GenerateFishingSO(FishBehaviour fishBehaviour)
-    {
-        float randomVal = Random.Range(0, totalWeight);
-        for (int i = 1; i < weightList.Count + 1; i++)
-        {
-            if (randomVal < weightList[i])
-            {
-                fishBehaviour.fishData = fishItems[i - 1];
-                break;
-            }
-        }
-    }
-
-   /// <summary>
-   /// Add the biting fish to the inventory
-   /// </summary>
-    public void AddToInventory()
-    {
-        // Find the biting fish
-        FishBehaviour bitingFish = fishList.Find(f => f.GetComponent<FishBehaviour>().isBiting).GetComponent<FishBehaviour>();
-        // Get its inventory data
-        SellableItemSO fishItem = bitingFish.fishData;
-        // Add it to inventory
-        inventoryData.AddItem(fishItem, 1);
-        Debug.Log("Added a "+ fishItem.Name + " to inventory! Item quantity:"  + inventoryData.InventoryItems.Find(f => fishItem).quantity);
-        FinishedFishing();
-        // Remove from the fishList and the fishList gameobject's child
-        DisableBitingFish(true);
-
-    }
-
-    /// <summary>
-    /// Release the biting fish back into the sea. I.e, re-enable the fish in the list.
-    /// </summary>
-    public void Release()
-    {
-        Debug.Log("Fish released!");
-        
-        FinishedFishing();
-        EnableBitingFish();
-    }
-
-    public FishBehaviour GetCurrentCaughtFish()
-    {
-        FishBehaviour fishToReturn = fishBehaviours.Find(f => f.isBiting);
-        if (fishToReturn)
-        {
-            return fishToReturn;
-        }
-        else
-        {
-            return null;    
-        }
-    } 
 }

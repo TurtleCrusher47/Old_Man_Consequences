@@ -462,8 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fe9665c6678614eb9ea618ed5a8974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
-  worldClockData: {fileID: 11400000, guid: c595cd7267b336b478dc9bcbc8eedc75, type: 2}
 --- !u!4 &676239987
 Transform:
   m_ObjectHideFlags: 0
