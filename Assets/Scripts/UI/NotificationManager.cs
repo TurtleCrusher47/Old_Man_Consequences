@@ -29,8 +29,6 @@ public class NotificationManager : MonoBehaviour
         {
             notifications.Add(notificationList[i].notificationKey, notificationList[i].notification);
         }
-
-        panel.SetActive(false);
     }
 
     public void LoadNotification(string notificationKey)

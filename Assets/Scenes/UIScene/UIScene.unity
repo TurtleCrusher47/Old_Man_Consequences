@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 188686197}
   m_Layer: 5
   m_Name: Notification Panel
-  m_TagString: Untagged
+  m_TagString: NotificationManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -643,8 +643,16 @@ MonoBehaviour:
   notificationList:
   - notificationKey: Margheritaday
     notification: {fileID: 11400000, guid: d4a81270146f619449cf7d47b79772df, type: 2}
-  - notificationKey: SharkWarning1
+  - notificationKey: SharkWarning
     notification: {fileID: 11400000, guid: a0e21e5cea3ad054980ef90b84f59a36, type: 2}
+  - notificationKey: SharkExistingDebt
+    notification: {fileID: 11400000, guid: c337449d66ba9944c8958db2949b857b, type: 2}
+  - notificationKey: BankThreeWeeks
+    notification: {fileID: 11400000, guid: f44b0bfc69baf78409a395922cee8cc0, type: 2}
+  - notificationKey: BankTwoWeeks
+    notification: {fileID: 11400000, guid: 572f856044989a44faffe4cd945221a6, type: 2}
+  - notificationKey: BankOneWeek
+    notification: {fileID: 11400000, guid: b41ddeb392694ad4b8268b280f081134, type: 2}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0
