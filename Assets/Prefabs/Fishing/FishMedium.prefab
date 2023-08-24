@@ -101,8 +101,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1.2
-  m_AngularDrag: 1.2
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0db8c9d05a5f3f40ad05c5a8ad1670c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishType: 0
   wayPointContainer: {fileID: 0}
   currWaypointIndex: 0
   minDistToNextPoint: 1.5
@@ -153,8 +152,7 @@ MonoBehaviour:
   rotationMultipler: 2
   destReached: 0
   isBiting: 0
-  canBite: 0
-  fishData: {fileID: 0}
+  movementSpeed: 0.5
 --- !u!60 &8663918630562469526
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183,11 +181,6 @@ PolygonCollider2D:
     - - {x: -0.453125, y: 0.265625}
       - {x: -0.453125, y: -0.234375}
       - {x: -0.421875, y: -0.265625}
-      - {x: -0.21149026, y: -0.2669757}
-      - {x: -0.068864435, y: -0.20375256}
-      - {x: 0.18216203, y: -0.20438077}
-      - {x: 0.33021212, y: -0.17167056}
-      - {x: 0.45541656, y: -0.047298104}
-      - {x: 0.4568657, y: 0.049784184}
-      - {x: 0.35552335, y: 0.14469008}
-      - {x: 0.1323049, y: 0.26333344}
+      - {x: 0.421875, y: -0.265625}
+      - {x: 0.453125, y: -0.203125}
+      - {x: 0.453125, y: 0.265625}
