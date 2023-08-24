@@ -22,7 +22,7 @@ MonoBehaviour:
   currentHydration: 60
   maxHydration: 100
   hydrationDecreaseInterval: 5
-  hydrationDecreasePerSecond: 5
+  hydrationDecreasePerSecond: 1
   balance: 0
   sharkDebt: 1
   sharkDebtWeeks: 0

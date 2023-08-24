@@ -2670,7 +2670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &715880060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3760,6 +3760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfa6c72142f42946ac9b56acc97c54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
+  uIPlayerStats: {fileID: 1796548733}
   timeText: {fileID: 648404183}
   dayText: {fileID: 502666790}
   worldClockData: {fileID: 11400000, guid: c595cd7267b336b478dc9bcbc8eedc75, type: 2}
@@ -5567,6 +5569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796548732}
   - component: {fileID: 1796548733}
+  - component: {fileID: 1796548734}
   m_Layer: 5
   m_Name: PlayerStats
   m_TagString: Untagged
@@ -5607,9 +5610,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ea0c096db17e04eace913ffb93cdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 1796548734}
   hungerBar: {fileID: 914623851}
   thirstBar: {fileID: 1688938732}
   playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
+--- !u!114 &1796548734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796548731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553e307983c4dc64a9065d39d35bc052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
+  worldClockManager: {fileID: 1161502308}
 --- !u!1 &1838961610
 GameObject:
   m_ObjectHideFlags: 0
