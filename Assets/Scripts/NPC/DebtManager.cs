@@ -8,11 +8,34 @@ public class DebtManager : MonoBehaviour
 
     [SerializeField] private NPC nPC;
 
+    private GameObject notificationManagerGO;
+    private NotificationManager notificationManager;
+
+    IEnumerator Start()
+    {
+        yield return null;
+        notificationManagerGO = GameObject.FindGameObjectWithTag("NotificationManager");
+        notificationManager = notificationManagerGO.GetComponent<NotificationManager>();
+
+        notificationManagerGO.SetActive(false);
+
+        if (notificationManager == null)
+        {
+            Debug.Log("Not Found");
+        }
+    }
+
+    void Update()
+    {
+       
+    }
+
     public void BorrowOneThousand()
     {
         // If the player owes money
         if (DebtCheck())
         {
+            StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
             nPC.DisableChoice();
         }
         else
@@ -27,6 +50,7 @@ public class DebtManager : MonoBehaviour
         // If the player owes money
         if (DebtCheck())
         {
+            notificationManager.ShowNotification("SharkExistingDebt");
             nPC.DisableChoice();
         }
         else
@@ -41,6 +65,7 @@ public class DebtManager : MonoBehaviour
         // If the player owes money
         if (DebtCheck())
         {
+            notificationManager.ShowNotification("SharkExistingDebt");
             nPC.DisableChoice();
         }
         else
