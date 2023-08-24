@@ -260,7 +260,12 @@ public class FishBehaviour : MonoBehaviour
                 if (newInt < biteChance)
                 {
                     luredState = LuredState.BITE;
-                    Debug.Log("Would've bitten.");
+                    Debug.Log("Change to bite.");
+                }
+                else
+                {
+                    luredState = LuredState.LURE;
+                    ChangeState(SwimState.SWIM);
                 }
                 biteTimer = 0;
             }

@@ -89,8 +89,8 @@ public class FishingController : MonoBehaviour
         lr.endColor = Color.black;
         lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
-        lr.startWidth = 0.1f;
-        lr.endWidth = 0.1f;
+        lr.startWidth = 0.05f;
+        lr.endWidth = 0.05f;
         audioSource = GetComponent<AudioSource>();
         audioPlayed = false;
         audioSource.loop = false;
@@ -170,7 +170,6 @@ public class FishingController : MonoBehaviour
     }
     void CastRod()
     {
-        fishingPoint.SetActive(true);
         fishingElapsedTime = 0;
 
         if (!audioSource.isPlaying && !audioPlayed) {
@@ -224,6 +223,7 @@ public class FishingController : MonoBehaviour
         slider.value = 0;
         lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
         lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        audioPlayed = false;
     }
     public BaitItemSO GetCurrentBait()
     {

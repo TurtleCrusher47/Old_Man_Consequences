@@ -78,37 +78,38 @@ public class FishingSliderBehaviour : MonoBehaviour
         {
             fishSpriteSlider.value = (0.5f * Mathf.Sin(0.5f * a * elaspedTime)) + 0.5f;
             staminaSlider.value -= 0.02f * Time.deltaTime;
+            if (Input.GetMouseButton(0))
+            {
+                playerRodSlider.value += 0.5f * Time.deltaTime;
+                staminaSlider.value -= 0.05f * Time.deltaTime;
+            }
+            else
+            {
+                playerRodSlider.value -= 0.5f * Time.deltaTime;
+            }
+            if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
+            {
+                fishCatchPercentSlider.value += Time.deltaTime * 1.5f;
+            }
+            else if (fishCatchPercentSlider.value > 0)
+            {
+                fishCatchPercentSlider.value -= 0.25f * Time.deltaTime;
+            }
+            if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
+            {
+                OnFishCaught();
+            }
+
+            if (staminaSlider.value < 0.001f)
+            {
+                releaseButton.gameObject.SetActive(true);
+                releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
+                catchText.text = "Uh oh! You ran out of energy! The fish got away.";
+            }
+            percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" +
+            "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
         }
-        if (Input.GetMouseButton(0))
-        {
-            playerRodSlider.value += 0.5f * Time.deltaTime;
-            staminaSlider.value -= 0.05f * Time.deltaTime;
-        }
-        else
-        {
-            playerRodSlider.value -= 0.5f * Time.deltaTime;
-        }
-        if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
-        {
-            fishCatchPercentSlider.value += Time.deltaTime * 1.5f;
-        }
-        else if (fishCatchPercentSlider.value > 0)
-        {
-            fishCatchPercentSlider.value -= 0.01f * Time.deltaTime;
-        }
-        if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
-        {
-            OnFishCaught(); 
-        }
-       
-        if (staminaSlider.value < 0.001f)
-        {
-            releaseButton.gameObject.SetActive(true);
-            releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
-            catchText.text = "Uh oh! You ran out of energy! The fish got away.";
-        }
-        percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" + 
-        "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
+        
     }
     void SetFishCatchColor()
     {
