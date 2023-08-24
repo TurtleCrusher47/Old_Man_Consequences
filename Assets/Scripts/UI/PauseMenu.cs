@@ -8,6 +8,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
 
+    public PlayerData playerData;
+    public WorldClockData worldClockData;
+
     private static bool gameIsPaused = false;
 
     private void Start()
@@ -47,6 +50,26 @@ public class PauseMenu : MonoBehaviour
         settingsMenu.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+    }
+
+    public void SaveGame()
+    {
+        // Save player data using PlayerPrefs
+        PlayerPrefs.SetFloat("CurrentStamina", playerData.CurrentStamina);
+        PlayerPrefs.SetFloat("CurrentHydration", playerData.CurrentHydration);
+        PlayerPrefs.SetInt("Balance", playerData.Balance);
+        PlayerPrefs.SetInt("SharkDebt", playerData.SharkDebt);
+        PlayerPrefs.SetInt("BankDebt", playerData.BankDebt);
+
+        // Load World Clock Data from PlayerPrefs
+        PlayerPrefs.SetInt("CurrentHour", worldClockData.hours);
+        PlayerPrefs.SetInt("CurrentMinute", worldClockData.minutes);
+        PlayerPrefs.SetInt("CurrentDay", worldClockData.currentDay);
+        PlayerPrefs.SetInt("CurrentDayIndex", worldClockData.currentDayIndex);
+        PlayerPrefs.SetInt("CurrentWeek", worldClockData.currentWeek);
+
+        PlayerPrefs.Save();
+        Debug.Log("Saved the Game");
     }
 
     public void Exit()

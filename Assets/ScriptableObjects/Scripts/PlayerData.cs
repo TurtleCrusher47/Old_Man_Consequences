@@ -80,5 +80,4 @@ public class PlayerData : ScriptableObject
         get => bankDebt;
         set => bankDebt = value;
     }
-
 }

@@ -41,11 +41,4 @@ public class TitleSceneManager : MonoBehaviour
         isSettingClicked = true; // change the bool to true
         Debug.Log("Scene Settings");
     }
-
-    public void Keybinds()
-    {
-        settingsMenu.SetActive(false);
-        keybindsMenu.SetActive(true);
-        Debug.Log("Scene Keybinds");
-    }
 }

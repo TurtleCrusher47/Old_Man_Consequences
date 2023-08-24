@@ -980,6 +980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1752264695}
   settingsMenu: {fileID: 817949629}
+  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
+  worldClockData: {fileID: 11400000, guid: c595cd7267b336b478dc9bcbc8eedc75, type: 2}
 --- !u!4 &395429483
 Transform:
   m_ObjectHideFlags: 0
@@ -3735,7 +3737,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 395429482}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
