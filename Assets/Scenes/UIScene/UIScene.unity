@@ -653,6 +653,8 @@ MonoBehaviour:
     notification: {fileID: 11400000, guid: 572f856044989a44faffe4cd945221a6, type: 2}
   - notificationKey: BankOneWeek
     notification: {fileID: 11400000, guid: b41ddeb392694ad4b8268b280f081134, type: 2}
+  - notificationKey: SharkInsufficientMoney
+    notification: {fileID: 11400000, guid: b7b422817a3927849ad4a4a23e82d827, type: 2}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0

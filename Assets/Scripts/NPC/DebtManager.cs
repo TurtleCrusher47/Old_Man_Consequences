@@ -33,7 +33,6 @@ public class DebtManager : MonoBehaviour
 
     public void BorrowOneThousand()
     {
-        // If the player owes money
         if (DebtCheck())
         {
             StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
@@ -48,7 +47,6 @@ public class DebtManager : MonoBehaviour
 
     public void BorrowFiveThousand()
     {
-        // If the player owes money
         if (DebtCheck())
         {
             StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
@@ -63,7 +61,6 @@ public class DebtManager : MonoBehaviour
 
     public void BorrowTenThousand()
     {
-        // If the player owes money
         if (DebtCheck())
         {
             notificationManager.ShowNotification("SharkExistingDebt");
@@ -76,11 +73,70 @@ public class DebtManager : MonoBehaviour
         }
     }
 
+    public void ReturnOneThousand()
+    {
+        if (ReturnDebtCheck(1000))
+        {
+            RemoveDebt(1000);
+        }
+        else
+        {
+            notificationManager.ShowNotification("SharkInsufficientMoney");
+            nPC.DisableChoice();
+        }
+    }
+
+    public void ReturnFiveThousand()
+    {
+        if (ReturnDebtCheck(5000))
+        {
+            RemoveDebt(5000);
+        }
+        else
+        {
+            notificationManager.ShowNotification("SharkInsufficientMoney");
+            nPC.DisableChoice();
+        }
+    }
+
+    public void ReturnAll()
+    {
+        if (ReturnDebtCheck(playerData.SharkDebt))
+        {
+            RemoveDebt(playerData.SharkDebt);
+        }
+        else
+        {
+            notificationManager.ShowNotification("SharkInsufficientMoney");
+            nPC.DisableChoice();
+        }
+    }
+
+    // If the player owes money
     public bool DebtCheck()
     {
         if (playerData.SharkDebt > 0)
         return true;
         else
         return false;
+    }
+
+    // If the player has enough money
+    private bool ReturnDebtCheck(int debtToPay)
+    {
+        if (playerData.Balance > debtToPay)
+        return true;
+        else
+        return false;
+    }
+
+    // Removing the amount of debt and making sure the debt is not negative
+    private void RemoveDebt(int debtToRemove)
+    {
+        playerData.Balance -= debtToRemove;
+        playerData.SharkDebt -= debtToRemove;
+
+        if (playerData.SharkDebt < 0)
+        playerData.SharkDebt = 0;
     }
 }
