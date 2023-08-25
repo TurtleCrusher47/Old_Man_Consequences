@@ -13,6 +13,7 @@ public class PlayerControllerIsometric : MonoBehaviour
     Vector2 currentPos;
     public VectorValue startingPosition;
     private IsoPlayerSoundController isoSoundController;
+    private int footStepsIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerControllerIsometric : MonoBehaviour
         isometricCharacterRenderer = GetComponent<IsometricCharacterRenderer>();
         isoSoundController = GetComponent<IsoPlayerSoundController>();
         transform.position = startingPosition.initialValue;
+        footStepsIndex = 0;
     }
 
     // Update is called once per frame
@@ -39,8 +41,12 @@ public class PlayerControllerIsometric : MonoBehaviour
         rb.velocity = velocity;
         
         if (velocity.magnitude > 0)
-        { 
-            isoSoundController.PlaySound(0);
+        {
+            if (!isoSoundController.IsPlaying())
+            {
+                Debug.Log(footStepsIndex);
+                isoSoundController.PlaySound(footStepsIndex);
+            }
         }
         else
         {
@@ -49,5 +55,22 @@ public class PlayerControllerIsometric : MonoBehaviour
 
         // Update the sprite to show
         isometricCharacterRenderer.SetDirection(velocity);
+    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Grass toucher");
+        if (collision.gameObject.CompareTag("Grass"))
+        {
+            footStepsIndex = 1;
+            isoSoundController.PauseSound();
+        }
+        
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    //private void OnCollisionExit2D(Collision2D collision)
+    {
+        footStepsIndex = 0;
+        isoSoundController.PauseSound();
     }
 }

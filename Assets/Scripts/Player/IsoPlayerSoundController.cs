@@ -9,7 +9,7 @@ public class IsoPlayerSoundController : MonoBehaviour
     private List<AudioClip> audioList;
     // Sound indexes
     // 0: Footsteps
-    // 1:
+    // 1: Inside grass
     private int soundIndex;
     // Start is called before the first frame update
     void Start()
@@ -25,11 +25,14 @@ public class IsoPlayerSoundController : MonoBehaviour
         {
             audioSource.Play();
             soundIndex = newSoundIndex;
-            audioSource.clip = audioList[soundIndex];
         }
     }
     public void PauseSound()
     {
         audioSource.Pause();
+    }
+    public bool IsPlaying()
+    {
+        return audioSource.isPlaying;
     }
 }

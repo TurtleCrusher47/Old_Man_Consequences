@@ -11,6 +11,7 @@ public class PlayerController2D : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;  
     private Animator ar;
+    private IsoPlayerSoundController isoPlayerSoundController;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class PlayerController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         ar = GetComponent<Animator>();
-
+        isoPlayerSoundController = GetComponent<IsoPlayerSoundController>();
         ar.SetBool("FacingRight", isFacingRight);
         ar.SetBool("FacingLeft", !isFacingRight);
     }
@@ -39,9 +40,16 @@ public class PlayerController2D : MonoBehaviour
         rb.velocity = velocity;
 
         if (rb.velocity.magnitude >= 0.1f)
-        ar.SetBool("Walking", true);
+        {
+            ar.SetBool("Walking", true);
+            isoPlayerSoundController.PlaySound(0);
+        }
         else
-        ar.SetBool("Walking", false);
+        {
+            ar.SetBool("Walking", false);
+            isoPlayerSoundController.PauseSound();
+        }
+        
     }
 
     private void Flip()
