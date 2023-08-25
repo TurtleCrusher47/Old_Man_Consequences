@@ -15,12 +15,11 @@ MonoBehaviour:
   canStack: 1
   maxStackSize: 64
   name: Bait Shrimp
-  description: A favourite meal of most saltwater fish, this bait will be sure to
-    attract most fish. However, fishes with a preference for crunchy and savoury
-    meals will like it more.
-  itemImage: {fileID: 0}
+  description: Fish with a preference for crunchy and savoury meals will like it
+    more.
+  itemImage: {fileID: -1042114473, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
   defaultParameterList: []
-  purchasePrice: 0
+  purchasePrice: 100
   modifierData:
   - statModifier: {fileID: 11400000, guid: 7f30fdfe2c3aa7240af2d885e4ac5ff4, type: 2}
     value: 2

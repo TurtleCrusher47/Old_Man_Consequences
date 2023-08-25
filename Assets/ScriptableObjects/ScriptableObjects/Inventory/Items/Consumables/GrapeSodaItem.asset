@@ -10,15 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c41e739cfd2c644aa944d29b6989ed8, type: 3}
-  m_Name: TestHydrationItem
+  m_Name: GrapeSodaItem
   m_EditorClassIdentifier: 
   canStack: 1
-  maxStackSize: 64
-  name: Test Hydration Item
-  description: edit the value under modifier data to change how much it replenishes
-  itemImage: {fileID: -1139920862, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
+  maxStackSize: 10
+  name: Grape Soda
+  description: 'Fizzy, sweet and oh so purple. What''s not to love?
+
+    +15 Hydration
+
+    +10
+    Stamina'
+  itemImage: {fileID: 21300000, guid: e0596a5fb1c71764e96b0c2f37df9089, type: 3}
   defaultParameterList: []
-  purchasePrice: 0
+  purchasePrice: 75
   modifiersData:
   - statModifier: {fileID: 11400000, guid: d309b4ee609227549a9fec13524caa48, type: 2}
+    value: 15
+  - statModifier: {fileID: 11400000, guid: 3c466614f95e7f84bbc9b63551ad5606, type: 2}
     value: 10
