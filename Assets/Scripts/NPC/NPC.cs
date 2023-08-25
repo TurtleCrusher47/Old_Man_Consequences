@@ -16,6 +16,7 @@ public class NPC : MonoBehaviour
     public float wordSpeed;
     public bool inRange;
     
+
     // Update is called once per frame
     void Update()
     {
