@@ -63,7 +63,7 @@ public class DebtManager : MonoBehaviour
     {
         if (DebtCheck())
         {
-            notificationManager.ShowNotification("SharkExistingDebt");
+            StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
             nPC.DisableChoice();
         }
         else
@@ -81,7 +81,7 @@ public class DebtManager : MonoBehaviour
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
@@ -94,7 +94,7 @@ public class DebtManager : MonoBehaviour
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
@@ -108,7 +108,7 @@ public class DebtManager : MonoBehaviour
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
