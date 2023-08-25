@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameplayScenes/GeneralStoreScene.unity
     guid: a9cbc4abbaf6df14ab2b31558cce6516
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/CreditScene.unity
+    guid: 86dc478b18a8d3a4e9e24e908fbdf6fc
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

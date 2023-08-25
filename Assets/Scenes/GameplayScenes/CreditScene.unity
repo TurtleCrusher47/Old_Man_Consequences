@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530484705}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: NewGame
+        m_MethodName: Credits
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1089,3 +1089,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fe9665c6678614eb9ea618ed5a8974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  worldClockData: {fileID: 0}

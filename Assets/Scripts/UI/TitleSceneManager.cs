@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class TitleSceneManager : MonoBehaviour
         //keybindsMenu.SetActive(false);
         isSettingClicked = false; // change the bool to true
         Debug.Log("Scene Resumed");
+    }
+
+    public void Credits(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     public void Settings()

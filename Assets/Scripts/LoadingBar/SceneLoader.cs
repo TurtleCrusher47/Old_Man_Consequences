@@ -47,6 +47,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void MainMenu(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void ExitScene()
     {
         Application.Quit();
