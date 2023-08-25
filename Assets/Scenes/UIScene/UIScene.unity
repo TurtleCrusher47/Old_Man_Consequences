@@ -1060,6 +1060,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73179dd8919b30e4e91d1b5700429c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textFields:
+  - {fileID: 949026668}
+  - {fileID: 1486147773}
+  - {fileID: 429645835}
+  targetValue: 100
+  animationDuration: 2
+  countUp: 1
+  testKey: 13
 --- !u!1 &396875940
 GameObject:
   m_ObjectHideFlags: 0
