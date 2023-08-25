@@ -17,9 +17,9 @@ MonoBehaviour:
   name: Bait Squid
   description: A commons staple in seafood, squid can also be useful for live fishing
     bait. They're very chewy and very sweet.
-  itemImage: {fileID: -1511410801, guid: a07e8884df0c7c940a4d23f48c434872, type: 3}
+  itemImage: {fileID: 0}
   defaultParameterList: []
-  purchasePrice: 100
+  purchasePrice: 0
   modifierData:
   - statModifier: {fileID: 11400000, guid: 8096afe7b98f0314ab3163fb07db850d, type: 2}
     value: 1

@@ -63,7 +63,7 @@ public class DebtManager : MonoBehaviour
     {
         if (DebtCheck())
         {
-            notificationManager.ShowNotification("SharkExistingDebt");
+            StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
             nPC.DisableChoice();
         }
         else
@@ -81,7 +81,7 @@ public class DebtManager : MonoBehaviour
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
@@ -94,7 +94,7 @@ public class DebtManager : MonoBehaviour
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
@@ -104,10 +104,11 @@ public class DebtManager : MonoBehaviour
         if (ReturnDebtCheck(playerData.SharkDebt))
         {
             RemoveDebt(playerData.SharkDebt);
+            Debug.Log("Returned debt");
         }
         else
         {
-            notificationManager.ShowNotification("SharkInsufficientMoney");
+            StartCoroutine(notificationManager.ShowNotification("SharkInsufficientMoney"));
             nPC.DisableChoice();
         }
     }
@@ -124,7 +125,7 @@ public class DebtManager : MonoBehaviour
     // If the player has enough money
     private bool ReturnDebtCheck(int debtToPay)
     {
-        if (playerData.Balance > debtToPay)
+        if (playerData.Balance >= debtToPay)
         return true;
         else
         return false;

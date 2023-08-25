@@ -19,7 +19,7 @@ MonoBehaviour:
     to anything. They're slightly chewy.
   itemImage: {fileID: 0}
   defaultParameterList: []
-  purchasePrice: 10
+  purchasePrice: 0
   modifierData:
   - statModifier: {fileID: 11400000, guid: dd3be3708c6063d458af3fa1e7207c87, type: 2}
     value: 0

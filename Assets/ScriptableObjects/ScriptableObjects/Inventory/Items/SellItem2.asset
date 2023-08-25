@@ -9,20 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea2eca7fe880e146bd383503e981230, type: 3}
-  m_Name: WorldClockData
+  m_Script: {fileID: 11500000, guid: a45a3d4eec7656c499f82d3a16457e29, type: 3}
+  m_Name: SellItem2
   m_EditorClassIdentifier: 
-  secondsPerMinute: 0.05
-  currentDay: 57
-  currentDayIndex: 5
-  daysOfWeek:
-  - Mon.
-  - Tue.
-  - Wed.
-  - Thu.
-  - Fri.
-  - Sat.
-  - Sun.
-  currentWeek: 8
-  hours: 7
-  minutes: 40
+  canStack: 1
+  maxStackSize: 10
+  name: wa
+  description: wawawa
+  itemImage: {fileID: -1479179544, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
+  defaultParameterList: []
+  sellPrice: 50
