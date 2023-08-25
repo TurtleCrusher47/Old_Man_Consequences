@@ -104,6 +104,7 @@ public class DebtManager : MonoBehaviour
         if (ReturnDebtCheck(playerData.SharkDebt))
         {
             RemoveDebt(playerData.SharkDebt);
+            Debug.Log("Returned debt");
         }
         else
         {
@@ -124,7 +125,7 @@ public class DebtManager : MonoBehaviour
     // If the player has enough money
     private bool ReturnDebtCheck(int debtToPay)
     {
-        if (playerData.Balance > debtToPay)
+        if (playerData.Balance >= debtToPay)
         return true;
         else
         return false;
