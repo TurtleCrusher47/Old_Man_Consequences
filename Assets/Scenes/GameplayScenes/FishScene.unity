@@ -7745,6 +7745,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8ccb814e6840c947ab89810ef466ab5, type: 2}
   - {fileID: 11400000, guid: e7a9a512627874143adba55576879d96, type: 2}
   - {fileID: 11400000, guid: e5cd89829ebf426498f3d010ebdb08f2, type: 2}
+  - {fileID: 11400000, guid: 6e354f265dbc19f4aab3fcb676cda6ee, type: 2}
   fishingCanvas: {fileID: 583329998}
   bgmPlayer: {fileID: 1436858903}
 --- !u!1 &2032594211
