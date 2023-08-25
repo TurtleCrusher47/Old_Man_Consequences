@@ -22,7 +22,6 @@ public class WorldClockManager : MonoBehaviour
     private bool isMorning = true; // AM
     private float timeCounter = 0.0f;
 
-
     private void Awake()
     {
         // Ensure there is only one instance of UIPlayerStats

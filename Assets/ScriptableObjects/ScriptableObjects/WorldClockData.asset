@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secondsPerMinute: 0.2
   currentDay: 1
-  currentDayIndex: 1
+  currentDayIndex: 0
   daysOfWeek:
-  - Sun.
   - Mon.
   - Tue.
   - Wed.
   - Thu.
   - Fri.
   - Sat.
+  - Sun.
   currentWeek: 0
-  hours: 0
-  minutes: 25
+  hours: 7
+  minutes: 39

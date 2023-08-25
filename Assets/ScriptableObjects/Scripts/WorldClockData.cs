@@ -24,7 +24,7 @@ public class WorldClockData : ScriptableObject
        hours = 7;
        minutes = 0;
        currentDay = 1;
-       currentDayIndex = 1;
+       currentDayIndex = 0;
        currentWeek = 0;
     }
 }

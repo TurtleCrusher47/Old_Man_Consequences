@@ -86,9 +86,8 @@ public class PlayerData : ScriptableObject
         // Player Data Reset
         CurrentStamina = 100;
         CurrentHydration = 100;
-        Balance = 100;
-        SharkDebt = 100;
-        BankDebt = 1000;
-
+        Balance = 0;
+        SharkDebt = 0;
+        BankDebt = 100000;
     }
 }
