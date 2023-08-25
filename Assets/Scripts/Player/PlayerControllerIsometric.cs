@@ -12,12 +12,14 @@ public class PlayerControllerIsometric : MonoBehaviour
     Vector2 moveDirection;
     Vector2 currentPos;
     public VectorValue startingPosition;
+    private IsoPlayerSoundController isoSoundController;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         isometricCharacterRenderer = GetComponent<IsometricCharacterRenderer>();
+        isoSoundController = GetComponent<IsoPlayerSoundController>();
         transform.position = startingPosition.initialValue;
     }
 
@@ -27,6 +29,7 @@ public class PlayerControllerIsometric : MonoBehaviour
         moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         moveDirection = Vector2.ClampMagnitude(moveDirection, 1);
+        
     }
 
     void FixedUpdate()
@@ -34,6 +37,15 @@ public class PlayerControllerIsometric : MonoBehaviour
         Vector2 velocity = moveDirection * playerData.MovementSpeed;
 
         rb.velocity = velocity;
+        
+        if (velocity.magnitude > 0)
+        { 
+            isoSoundController.PlaySound(0);
+        }
+        else
+        {
+            isoSoundController.PauseSound();
+        }
 
         // Update the sprite to show
         isometricCharacterRenderer.SetDirection(velocity);
