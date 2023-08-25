@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   sprintSpeed: 6.5
-  currentStamina: 95
+  currentStamina: 76
   maxStamina: 100
   staminaDecreaseAmountOnClick: 5
   staminaDecreaseInterval: 3
   staminaDecreasePerSecond: 1
-  currentHydration: 98
+  currentHydration: 0
   maxHydration: 100
   hydrationDecreaseInterval: 2
   hydrationDecreasePerSecond: 1
   balance: 0
-  sharkDebt: 0
+  sharkDebt: 1
   sharkDebtWeeks: 0
   bankDebt: 100000

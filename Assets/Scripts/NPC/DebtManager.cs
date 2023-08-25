@@ -50,7 +50,7 @@ public class DebtManager : MonoBehaviour
         // If the player owes money
         if (DebtCheck())
         {
-            notificationManager.ShowNotification("SharkExistingDebt");
+            StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
             nPC.DisableChoice();
         }
         else
