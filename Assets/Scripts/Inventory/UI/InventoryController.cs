@@ -22,7 +22,7 @@ public class InventoryController : MonoBehaviour
 
     private void PrepareInventoryData()
     {
-        inventoryData.Init();
+        //inventoryData.Init();
         inventoryData.OnInventoryUpdated += UpdateInventoryUI;   
         foreach (InventoryItemStruct item in initialItems)
         {

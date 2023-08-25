@@ -11,12 +11,16 @@ public class SceneLoader : MonoBehaviour
     [Header("World Clock Data")]
     public WorldClockData worldClockData;
 
+    [Header("Inventory Data")]
+    public InventorySO inventoryData;
+
     public void NewGame(string sceneName)
     {
         //NewGameData();
 
         playerData.Reset();
         worldClockData.Reset();
+        inventoryData.Init();
 
         SceneManager.LoadScene(sceneName);
     }
