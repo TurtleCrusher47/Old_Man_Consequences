@@ -61,6 +61,17 @@ public class FishingController : MonoBehaviour
     [HideInInspector]
     public BaitItemSO selectedBait;
 
+    [SerializeField]
+    private GameObject theRod;
+    private LineRenderer lr;
+
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip plotSoundClip;
+    [SerializeField]
+    private AudioClip walkAudioClip;
+
+    bool audioPlayed;
     void Awake()
     {
         dirV = 0;
@@ -75,6 +86,16 @@ public class FishingController : MonoBehaviour
         isCasted = false;
         isReeling = false;
         selectedBait = baitItems[0];
+        lr = theRod.GetComponent<LineRenderer>();
+        lr.startColor = Color.black;
+        lr.endColor = Color.black;
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.startWidth = 0.05f;
+        lr.endWidth = 0.05f;
+        audioSource = GetComponent<AudioSource>();
+        audioPlayed = false;
+        audioSource.loop = false;
     }
     // Update is called once per frame
     void Update()
@@ -106,6 +127,7 @@ public class FishingController : MonoBehaviour
             else
             {
                 Walking();
+
             }
         }
            
@@ -119,11 +141,28 @@ public class FishingController : MonoBehaviour
         // Get player's horizontal direction
         dirH = Input.GetAxis("Horizontal");
         // Move based on that direction
-        Vector3 newPos = transform.position + new Vector3(dirH, dirV, 0) * Time.deltaTime;
+        Vector3 newPos = transform.position + (new Vector3(dirH, dirV, 0) * Time.deltaTime);
         // Reset the crosshair if the player moves
         if (dirV != 0)
         {
             ResetFishingPoint();
+            lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+            lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.0f, 0));
+            audioSource.loop = true;
+            audioSource.clip = walkAudioClip;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+            isCasted = false;
+        }
+        else
+        {
+            audioSource.loop = false;
+        }
+        if (isCasted)
+        {
+            lr.SetPosition(1, fishingPoint.transform.position);
         }
         // Transform the position based on the direction
         transform.position = newPos;
@@ -138,22 +177,29 @@ public class FishingController : MonoBehaviour
         // Set the fishing strength
         fishingStrength = Mathf.Abs(Mathf.Sin(baseRodStrengthMult*fishingElapsedTime)); 
         slider.value = fishingStrength;
-        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y);
+        Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y);
         fishingCrosshairCanvas.transform.position = newFishingPos;
+        lr.SetPosition(1, fishingCrosshairCanvas.transform.position);
     }
     void CastRod()
     {
-        fishingPoint.SetActive(true);
         fishingElapsedTime = 0;
+
+        if (!audioSource.isPlaying && !audioPlayed) {
+            audioSource.clip = plotSoundClip;
+            audioSource.Play();
+            audioPlayed = true;
+        }
         //fishingStrength = 0;
         // Take rod strength
         // Calculate X position of rod based on rod strength
-        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength), transform.position.y, 0);
+        Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y, 0);
         fishingPoint.transform.position = newFishingPtPos;
-        if (!isCasted)
+        if (isCasted == false)
         {
             isCasted = true;
         }
+        lr.SetPosition(1, fishingPoint.transform.position);
     }
     void UpdateSpriteDirection()
     {
@@ -188,6 +234,9 @@ public class FishingController : MonoBehaviour
         fishingPoint.transform.position = newPos;
         isCasted = false;
         slider.value = 0;
+        lr.SetPosition(0, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        lr.SetPosition(1, theRod.transform.position + new Vector3(-0.4f, 0.4f, 0));
+        audioPlayed = false;
     }
     public BaitItemSO GetCurrentBait()
     {

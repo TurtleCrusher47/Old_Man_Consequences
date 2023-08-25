@@ -67,6 +67,13 @@ public class PlayerData : ScriptableObject
         set => sharkDebt = value;
     }
 
+    [SerializeField] private int sharkDebtWeeks = 0;
+    public int SharkDebtWeeks
+    {
+        get => sharkDebtWeeks;
+        set => sharkDebtWeeks = value;
+    }
+
     [SerializeField] private int bankDebt = 100000;
     public int BankDebt
     {
@@ -74,4 +81,13 @@ public class PlayerData : ScriptableObject
         set => bankDebt = value;
     }
 
+    public void Reset()
+    {
+        // Player Data Reset
+        CurrentStamina = 100;
+        CurrentHydration = 100;
+        Balance = 0;
+        SharkDebt = 0;
+        BankDebt = 100000;
+    }
 }

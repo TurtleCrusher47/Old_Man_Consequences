@@ -6,15 +6,9 @@ public class TitleSceneManager : MonoBehaviour
 {
     [Header("Menu Elements")]
     [SerializeField] private GameObject settingsMenu;
-    [SerializeField] private GameObject keybindsMenu;
+    //[SerializeField] private GameObject keybindsMenu;
 
     private bool isSettingClicked = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,7 +30,7 @@ public class TitleSceneManager : MonoBehaviour
     public void Resume()
     {
         settingsMenu.SetActive(false); // Set the panel active to true
-        keybindsMenu.SetActive(false);
+        //keybindsMenu.SetActive(false);
         isSettingClicked = false; // change the bool to true
         Debug.Log("Scene Resumed");
     }
@@ -46,12 +40,5 @@ public class TitleSceneManager : MonoBehaviour
         settingsMenu.SetActive(true); // Set the panel active to true
         isSettingClicked = true; // change the bool to true
         Debug.Log("Scene Settings");
-    }
-
-    public void Keybinds()
-    {
-        settingsMenu.SetActive(false);
-        keybindsMenu.SetActive(true);
-        Debug.Log("Scene Keybinds");
     }
 }

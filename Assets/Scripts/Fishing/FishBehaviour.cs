@@ -260,7 +260,12 @@ public class FishBehaviour : MonoBehaviour
                 if (newInt < biteChance)
                 {
                     luredState = LuredState.BITE;
-                    Debug.Log("Would've bitten.");
+                    Debug.Log("Change to bite.");
+                }
+                else
+                {
+                    luredState = LuredState.LURE;
+                    ChangeState(SwimState.SWIM);
                 }
                 biteTimer = 0;
             }
@@ -332,7 +337,7 @@ public class FishBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED)
+        if (collision.gameObject == fishingPoint && canBite == true && luredState == LuredState.BITE && swimState == SwimState.LURED && player.isCasted)
         {
             Debug.Log(gameObject.name + "biting");
             isBiting = true;

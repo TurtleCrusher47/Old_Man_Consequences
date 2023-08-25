@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIPlayerStats : MonoBehaviour
 {
+    [SerializeField] PlayerManager playerManager;
+    
     [Header("Hunger Elements")]
     [SerializeField] private Image hungerBar; // Assign image object
 
@@ -14,9 +16,6 @@ public class UIPlayerStats : MonoBehaviour
 
     [Header("PlayerStats")]
     public PlayerData playerData;
-
-    [Header("Players Money")]
-    [SerializeField] private TMP_Text playerMoney;
 
     public static UIPlayerStats Instance { get; private set; }
 
@@ -62,8 +61,10 @@ public class UIPlayerStats : MonoBehaviour
         //     DecreaseHunger(5);
         // }
 
-        UpdateMoneyText();
-        UpdateUIFromPlayerData();
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            playerData.Balance = 5;
+        }
     }
 
     public void UpdateUIFromPlayerData()
@@ -92,6 +93,10 @@ public class UIPlayerStats : MonoBehaviour
         float newHungerValue = Mathf.Clamp(playerData.CurrentStamina - amount, 0f, playerData.MaxStamina);
         playerData.CurrentStamina = newHungerValue;
         hungerBar.fillAmount = newHungerValue / playerData.MaxStamina;
+
+        if (playerData.CurrentStamina <= 0)
+        playerManager.PlayerFaintStamina();
+
     }
 
     private void DecreaseThirst(float amount)
@@ -100,31 +105,8 @@ public class UIPlayerStats : MonoBehaviour
         float newThirstValue = Mathf.Clamp(playerData.CurrentHydration - amount, 0f, playerData.MaxHydration);
         playerData.CurrentHydration = newThirstValue;
         thirstBar.fillAmount = newThirstValue / playerData.MaxHydration;
-    }
 
-    private void UpdateMoneyText()
-    {
-        playerMoney.text = playerData.BankDebt.ToString();
-        DynamicTextFontSize(playerMoney);
-    }
-
-    private void DynamicTextFontSize(TMP_Text textComponent)
-    {
-        float originalFontSize = textComponent.fontSize;
-        TMP_TextInfo textInfo = textComponent.textInfo;
-
-        float preferredWidth = textComponent.preferredWidth;
-        float availableWidth = textComponent.rectTransform.rect.width;
-
-        while (preferredWidth > availableWidth && textComponent.fontSize > 1)
-        {
-            textComponent.fontSize--;
-            preferredWidth = textComponent.preferredWidth;
-        }
-
-        if (preferredWidth > availableWidth)
-        {
-            textComponent.fontSize = originalFontSize; // Reset to original size if necessary
-        }
+        if (playerData.CurrentHydration <= 0)
+        playerManager.PlayerFaintHydration();
     }
 }

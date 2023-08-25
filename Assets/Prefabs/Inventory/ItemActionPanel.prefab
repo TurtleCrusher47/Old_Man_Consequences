@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6246070087594197988}
   - component: {fileID: 6246070087594197991}
   - component: {fileID: 8204325011537394452}
-  - component: {fileID: 1090392602}
+  - component: {fileID: 96676722}
   m_Layer: 5
   m_Name: ItemActionPanel
   m_TagString: Untagged
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
---- !u!114 &1090392602
+--- !u!114 &96676722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

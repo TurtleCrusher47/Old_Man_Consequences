@@ -19,6 +19,4 @@ MonoBehaviour:
   itemImage: {fileID: -1124589022, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
   defaultParameterList: []
   purchasePrice: 200
-  modifiersData:
-  - statModifier: {fileID: 11400000, guid: 3c466614f95e7f84bbc9b63551ad5606, type: 2}
-    value: 10
+  modifiersData: []

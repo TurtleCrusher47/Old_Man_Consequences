@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5941549455050279240}
   - component: {fileID: 3680686058251397497}
   - component: {fileID: 8663918630562469526}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FishMedium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   isBiting: 0
   canBite: 0
   fishData: {fileID: 0}
+  player: {fileID: 0}
 --- !u!60 &8663918630562469526
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183,11 +184,6 @@ PolygonCollider2D:
     - - {x: -0.453125, y: 0.265625}
       - {x: -0.453125, y: -0.234375}
       - {x: -0.421875, y: -0.265625}
-      - {x: -0.21149026, y: -0.2669757}
-      - {x: -0.068864435, y: -0.20375256}
-      - {x: 0.18216203, y: -0.20438077}
-      - {x: 0.33021212, y: -0.17167056}
-      - {x: 0.45541656, y: -0.047298104}
-      - {x: 0.4568657, y: 0.049784184}
-      - {x: 0.35552335, y: 0.14469008}
-      - {x: 0.1323049, y: 0.26333344}
+      - {x: 0.421875, y: -0.265625}
+      - {x: 0.453125, y: -0.203125}
+      - {x: 0.453125, y: 0.265625}
