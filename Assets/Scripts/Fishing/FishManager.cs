@@ -60,6 +60,7 @@ public class FishManager : MonoBehaviour
     float biteTimer;
     int schoolingCounter;
 
+    private float fishBiteResetTimer;
     
     void Start()
     {
@@ -120,13 +121,17 @@ public class FishManager : MonoBehaviour
         }
         canFishBite = true;
         biteTimer = 0;
+        fishBiteResetTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         destTimer += Time.deltaTime;
-        
+        if (fishBiteResetTimer > 0)
+        {
+            fishBiteResetTimer -= Time.deltaTime;
+        }
         // Check if any fish has been bitten
         //TODO: use a list of fishbehaviours instead to reduce the number of GetComponent calls
         if (fishBehaviours.FindAll(f => f.isBiting ? true : false).Count > 0 && player.isReeling == false)
@@ -177,6 +182,10 @@ public class FishManager : MonoBehaviour
                 SetAllFishSchooling(schooling);
                 schoolTimer = 0;
             }
+        }
+        if (fishBiteResetTimer <= 0)
+        {
+            SetAllFishCanBite(true);
         }
     }
 
@@ -343,11 +352,14 @@ public class FishManager : MonoBehaviour
         fishingCanvas.gameObject.SetActive(false);
         player.isReeling = false;
         //SetAllFishCanBite(true);
+        fishBiteResetTimer = 5;
         player.ResetFishingPoint();
         //reset bait to worm bait after fishing is complete
         player.selectedBait = player.BaitItems[0];
         bgmPlayer.ChangeSong(0);
         bgmPlayer.PlaySeaSounds();
+        SetAllFishStates(SwimState.SWIM);
+        SetAllFishCanBite(false);
     }
 
     /// <summary>

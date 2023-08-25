@@ -410,27 +410,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 160
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989167690684, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088752989377407858, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
       propertyPath: m_HorizontalScrollbar
@@ -936,6 +936,10 @@ PrefabInstance:
     - target: {fileID: 7288687315786545970, guid: 2e46e5a31dccd51428ecb9719d616187, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288687315786545970, guid: 2e46e5a31dccd51428ecb9719d616187, type: 3}
+      propertyPath: m_TagString
+      value: FishingPoint
       objectReference: {fileID: 0}
     - target: {fileID: 7288687315786545971, guid: 2e46e5a31dccd51428ecb9719d616187, type: 3}
       propertyPath: m_RootOrder

@@ -180,11 +180,11 @@ public class FishingController : MonoBehaviour
         Vector3 newFishingPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y);
         fishingCrosshairCanvas.transform.position = newFishingPos;
         lr.SetPosition(1, fishingCrosshairCanvas.transform.position);
+        fishingPoint.SetActive(true);
     }
     void CastRod()
     {
         fishingElapsedTime = 0;
-
         if (!audioSource.isPlaying && !audioPlayed) {
             audioSource.clip = plotSoundClip;
             audioSource.Play();
