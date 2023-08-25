@@ -17,6 +17,7 @@ public class DebtManager : MonoBehaviour
         notificationManagerGO = GameObject.FindGameObjectWithTag("NotificationManager");
         notificationManager = notificationManagerGO.GetComponent<NotificationManager>();
 
+        yield return null;
         notificationManagerGO.SetActive(false);
 
         if (notificationManager == null)
@@ -50,7 +51,7 @@ public class DebtManager : MonoBehaviour
         // If the player owes money
         if (DebtCheck())
         {
-            notificationManager.ShowNotification("SharkExistingDebt");
+            StartCoroutine(notificationManager.ShowNotification("SharkExistingDebt"));
             nPC.DisableChoice();
         }
         else

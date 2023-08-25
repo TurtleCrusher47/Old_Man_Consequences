@@ -22,9 +22,9 @@ MonoBehaviour:
     I was crazy once. I enrolled in a course. A game dev course. That game dev course
     gave me assignments. The assignments gave me stress. I hate stress. Stress makes
     me crazy. Crazy? I was crazy onc-'
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 0bd64273bd72c4c4895ec323d5134eb2, type: 3}
   defaultParameterList: []
   sellPrice: 100000
   flavourPrefScale: {x: 0, y: 0}
   sizeMultiplier: []
-  spawnChance: 0.05
+  spawnChance: 0.1

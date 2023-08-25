@@ -39,6 +39,12 @@ public class WorldClockManager : MonoBehaviour
         uIPlayerStats.UpdateUIFromPlayerData();
     }
 
+    IEnumerator Start()
+    {
+        yield return null;
+        notificationManager = GameObject.FindGameObjectWithTag("NotificationManager").GetComponent<NotificationManager>();
+    }
+
     private void Update()
     {
         UpdateTime();
@@ -156,8 +162,32 @@ public class WorldClockManager : MonoBehaviour
     {
         worldClockData.currentWeek = worldClockData.currentDay / 7;
 
+        // If player has 1 week left to repay bank
+        if (worldClockData.currentWeek == 6)
+        {
+            if (playerData.BankDebt > 0)
+            {
+                StartCoroutine(notificationManager.ShowNotification("BankOneWeek"));
+            }
+        }
+        // If player has 2 weeks left to repay bank
+        else if (worldClockData.currentWeek == 7)
+        {
+            if (playerData.BankDebt > 0)
+            {
+                StartCoroutine(notificationManager.ShowNotification("BankTwoWeeks"));
+            }
+        }
+        // If player has 3 weeks left to repay bank
+        else if (worldClockData.currentWeek == 8)
+        {
+            if (playerData.BankDebt > 0)
+            {
+                StartCoroutine(notificationManager.ShowNotification("BankThreeWeeks"));
+            }
+        }
         // Loss condition
-        if (worldClockData.currentWeek >= 11)
+        else if (worldClockData.currentWeek == 11)
         {
             if (playerData.BankDebt > 0)
             {
