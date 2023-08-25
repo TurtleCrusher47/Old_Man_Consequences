@@ -16,6 +16,7 @@ public class BGMBehaviour : MonoBehaviour
         mainSeaBGMSource = GetComponents<AudioSource>()[1];
         mainBGMSource.loop = true;
         mainSeaBGMSource.loop = true;
+        mainSeaBGMSource.volume = 0.5f;
         songIndex = 0;
         mainBGMSource.clip = clipList[songIndex];
         mainBGMSource.Play();
