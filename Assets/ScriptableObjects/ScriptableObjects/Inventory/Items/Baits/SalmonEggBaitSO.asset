@@ -15,11 +15,12 @@ MonoBehaviour:
   canStack: 1
   maxStackSize: 64
   name: Salmon Eggs
-  description: 
-  itemImage: {fileID: 0}
+  description: Chewy and savoury, these eggs are commonly used in human dishes, but
+    many fish love the taste of it as well!
+  itemImage: {fileID: 21300000, guid: cec517c721f7b0945801807978c00c4b, type: 3}
   defaultParameterList: []
-  purchasePrice: 0
+  purchasePrice: 100
   modifierData:
   - statModifier: {fileID: 11400000, guid: 0179551b1d567f349820ee217c83fff9, type: 2}
     value: 4
-  flavourProfile: {x: -0.8, y: 0.7}
+  flavourProfile: {x: 0.8, y: -0.7}

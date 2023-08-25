@@ -303,7 +303,7 @@ RectTransform:
   - {fileID: 2095924387}
   - {fileID: 533419265}
   - {fileID: 32339915}
-  m_Father: {fileID: 858152100}
+  m_Father: {fileID: 2133387634}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -1137,7 +1137,7 @@ RectTransform:
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 221864231}
+  - {fileID: 2133387634}
   - {fileID: 1204037338}
   m_Father: {fileID: 1225402898}
   m_RootOrder: 0
@@ -1201,11 +1201,11 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 2
-  m_Elasticity: 0.1
+  m_Elasticity: 0
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 0}
+  m_ScrollSensitivity: 50
+  m_Viewport: {fileID: 2133387634}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 0
@@ -2052,7 +2052,14 @@ MonoBehaviour:
   inventoryData: {fileID: 11400000, guid: eb97e20639c29a04a930a784a553431c, type: 2}
   balance: {fileID: 543763529}
   purchaseableItemSO:
-  - {fileID: 11400000, guid: e69ab8e2b2daeac4995cdaa358d90bf2, type: 2}
+  - {fileID: 11400000, guid: d5a6e118ca7a2c440b0a7dddf618e1b7, type: 2}
+  - {fileID: 11400000, guid: cb4fcd5bfff16ca4f8ace13096a24254, type: 2}
+  - {fileID: 11400000, guid: fc1679e5c4e977c4a9045fc0caf64960, type: 2}
+  - {fileID: 11400000, guid: ae28d2ac966836c48997bf7b763e9b6b, type: 2}
+  - {fileID: 11400000, guid: 155c14ac3a7ce194b8e5c1962f1161c5, type: 2}
+  - {fileID: 11400000, guid: 31c3e8f5a60fb81489b7ad14ff074b62, type: 2}
+  - {fileID: 11400000, guid: 2886c38b450c20b4b93cbaa3720956dd, type: 2}
+  - {fileID: 11400000, guid: a0b7796d60b4f754fba2764cfb11bd2f, type: 2}
   buyShopPanelGO:
   - {fileID: 2077788274}
   - {fileID: 2064390237}
@@ -3302,6 +3309,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae0a8c97a0318ad4d84f690e478258f3, type: 3}
+--- !u!1 &2133387633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2133387634}
+  m_Layer: 5
+  m_Name: Viewport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2133387634
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133387633}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 221864231}
+  m_Father: {fileID: 858152100}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 500}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &708931787846061113
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,8 +15,9 @@ MonoBehaviour:
   canStack: 1
   maxStackSize: 64
   name: Candy
-  description: 
-  itemImage: {fileID: 1782472469, guid: bd8bef30eba794849a467a889827d3f6, type: 3}
+  description: 'Crunchy and sweet, this candy is beloved both by children and some
+    species of fish. '
+  itemImage: {fileID: 21300000, guid: 1051b07998fb1a6409e73b20cecffed5, type: 3}
   defaultParameterList: []
   purchasePrice: 100
   modifierData:
