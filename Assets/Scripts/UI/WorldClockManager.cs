@@ -17,6 +17,11 @@ public class WorldClockManager : MonoBehaviour
     [Header("World Clock Stats")]
     [SerializeField] private WorldClockData worldClockData;
 
+    [Header("Global Light")]
+    [SerializeField] private Light2D globalLight; // Reference to the 2D light
+    [SerializeField] private float baseIntensity = 1.0f; // Base intensity of the light
+    [SerializeField] private float intensityChangePerHour = 0.1f; // Intensity change per hour
+
     public static WorldClockManager Instance { get; private set; }
 
     private bool isMorning = true; // AM
@@ -91,6 +96,15 @@ public class WorldClockManager : MonoBehaviour
             UpdateUI();
 
             // Update global light
+        }
+
+        if (worldClockData.minutes % 30 == 0) // Check if it's a new hour
+        {
+            // Calculate intensity based on time of day
+            float intensity = CalculateIntensity();
+
+            // Apply the intensity to the global light
+            globalLight.intensity = intensity;
         }
 
         // Debug the time, days and numOfTheDays
@@ -196,8 +210,49 @@ public class WorldClockManager : MonoBehaviour
         }
 
         // Code to transition to beach scene
-
+        
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+    }
+
+    private float CalculateIntensity()
+    {
+        float intensityMultiplier = 0.0f;
+
+        if (worldClockData.hours >= 20 || worldClockData.hours < 7)
+        {
+            // Night: Intensity at 8 PM is 0.3
+            intensityMultiplier = Mathf.Lerp(1.1f, 0.3f, Mathf.Clamp01((float)(worldClockData.hours + 12 - 20) / 4.0f));
+        }
+        else if (worldClockData.hours < 12)
+        {
+            // Morning: Intensity from 7 AM to 12 PM
+            intensityMultiplier = Mathf.Lerp(0.3f, 1.1f, (float)(worldClockData.hours - 7) / 5.0f);
+        }
+        else if (worldClockData.hours < 18)
+        {
+            // Afternoon: Intensity from 12 PM to 6 PM
+            intensityMultiplier = Mathf.Lerp(1.1f, 0.5f, (float)(worldClockData.hours - 12) / 6.0f);
+        }
+        else if (worldClockData.hours >= 18 && worldClockData.hours < 20)
+        {
+            // Evening: Intensity from 6 PM to 8 PM
+            intensityMultiplier = Mathf.Lerp(0.5f, 0.3f, (float)(worldClockData.hours - 18) / 2.0f);
+        }
+        else
+        {
+            // Night: Intensity at and after 8 PM is 0.3
+            intensityMultiplier = 0.3f;
+        }
+
+        // Apply a change every 30 minutes
+        float progressThroughHour = (float)worldClockData.minutes / 60.0f;
+        float change = intensityChangePerHour * progressThroughHour;
+        intensityMultiplier += change;
+
+        // Clamp intensity to prevent going above 1.1 or below 0.3
+        intensityMultiplier = Mathf.Clamp(intensityMultiplier, 0.3f, 1.1f);
+
+        return baseIntensity * intensityMultiplier;
     }
 }
