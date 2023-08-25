@@ -17,4 +17,14 @@ public class WorldClockData : ScriptableObject
 
     public int hours = 7; // Starting hour (7 AM)
     public int minutes = 0;
+
+    public void Reset()
+    {
+        // World Clock Data Reset
+       hours = 7;
+       minutes = 0;
+       currentDay = 1;
+       currentDayIndex = 1;
+       currentWeek = 0;
+    }
 }

@@ -49,6 +49,5 @@ public class DynamicTextSize : MonoBehaviour
             textComponent.fontSize = originalFontSize;
         }
 
-        Debug.Log(originalFontSize);
     }
 }

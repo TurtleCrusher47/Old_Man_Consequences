@@ -13,7 +13,10 @@ public class SceneLoader : MonoBehaviour
 
     public void NewGame(string sceneName)
     {
-        NewGameData();
+        //NewGameData();
+
+        playerData.Reset();
+        worldClockData.Reset();
 
         SceneManager.LoadScene(sceneName);
     }
@@ -33,6 +36,8 @@ public class SceneLoader : MonoBehaviour
         worldClockData.currentDay = PlayerPrefs.GetInt("CurrentDay");
         worldClockData.currentDayIndex = PlayerPrefs.GetInt("CurrentDayIndex");
         worldClockData.currentWeek = PlayerPrefs.GetInt("CurrentWeek");
+
+        Debug.Log("run");
 
         SceneManager.LoadScene(sceneName);
     }
@@ -62,5 +67,7 @@ public class SceneLoader : MonoBehaviour
         worldClockData.currentDay = 1;
         worldClockData.currentDayIndex = 1;
         worldClockData.currentWeek = 0;
+
+        //Debug.Log("Run");
     }
 }

@@ -80,4 +80,15 @@ public class PlayerData : ScriptableObject
         get => bankDebt;
         set => bankDebt = value;
     }
+
+    public void Reset()
+    {
+        // Player Data Reset
+        CurrentStamina = 100;
+        CurrentHydration = 100;
+        Balance = 100;
+        SharkDebt = 100;
+        BankDebt = 1000;
+
+    }
 }
