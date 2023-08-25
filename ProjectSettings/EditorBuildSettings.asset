@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameplayScenes/GeneralStoreScene.unity
     guid: a9cbc4abbaf6df14ab2b31558cce6516
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

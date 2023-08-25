@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/ScriptableObjects/ScriptableObjects/Inventory/Items/Consumables/ChickenItem.asset.meta
-guid: fc1679e5c4e977c4a9045fc0caf64960
-========
 guid: 6e354f265dbc19f4aab3fcb676cda6ee
->>>>>>>> 6eaaa0ecb500caaba4d9ebb595bea738ab70a8a3:Assets/ScriptableObjects/ScriptableObjects/Inventory/Items/Fishes/CarabinoItemSO.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
