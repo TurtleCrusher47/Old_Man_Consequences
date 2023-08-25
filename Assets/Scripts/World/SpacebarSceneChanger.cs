@@ -8,6 +8,7 @@ public class SpacebarSceneChanger : MonoBehaviour
     [SerializeField] string nextScene;
     [SerializeField] GameObject loadingPanel;
     [SerializeField] Slider slider;
+    public SceneTransitionChange sceneChanger;
 
     private bool inCollider;
     
@@ -27,7 +28,7 @@ public class SpacebarSceneChanger : MonoBehaviour
 
                 if (slider.value >= slider.maxValue)
                 {
-                    SceneChanger.ChangeScene(nextScene);
+                    sceneChanger.LoadScene(nextScene);
                 }
             }
             else if (slider.value > slider.minValue)
