@@ -57,20 +57,28 @@ public class PlayerControllerIsometric : MonoBehaviour
         isometricCharacterRenderer.SetDirection(velocity);
     }
     //private void OnCollisionEnter2D(Collision2D collision)
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("Grass toucher");
         if (collision.gameObject.CompareTag("Grass"))
         {
-            footStepsIndex = 1;
-            isoSoundController.PauseSound();
+            if (footStepsIndex != 1)
+            {
+                footStepsIndex = 1;
+                if (isoSoundController.IsPlaying())
+                    isoSoundController.PauseSound();
+            }
         }
         
     }
     private void OnTriggerExit2D(Collider2D collision)
     //private void OnCollisionExit2D(Collision2D collision)
     {
-        footStepsIndex = 0;
-        isoSoundController.PauseSound();
+        Debug.Log("Not grass touch");
+        if (footStepsIndex != 0)
+        {
+            footStepsIndex = 0;
+            isoSoundController.PauseSound();
+        }
     }
 }

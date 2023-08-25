@@ -21,10 +21,12 @@ public class IsoPlayerSoundController : MonoBehaviour
 
     public void PlaySound(int newSoundIndex)
     {
+        soundIndex = newSoundIndex;
         if (!audioSource.isPlaying)
         {
+            audioSource.clip = audioList[soundIndex];
             audioSource.Play();
-            soundIndex = newSoundIndex;
+            
         }
     }
     public void PauseSound()
