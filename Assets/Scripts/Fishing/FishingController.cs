@@ -154,7 +154,7 @@ public class FishingController : MonoBehaviour
             {
                 audioSource.Play();
             }
-            
+            isCasted = false;
         }
         else
         {
@@ -195,7 +195,7 @@ public class FishingController : MonoBehaviour
         // Calculate X position of rod based on rod strength
         Vector3 newFishingPtPos = new Vector3(transform.position.x - (baseXMultipler * fishingStrength) - 1, transform.position.y, 0);
         fishingPoint.transform.position = newFishingPtPos;
-        if (!isCasted)
+        if (isCasted == false)
         {
             isCasted = true;
         }
