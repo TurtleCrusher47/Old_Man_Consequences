@@ -2601,6 +2601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 4846903198212163930, guid: 2832a7dc1ee94fa40a15231c03e630a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4846903198212163931, guid: 2832a7dc1ee94fa40a15231c03e630a2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2973,7 +2977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1225402898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4832,6 +4836,7 @@ GameObject:
   - component: {fileID: 1932197537}
   - component: {fileID: 1932197536}
   - component: {fileID: 1932197540}
+  - component: {fileID: 1932197541}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4936,6 +4941,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipText: {fileID: 712512687}
   tipWindow: {fileID: 1650540432}
+--- !u!114 &1932197541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932197535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d954469b7ccae74690e5db86904bb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopPanel: {fileID: 1225402897}
 --- !u!1001 &1951414498
 PrefabInstance:
   m_ObjectHideFlags: 0
