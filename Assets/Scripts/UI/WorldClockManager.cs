@@ -123,7 +123,7 @@ public class WorldClockManager : MonoBehaviour
 
             if (playerData.SharkDebtWeeks == 2)
             {
-                // Put in shark debt warning for one week overdue
+                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
             }
 
             // Check if the player has owed the shark for 2 weeks
@@ -138,8 +138,6 @@ public class WorldClockManager : MonoBehaviour
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
-        
-        StartCoroutine(notificationManager.ShowNotification("Margheritaday"));
     }
 
     public void FaintNextDay()

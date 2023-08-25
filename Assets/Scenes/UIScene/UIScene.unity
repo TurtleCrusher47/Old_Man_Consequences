@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 188686197}
   m_Layer: 5
   m_Name: Notification Panel
-  m_TagString: Untagged
+  m_TagString: NotificationManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -643,6 +643,16 @@ MonoBehaviour:
   notificationList:
   - notificationKey: Margheritaday
     notification: {fileID: 11400000, guid: d4a81270146f619449cf7d47b79772df, type: 2}
+  - notificationKey: SharkWarning
+    notification: {fileID: 11400000, guid: a0e21e5cea3ad054980ef90b84f59a36, type: 2}
+  - notificationKey: SharkExistingDebt
+    notification: {fileID: 11400000, guid: c337449d66ba9944c8958db2949b857b, type: 2}
+  - notificationKey: BankThreeWeeks
+    notification: {fileID: 11400000, guid: f44b0bfc69baf78409a395922cee8cc0, type: 2}
+  - notificationKey: BankTwoWeeks
+    notification: {fileID: 11400000, guid: 572f856044989a44faffe4cd945221a6, type: 2}
+  - notificationKey: BankOneWeek
+    notification: {fileID: 11400000, guid: b41ddeb392694ad4b8268b280f081134, type: 2}
 --- !u!114 &188686198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3452,74 +3462,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914623849}
   m_CullTransparentMesh: 1
---- !u!1 &929963219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 929963222}
-  - component: {fileID: 929963221}
-  - component: {fileID: 929963220}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &929963220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929963219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &929963221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929963219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &929963222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929963219}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &949026666
 GameObject:
   m_ObjectHideFlags: 0
