@@ -17,6 +17,7 @@ public class DebtManager : MonoBehaviour
         notificationManagerGO = GameObject.FindGameObjectWithTag("NotificationManager");
         notificationManager = notificationManagerGO.GetComponent<NotificationManager>();
 
+        yield return null;
         notificationManagerGO.SetActive(false);
 
         if (notificationManager == null)
