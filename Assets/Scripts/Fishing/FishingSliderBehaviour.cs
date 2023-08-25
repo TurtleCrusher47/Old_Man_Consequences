@@ -34,6 +34,13 @@ public class FishingSliderBehaviour : MonoBehaviour
     [SerializeField]
     private FishManager fishManager;
 
+    [SerializeField]
+    private AudioSource playerAudioSource;
+    [SerializeField]
+    private AudioClip rodReelClip;
+    [SerializeField]
+    private AudioClip rodReleaseClip;
+
     private float elaspedTime;
     public float a = 0.6f;
     public bool fishCaught;
@@ -60,6 +67,7 @@ public class FishingSliderBehaviour : MonoBehaviour
 
         fishCatchPercentSlider.onValueChanged.AddListener(delegate { SetFishCatchColor(); });
         ResetSliderValues();
+        playerAudioSource.loop = false;
     }
 
     // Update is called once per frame
@@ -109,7 +117,63 @@ public class FishingSliderBehaviour : MonoBehaviour
             percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" +
             "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
         }
-        
+        if (Input.GetMouseButton(0))
+        {
+            playerRodSlider.value += 0.5f * Time.deltaTime;
+            staminaSlider.value -= 0.05f * Time.deltaTime;
+            if (!playerAudioSource.isPlaying)
+            {
+                playerAudioSource.clip = rodReelClip;
+                playerAudioSource.Play();
+            }
+            else if (playerAudioSource.clip != rodReelClip)
+            {
+                playerAudioSource.Pause();
+            }
+        }
+        else
+        {
+
+            playerRodSlider.value -= 0.5f * Time.deltaTime;
+
+            if (playerRodSlider.value > playerRodSlider.minValue)
+            {
+                if (playerAudioSource.clip != rodReleaseClip)
+                {
+                    playerAudioSource.Pause();
+                    if (!playerAudioSource.isPlaying)
+                    {
+                        playerAudioSource.clip = rodReleaseClip;
+                        playerAudioSource.Play();
+                    }
+                }
+                
+            }
+           
+            
+        }
+        if (Mathf.Abs(playerRodSlider.value - fishSpriteSlider.value) < 0.1f)
+        {
+            fishCatchPercentSlider.value += Time.deltaTime * 1.5f;
+        }
+        else if (fishCatchPercentSlider.value > 0)
+        {
+            fishCatchPercentSlider.value -= 0.01f * Time.deltaTime;
+        }
+        if (fishCatchPercentSlider.value == fishCatchPercentSlider.maxValue)
+        {
+            OnFishCaught(); 
+            
+        }
+       
+        if (staminaSlider.value < 0.001f)
+        {
+            releaseButton.gameObject.SetActive(true);
+            releaseButton.GetComponentInChildren<TMP_Text>().text = "Okay";
+            catchText.text = "Uh oh! You ran out of energy! The fish got away.";
+        }
+        percentText.text = "Catch percentage: " + (int)((fishCatchPercentSlider.value / fishCatchPercentSlider.maxValue) * 100) + "%\n" + 
+        "Stamina left: " + (int)(staminaSlider.value * 100) + "%";
     }
     void SetFishCatchColor()
     {
@@ -129,6 +193,7 @@ public class FishingSliderBehaviour : MonoBehaviour
         FishBehaviour caughtFish = fishManager.GetCurrentCaughtFish();
         if (caughtFish != null)
         {
+            playerAudioSource.Pause();
             fishCaught = true;
             addButton.gameObject.SetActive(true);
             releaseButton.gameObject.SetActive(true);

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6faf83d60df4b5499b84af2272b0455, type: 3}
+  m_Name: CarabinoItemSO
+  m_EditorClassIdentifier: 
+  canStack: 0
+  maxStackSize: 1
+  name: Carabino
+  description: 'Fishing? Like in the 2023 hit PC video game Cruelty Squad, which
+    features an in depth fishing stock market mechanic? That''s crazy!
+
+    Crazy?
+    I was crazy once. I enrolled in a course. A game dev course. That game dev course
+    gave me assignments. The assignments gave me stress. I hate stress. Stress makes
+    me crazy. Crazy? I was crazy onc-'
+  itemImage: {fileID: 0}
+  defaultParameterList: []
+  sellPrice: 100000
+  flavourPrefScale: {x: 0, y: 0}
+  sizeMultiplier: []
+  spawnChance: 0.05

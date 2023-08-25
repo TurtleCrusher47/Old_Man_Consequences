@@ -2185,6 +2185,9 @@ MonoBehaviour:
   fishingSliderCatchImage: {fileID: 672104390}
   caughtFishSprite: {fileID: 941660121}
   fishManager: {fileID: 2032072415}
+  playerAudioSource: {fileID: 999580862}
+  rodReelClip: {fileID: 8300000, guid: b5805bdf23390824b8b3b14f95f73570, type: 3}
+  rodReleaseClip: {fileID: 8300000, guid: 7d435da3d6493a145ad4ebe35353af81, type: 3}
   a: 3
   fishCaught: 0
 --- !u!1 &587759997 stripped
@@ -4579,6 +4582,7 @@ MonoBehaviour:
   selectedBait: {fileID: 0}
   theRod: {fileID: 1405620265}
   plotSoundClip: {fileID: 8300000, guid: 97c5361cd75dd014693ba05fb8866bb8, type: 3}
+  walkAudioClip: {fileID: 8300000, guid: c00e59f9d206aff4ebdb21e04a062c76, type: 3}
 --- !u!114 &999580860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5590,6 +5594,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1436858902}
   - component: {fileID: 1436858901}
+  - component: {fileID: 1436858903}
+  - component: {fileID: 1436858904}
   m_Layer: 0
   m_Name: BackgroundAudio
   m_TagString: Untagged
@@ -5708,6 +5714,117 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1436858903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436858900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8624006eb0313f8419975b5a71eeb7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipList:
+  - {fileID: 8300000, guid: 51cc6ad5b83d7174d850e41dc1a475e5, type: 3}
+  - {fileID: 8300000, guid: 825f71a489491034cb989961706a0255, type: 3}
+--- !u!82 &1436858904
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436858900}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1766655923454398078, guid: 6ccb18b3f9dd4694f9e85508287c11c0, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 9c0b314c312faf048ac4e27387ce7d45, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.503
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1443386667
 GameObject:
   m_ObjectHideFlags: 0
@@ -7597,7 +7714,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8ccb814e6840c947ab89810ef466ab5, type: 2}
   - {fileID: 11400000, guid: e7a9a512627874143adba55576879d96, type: 2}
   - {fileID: 11400000, guid: e5cd89829ebf426498f3d010ebdb08f2, type: 2}
+  - {fileID: 11400000, guid: 6e354f265dbc19f4aab3fcb676cda6ee, type: 2}
   fishingCanvas: {fileID: 583329998}
+  bgmPlayer: {fileID: 1436858903}
 --- !u!1 &2032594211
 GameObject:
   m_ObjectHideFlags: 0
