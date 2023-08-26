@@ -23,5 +23,5 @@ MonoBehaviour:
   defaultParameterList: []
   purchasePrice: 180
   modifiersData:
-  - statModifier: {fileID: 11400000, guid: 3c466614f95e7f84bbc9b63551ad5606, type: 2}
+  - statModifier: {fileID: 11400000, guid: 25076f5e371ad954fb0e44bfc57d4ad7, type: 2}
     value: 60

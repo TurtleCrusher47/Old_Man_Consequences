@@ -89,5 +89,6 @@ public class PlayerData : ScriptableObject
         Balance = 0;
         SharkDebt = 0;
         BankDebt = 100000;
+        sharkDebtWeeks = 0;
     }
 }
