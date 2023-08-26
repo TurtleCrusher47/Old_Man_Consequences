@@ -9,6 +9,8 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] TMP_Text balanceText;
     [SerializeField] TMP_Text bankDebtText;
 
+    [SerializeField] TMP_Text sharkDebtText;
+
     [SerializeField] Animator animator;
 
     [SerializeField] WorldClockData worldClockData;
@@ -30,8 +32,14 @@ public class PhoneManager : MonoBehaviour
         bankDebtText.text = "Debt: " + playerData.BankDebt.ToString();
     }
 
+    public void UpdateSharkDebtText()
+    {
+        sharkDebtText.text = "I owe Diego (Shark Guy): " + playerData.SharkDebt.ToString();
+    }
+
     public void TurnOnPhone()
     {
+        UpdateSharkDebtText();
         animator.SetBool("PhoneClicked", true);
     }
 
