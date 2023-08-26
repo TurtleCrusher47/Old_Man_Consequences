@@ -24,7 +24,7 @@ MonoBehaviour:
     me crazy. Crazy? I was crazy onc-'
   itemImage: {fileID: 21300000, guid: 0bd64273bd72c4c4895ec323d5134eb2, type: 3}
   defaultParameterList: []
-  sellPrice: 100000
+  sellPrice: 1000
   flavourPrefScale: {x: 0, y: 0}
   sizeMultiplier: []
-  spawnChance: 0.1
+  spawnChance: 0.05

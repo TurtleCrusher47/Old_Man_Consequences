@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c41e739cfd2c644aa944d29b6989ed8, type: 3}
+  m_Name: GrapeSodaItem
+  m_EditorClassIdentifier: 
+  canStack: 1
+  maxStackSize: 10
+  name: Grape Soda
+  description: 'Fizzy, sweet and oh so purple. What''s not to love?
+
+    +15 Hydration
+
+    +10
+    Stamina'
+  itemImage: {fileID: 21300000, guid: e0596a5fb1c71764e96b0c2f37df9089, type: 3}
+  defaultParameterList: []
+  purchasePrice: 75
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 802f526247de36f4caed0b86feb6bb29, type: 2}
+    value: 15
+  - statModifier: {fileID: 11400000, guid: 25076f5e371ad954fb0e44bfc57d4ad7, type: 2}
+    value: 10

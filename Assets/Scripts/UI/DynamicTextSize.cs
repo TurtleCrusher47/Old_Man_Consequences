@@ -21,12 +21,12 @@ public class DynamicTextSize : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        playerMoney.text = playerData.Balance.ToString();
-        playerShark.text = playerData.SharkDebt.ToString();
-        playerBank.text = playerData.BankDebt.ToString();
-        DynamicTextFontSize(playerMoney);
-        DynamicTextFontSize(playerShark);
-        DynamicTextFontSize(playerBank);
+        // playerMoney.text = playerData.Balance.ToString();
+        // playerShark.text = playerData.SharkDebt.ToString();
+        // playerBank.text = playerData.BankDebt.ToString();
+        // DynamicTextFontSize(playerMoney);
+        // DynamicTextFontSize(playerShark);
+        // DynamicTextFontSize(playerBank);
     }
 
     private void DynamicTextFontSize(TMP_Text textComponent)
