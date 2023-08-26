@@ -7,7 +7,7 @@ public class PlayerHydrationModifierSO : CharacterStatModifierSO
 {
     [SerializeField] private PlayerData playerData;
 
-    [SerializeField] private GameObject particleEffect;
+    //[SerializeField] private GameObject particleEffect;
 
     public override void AffectCharacter(GameObject character, float val)
     {
