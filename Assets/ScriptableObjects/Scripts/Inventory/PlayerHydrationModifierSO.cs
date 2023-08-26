@@ -12,6 +12,8 @@ public class PlayerHydrationModifierSO : CharacterStatModifierSO
     public override void AffectCharacter(GameObject character, float val)
     {
         playerData.CurrentHydration += val;
+
+        //Debug.Log("Affect Hydration" + val);
         //GameObject effect = Instantiate(particleEffect, character.transform).gameObject;
 
         //Destroy(effect, 3.0f);
