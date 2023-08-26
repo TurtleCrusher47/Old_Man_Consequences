@@ -149,7 +149,7 @@ public class WorldClockManager : MonoBehaviour
             if (playerData.SharkDebtWeeks >= 3)
             {
                 // Put in code for what happens when it has been 3 weeks
-                // Debug.Log("Ship has sunk");
+                SceneChanger.ChangeScene("EndScene");
             }
         }
 

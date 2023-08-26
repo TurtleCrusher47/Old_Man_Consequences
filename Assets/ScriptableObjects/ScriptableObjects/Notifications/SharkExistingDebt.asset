@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d2a25ebdf78447a99ce81752fb20c, type: 3}
   m_Name: SharkExistingDebt
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 078e5c1b10ae85047a5be64a1fb76f67, type: 3}
   message: You still owe me money don't you
