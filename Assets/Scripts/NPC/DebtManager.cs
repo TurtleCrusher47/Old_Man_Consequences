@@ -104,7 +104,6 @@ public class DebtManager : MonoBehaviour
         if (ReturnDebtCheck(playerData.SharkDebt))
         {
             RemoveDebt(playerData.SharkDebt);
-            Debug.Log("Returned debt");
         }
         else
         {

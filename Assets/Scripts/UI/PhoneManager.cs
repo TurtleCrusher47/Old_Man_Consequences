@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PhoneManager : MonoBehaviour
 {
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,15 @@ public class PhoneManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TurnOnPhone()
+    {
+        animator.SetBool("PhoneClicked", true);
+    }
+
+    public void TurnOffPhone()
+    {
+        animator.SetBool("PhoneClicked", false);
     }
 }
