@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BankDebtManager : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
 
-    [SerializeField] public GameObject insufficientPanel;
-
+    [SerializeField] private GameObject sufficientPanel;
+    [SerializeField] private GameObject insufficientPanel;
+    [SerializeField] PhoneManager phoneManager;
 
     private void Start()
     {
-        StartCoroutine(InsufficientBalance());
+        //StartCoroutine(InsufficientBalance());
     }
     
     public void ReturnOneThousand()
@@ -19,6 +21,8 @@ public class BankDebtManager : MonoBehaviour
         if (ReturnDebtCheck(1000))
         {
             RemoveDebt(1000);
+            phoneManager.UpdateBalanceAndDebtText();
+            StartCoroutine(SufficientBalance());
         }
         else
         {
@@ -31,6 +35,8 @@ public class BankDebtManager : MonoBehaviour
         if (ReturnDebtCheck(5000))
         {
             RemoveDebt(5000);
+            phoneManager.UpdateBalanceAndDebtText();
+            StartCoroutine(SufficientBalance());
         }
         else
         {
@@ -43,6 +49,8 @@ public class BankDebtManager : MonoBehaviour
         if (ReturnDebtCheck(playerData.BankDebt))
         {
             RemoveDebt(playerData.BankDebt);
+            phoneManager.UpdateBalanceAndDebtText();
+            StartCoroutine(SufficientBalance());
         }
         else
         {
@@ -81,7 +89,14 @@ public class BankDebtManager : MonoBehaviour
     public IEnumerator InsufficientBalance()
     {
         insufficientPanel.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         insufficientPanel.SetActive(false);
+    }
+
+    public IEnumerator SufficientBalance()
+    {
+        sufficientPanel.SetActive(true);
+        yield return new WaitForSeconds(1);
+        sufficientPanel.SetActive(false);
     }
 }
