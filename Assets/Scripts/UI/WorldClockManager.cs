@@ -9,6 +9,7 @@ public class WorldClockManager : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] UIPlayerStats uIPlayerStats;
     [SerializeField] NotificationManager notificationManager;
+    [SerializeField] PhoneManager phoneManager;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
@@ -160,6 +161,7 @@ public class WorldClockManager : MonoBehaviour
         }
 
         playerData.CurrentStamina = playerData.MaxStamina;
+        phoneManager.UpdateWeekText();
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
