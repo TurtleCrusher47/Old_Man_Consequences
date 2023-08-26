@@ -126,6 +126,12 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextDay()
     {
+        if (playerData.BankDebt <= 0)
+        {
+            SceneChanger.ChangeScene("WinEndScene");
+            return;
+        }
+        
         worldClockData.currentDay++;
         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
         worldClockData.hours = 7;
@@ -149,7 +155,7 @@ public class WorldClockManager : MonoBehaviour
             if (playerData.SharkDebtWeeks >= 3)
             {
                 // Put in code for what happens when it has been 3 weeks
-                SceneChanger.ChangeScene("EndScene");
+                SceneChanger.ChangeScene("SharkEndScene");
             }
         }
 
@@ -174,6 +180,8 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextWeek()
     {
+        SceneChanger.ChangeScene("NPCScene");
+        
         worldClockData.currentWeek = worldClockData.currentDay / 7;
 
         // If player has 1 week left to repay bank
@@ -207,6 +215,7 @@ public class WorldClockManager : MonoBehaviour
             {
                 // Insert what to do if player loses
             }
+
         }
 
         // Code to transition to beach scene
