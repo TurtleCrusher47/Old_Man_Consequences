@@ -20,6 +20,7 @@ public class PhoneManager : MonoBehaviour
 
     public void TurnOnPhone()
     {
+        Debug.Log("Clicked");
         animator.SetBool("PhoneClicked", true);
     }
 
