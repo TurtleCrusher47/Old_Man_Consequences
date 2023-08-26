@@ -17,14 +17,14 @@ public class TextUpdater : MonoBehaviour
 
     void Start()
     {
-        startValues = new float[textFields.Length];
-        startTime = Time.time;
+        // startValues = new float[textFields.Length];
+        // startTime = Time.time;
 
-        for (int i = 0; i < textFields.Length; i++)
-        {
-            startValues[i] = countUp ? 0 : targetValue;
-            textFields[i].text = startValues[i].ToString();
-        }
+        // for (int i = 0; i < textFields.Length; i++)
+        // {
+        //     startValues[i] = countUp ? 0 : targetValue;
+        //     textFields[i].text = startValues[i].ToString();
+        // }
     }
 
     void Update()

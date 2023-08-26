@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PhoneManager : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] TMP_Text weekText;
+    [SerializeField] Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] WorldClockData worldClockData;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateWeekText()
     {
-        
+        weekText.text = "Week " + worldClockData.currentWeek.ToString();
     }
 
     public void TurnOnPhone()
