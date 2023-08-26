@@ -81,11 +81,6 @@ public class WorldClockManager : MonoBehaviour
                     {
                         // Move to the next day of the week
                         NextDay();
-
-                        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
-                        {
-                            NextWeek();
-                        }
                     }
                 }
             }
@@ -161,27 +156,66 @@ public class WorldClockManager : MonoBehaviour
         }
 
         playerData.CurrentStamina = playerData.MaxStamina;
-        phoneManager.UpdateWeekText();
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+        {
+            NextWeek();
+        }
     }
 
     public void FaintNextDay()
     {
+        if (playerData.BankDebt <= 0)
+        {
+            SceneChanger.ChangeScene("WinEndScene");
+            return;
+        }
+        
         worldClockData.currentDay++;
         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
+        // Check shark debt
+        if (worldClockData.currentDayIndex == 2)
+        {
+            // Check every tuesday if the player still owes money to the shark
+            if (playerData.SharkDebt > 0)
+            playerData.SharkDebtWeeks ++;
+            else
+            playerData.SharkDebtWeeks = 0;
+
+            if (playerData.SharkDebtWeeks == 2)
+            {
+                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
+            }
+
+            // Check if the player has owed the shark for 2 weeks
+            if (playerData.SharkDebtWeeks >= 3)
+            {
+                // Put in code for what happens when it has been 3 weeks
+                SceneChanger.ChangeScene("SharkEndScene");
+            }
+        }
+
         playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+        {
+            NextWeek();
+        }
     }
 
     public void NextWeek()
     {
+        phoneManager.UpdateWeekText();
+
         SceneChanger.ChangeScene("NPCScene");
         
         worldClockData.currentWeek = worldClockData.currentDay / 7;
@@ -222,6 +256,11 @@ public class WorldClockManager : MonoBehaviour
 
         // Code to transition to beach scene
         
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+
+        phoneManager.UpdateWeekText();
+
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
     }
