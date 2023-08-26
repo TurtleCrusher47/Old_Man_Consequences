@@ -11,7 +11,10 @@ public class SharkEndSceneManager : MonoBehaviour
 
     public Animator boatAnimator;
     public Animator sharkAnimator;
+    
+    public AudioSource sfxManager;
 
+    public AudioClip[] clips;
 
     void Start()
     {
@@ -21,9 +24,15 @@ public class SharkEndSceneManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
+        sfxManager.clip = clips[0];
+
+        sfxManager.Play();
+
         sharkPanel.SetActive(true);
 
         yield return new WaitForSeconds(6f);
+
+        sfxManager.Play();
 
         sharkAnimator.SetBool("Exit", true);
 
@@ -31,7 +40,17 @@ public class SharkEndSceneManager : MonoBehaviour
 
         sharkFin.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
+
+        sfxManager.clip = clips[1];
+
+        sfxManager.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        sfxManager.clip = clips[2];
+
+        sfxManager.Play();
 
         boatAnimator.SetBool("Sink", true);
 

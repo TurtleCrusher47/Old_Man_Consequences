@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WorldClockData
   m_EditorClassIdentifier: 
   secondsPerMinute: 0.05
-  currentDay: 59
-  currentDayIndex: 6
+  currentDay: 3
+  currentDayIndex: 2
   daysOfWeek:
   - Mon.
   - Tue.
@@ -23,6 +23,6 @@ MonoBehaviour:
   - Fri.
   - Sat.
   - Sun.
-  currentWeek: 8
-  hours: 9
-  minutes: 1
+  currentWeek: 1
+  hours: 0
+  minutes: 0
