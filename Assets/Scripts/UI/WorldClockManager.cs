@@ -215,7 +215,7 @@ public class WorldClockManager : MonoBehaviour
         {
             if (playerData.BankDebt > 0)
             {
-                // Insert what to do if player loses
+                SceneChanger.ChangeScene("BankEndScene");
             }
 
         }

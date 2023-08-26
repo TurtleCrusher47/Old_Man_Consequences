@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EndSceneManager : MonoBehaviour
+public class SharkEndSceneManager : MonoBehaviour
 {
     public GameObject sharkPanel;
     public GameObject sharkFin;
