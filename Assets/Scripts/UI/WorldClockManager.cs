@@ -8,6 +8,7 @@ public class WorldClockManager : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
     [SerializeField] UIPlayerStats uIPlayerStats;
+    [SerializeField] GameObject notificationManagerGO;
     [SerializeField] NotificationManager notificationManager;
     [SerializeField] PhoneManager phoneManager;
 
@@ -48,7 +49,12 @@ public class WorldClockManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return null;
-        notificationManager = GameObject.FindGameObjectWithTag("NotificationManager").GetComponent<NotificationManager>();
+        notificationManagerGO = GameObject.FindGameObjectWithTag("NotificationManager");
+        notificationManager = notificationManagerGO.GetComponent<NotificationManager>();
+        
+        yield return null;
+        if (notificationManager)
+        notificationManagerGO.SetActive(false);
     }
 
     private void Update()
