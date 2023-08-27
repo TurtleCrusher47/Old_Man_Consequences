@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using TMPro;
+using UnityEditor.SearchService;
 
 public class WorldClockManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class WorldClockManager : MonoBehaviour
     [SerializeField] GameObject notificationManagerGO;
     [SerializeField] NotificationManager notificationManager;
     [SerializeField] PhoneManager phoneManager;
+    [SerializeField] GameObject blackoutPanel;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
@@ -128,6 +130,8 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextDay()
     {
+        StartCoroutine(Blackout());
+        
         if (playerData.BankDebt <= 0)
         {
             SceneChanger.ChangeScene("WinEndScene");
@@ -310,5 +314,20 @@ public class WorldClockManager : MonoBehaviour
         intensityMultiplier = Mathf.Clamp(intensityMultiplier, 0.3f, 1.1f);
 
         return baseIntensity * intensityMultiplier;
+    }
+
+    private IEnumerator Blackout()
+    {
+        blackoutPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        SceneChanger.ChangeScene("BoatScene");
+
+        yield return new WaitForSeconds(1f);
+
+        blackoutPanel.SetActive(false);
+
+       
     }
 }

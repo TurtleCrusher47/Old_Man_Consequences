@@ -29,8 +29,11 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
     public void ResetData()
     {
+        
         this.itemImage.gameObject.SetActive(false);
         empty = true;
+
+        
     }
 
     public void Deselect()
