@@ -96,7 +96,7 @@ public class WorldClockManager : MonoBehaviour
                         NextDay();
                     }
                 }
-                else if (worldClockData.hours == 7 && isMorning)
+                else if (worldClockData.currentDayIndex == 0 && worldClockData.hours == 7 && isMorning)
                 {
                     SharkAndBankCheck();
                 }
@@ -149,8 +149,6 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
-        StartCoroutine(Blackout());
-
         playerData.CurrentStamina = playerData.MaxStamina;
 
         if (playerData.CurrentHydration < 30)
@@ -160,6 +158,8 @@ public class WorldClockManager : MonoBehaviour
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        StartCoroutine(Blackout());
 
         if (((worldClockData.currentDay - 1) / 7) + 1 > worldClockData.currentWeek)
         {
@@ -180,28 +180,6 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
-        // Check shark debt
-        if (worldClockData.currentDayIndex == 2)
-        {
-            // Check every tuesday if the player still owes money to the shark
-            if (playerData.SharkDebt > 0)
-            playerData.SharkDebtWeeks ++;
-            else
-            playerData.SharkDebtWeeks = 0;
-
-            if (playerData.SharkDebtWeeks == 2)
-            {
-                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
-            }
-
-            // Check if the player has owed the shark for 2 weeks
-            if (playerData.SharkDebtWeeks >= 3)
-            {
-                // Put in code for what happens when it has been 3 weeks
-                SceneChanger.ChangeScene("SharkEndScene");
-            }
-        }
-
         playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
 
         if (playerData.CurrentHydration < 30)
@@ -211,6 +189,8 @@ public class WorldClockManager : MonoBehaviour
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        StartCoroutine(Blackout());
 
         if (((worldClockData.currentDay - 1) / 7) + 1 > worldClockData.currentWeek)
         {
@@ -302,8 +282,6 @@ public class WorldClockManager : MonoBehaviour
 
     private void SharkAndBankCheck()
     {
-        Debug.Log("Started");
-
         // Check shark debt
         if (worldClockData.currentDayIndex == 1)
         {
