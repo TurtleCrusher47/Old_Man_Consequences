@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea2eca7fe880e146bd383503e981230, type: 3}
   m_Name: WorldClockData
   m_EditorClassIdentifier: 
-  secondsPerMinute: 0.2
+  secondsPerMinute: 0.25
   currentDay: 1
   currentDayIndex: 0
   daysOfWeek:
@@ -23,6 +23,6 @@ MonoBehaviour:
   - Fri.
   - Sat.
   - Sun.
-  currentWeek: 1
+  currentWeek: 0
   hours: 7
-  minutes: 0
+  minutes: 7

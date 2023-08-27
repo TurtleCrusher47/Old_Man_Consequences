@@ -1663,8 +1663,6 @@ GameObject:
   - component: {fileID: 395429483}
   - component: {fileID: 395429482}
   - component: {fileID: 395429484}
-  - component: {fileID: 395429485}
-  - component: {fileID: 395429486}
   m_Layer: 0
   m_Name: UISceneManager
   m_TagString: Untagged
@@ -1722,34 +1720,6 @@ MonoBehaviour:
   bgmProgressText: {fileID: 1663354845}
   sfxSlider: {fileID: 1331348899}
   sfxProgressText: {fileID: 1876636121}
---- !u!114 &395429485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395429481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7048edacbacad4d43ad3a32f135de2a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
-  playerMoney: {fileID: 0}
-  playerShark: {fileID: 0}
-  playerBank: {fileID: 0}
---- !u!114 &395429486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395429481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73179dd8919b30e4e91d1b5700429c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &409025780
 GameObject:
   m_ObjectHideFlags: 0
@@ -6184,7 +6154,7 @@ MonoBehaviour:
   worldClockData: {fileID: 11400000, guid: c595cd7267b336b478dc9bcbc8eedc75, type: 2}
   globalLight: {fileID: 683600940}
   baseIntensity: 1
-  intensityChangePerHour: 0.1
+  intensityChangePerHour: 0.3
 --- !u!1 &1215404362
 GameObject:
   m_ObjectHideFlags: 0

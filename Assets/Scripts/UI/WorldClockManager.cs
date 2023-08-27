@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using TMPro;
-using UnityEditor.SearchService;
 
 public class WorldClockManager : MonoBehaviour
 {

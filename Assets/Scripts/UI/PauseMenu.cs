@@ -69,7 +69,6 @@ public class PauseMenu : MonoBehaviour
         PlayerPrefs.SetInt("CurrentWeek", worldClockData.currentWeek);
 
         PlayerPrefs.Save();
-        Debug.Log("Saved the Game");
     }
 
     public void Exit()
