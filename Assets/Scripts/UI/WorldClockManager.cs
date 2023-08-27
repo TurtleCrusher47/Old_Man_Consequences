@@ -222,7 +222,7 @@ public class WorldClockManager : MonoBehaviour
     {
         playerData.CurrentStamina = playerData.MaxStamina;
 
-            playerData.CurrentHydration = playerData.MaxHydration;
+        playerData.CurrentHydration = playerData.MaxHydration;
 
         worldClockData.currentWeek ++;
         worldClockData.currentDay = worldClockData.currentWeek * 7 - 6;
@@ -237,6 +237,7 @@ public class WorldClockManager : MonoBehaviour
             if (playerData.BankDebt > 0)
             {
                 SceneChanger.ChangeScene("BankEndScene");
+                return;
             }
         }
 
@@ -328,7 +329,7 @@ public class WorldClockManager : MonoBehaviour
             else if (worldClockData.currentDayIndex == 6)
             {
                 // If player has 1 week left to repay bank
-                if (worldClockData.currentWeek == 10)
+                if (worldClockData.currentWeek == 9)
                 {
                     if (playerData.BankDebt > 0)
                     {
