@@ -40,6 +40,7 @@ public class InventoryController : MonoBehaviour
         {
             inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
         }
+
     }
 
     private void PrepareUI()

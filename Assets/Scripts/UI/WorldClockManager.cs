@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using TMPro;
+using UnityEditor.SearchService;
 
 public class WorldClockManager : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
     [SerializeField] UIPlayerStats uIPlayerStats;
+    [SerializeField] GameObject notificationManagerGO;
     [SerializeField] NotificationManager notificationManager;
+    [SerializeField] PhoneManager phoneManager;
+    [SerializeField] GameObject blackoutPanel;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text timeText; // Assign the time text
@@ -47,7 +51,12 @@ public class WorldClockManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return null;
-        notificationManager = GameObject.FindGameObjectWithTag("NotificationManager").GetComponent<NotificationManager>();
+        notificationManagerGO = GameObject.FindGameObjectWithTag("NotificationManager");
+        notificationManager = notificationManagerGO.GetComponent<NotificationManager>();
+        
+        yield return null;
+        if (notificationManager)
+        notificationManagerGO.SetActive(false);
     }
 
     private void Update()
@@ -80,11 +89,6 @@ public class WorldClockManager : MonoBehaviour
                     {
                         // Move to the next day of the week
                         NextDay();
-
-                        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
-                        {
-                            NextWeek();
-                        }
                     }
                 }
             }
@@ -126,6 +130,14 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextDay()
     {
+        StartCoroutine(Blackout());
+        
+        if (playerData.BankDebt <= 0)
+        {
+            SceneChanger.ChangeScene("WinEndScene");
+            return;
+        }
+        
         worldClockData.currentDay++;
         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
         worldClockData.hours = 7;
@@ -149,7 +161,7 @@ public class WorldClockManager : MonoBehaviour
             if (playerData.SharkDebtWeeks >= 3)
             {
                 // Put in code for what happens when it has been 3 weeks
-                // Debug.Log("Ship has sunk");
+                SceneChanger.ChangeScene("SharkEndScene");
             }
         }
 
@@ -157,23 +169,65 @@ public class WorldClockManager : MonoBehaviour
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+        {
+            NextWeek();
+        }
     }
 
     public void FaintNextDay()
     {
+        if (playerData.BankDebt <= 0)
+        {
+            SceneChanger.ChangeScene("WinEndScene");
+            return;
+        }
+        
         worldClockData.currentDay++;
         worldClockData.currentDayIndex = (worldClockData.currentDayIndex + 1) % 7;
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
+        // Check shark debt
+        if (worldClockData.currentDayIndex == 2)
+        {
+            // Check every tuesday if the player still owes money to the shark
+            if (playerData.SharkDebt > 0)
+            playerData.SharkDebtWeeks ++;
+            else
+            playerData.SharkDebtWeeks = 0;
+
+            if (playerData.SharkDebtWeeks == 2)
+            {
+                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
+            }
+
+            // Check if the player has owed the shark for 2 weeks
+            if (playerData.SharkDebtWeeks >= 3)
+            {
+                // Put in code for what happens when it has been 3 weeks
+                SceneChanger.ChangeScene("SharkEndScene");
+            }
+        }
+
         playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
 
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
+
+        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+        {
+            NextWeek();
+        }
     }
 
     public void NextWeek()
     {
+        phoneManager.UpdateWeekText();
+
+        SceneChanger.ChangeScene("NPCScene");
+        
         worldClockData.currentWeek = worldClockData.currentDay / 7;
 
         // If player has 1 week left to repay bank
@@ -205,12 +259,18 @@ public class WorldClockManager : MonoBehaviour
         {
             if (playerData.BankDebt > 0)
             {
-                // Insert what to do if player loses
+                SceneChanger.ChangeScene("BankEndScene");
             }
+
         }
 
         // Code to transition to beach scene
         
+        UpdateUI();
+        uIPlayerStats.UpdateUIFromPlayerData();
+
+        phoneManager.UpdateWeekText();
+
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
     }
@@ -254,5 +314,20 @@ public class WorldClockManager : MonoBehaviour
         intensityMultiplier = Mathf.Clamp(intensityMultiplier, 0.3f, 1.1f);
 
         return baseIntensity * intensityMultiplier;
+    }
+
+    private IEnumerator Blackout()
+    {
+        blackoutPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        SceneChanger.ChangeScene("BoatScene");
+
+        yield return new WaitForSeconds(1f);
+
+        blackoutPanel.SetActive(false);
+
+       
     }
 }

@@ -35,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameplayScenes/CreditScene.unity
     guid: 86dc478b18a8d3a4e9e24e908fbdf6fc
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/SharkEndScene.unity
+    guid: 50bff00e3b3f0fc46bfc2d183a4a9852
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/BankEndScene.unity
+    guid: ff74d58a030a02e4b9d0fdd0afb47870
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/WinEndScene.unity
+    guid: 16173dbd9070c4b408a6cfa0bf227529
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

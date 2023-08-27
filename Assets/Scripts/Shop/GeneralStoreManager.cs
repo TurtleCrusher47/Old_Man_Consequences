@@ -47,7 +47,7 @@ public class GeneralStoreManager : MonoBehaviour
     }
 
     // Purchase the item
-    public void PurchaseItem(int buttonNumber)
+     public void PurchaseItem(int buttonNumber)
     {
         if (playerData.Balance >= purchaseableItemSO[buttonNumber].PurchasePrice)
         {
