@@ -103,12 +103,11 @@ public class WorldClockManager : MonoBehaviour
         {
             // Update UI
             UpdateUI();
-
-            // Update global light
         }
 
-        if (worldClockData.minutes % 30 == 0) // Check if it's a new hour
+        if (worldClockData.minutes % 1 == 0)
         {
+            // Update global light
             // Calculate intensity and color based on time of day
             float intensity = CalculateIntensity();
 
@@ -304,22 +303,22 @@ public class WorldClockManager : MonoBehaviour
         if (isMorning == true && worldClockData.hours >= 7 && worldClockData.hours < 12)
         {
             // Set intensityMultiplier for morning
-            intensityMultiplier = Mathf.Lerp(0.6f, 1.05f, normalizedHour);
+            intensityMultiplier = Mathf.Lerp(0.6f, 1f, normalizedHour);
         }
-        else if (isMorning == false && worldClockData.hours >= 0 && worldClockData.hours < 4)
+        else if (isMorning == false && worldClockData.hours >= 0 && worldClockData.hours <= 6)
         {
             // Set intensityMultiplier for afternoon
-            intensityMultiplier = Mathf.Lerp(1.05f, 0.6f, normalizedHour);
+            intensityMultiplier = Mathf.Lerp(1f, 0.7f, normalizedHour);
         }
-        else if (isMorning == false && worldClockData.hours >= 4 && worldClockData.hours < 6)
+        else if (isMorning == false && worldClockData.hours >= 6 && worldClockData.hours < 9)
         {
             // Set intensityMultiplier for evening
-            intensityMultiplier = Mathf.Lerp(0.6f, 0.3f, normalizedHour);
+            intensityMultiplier = Mathf.Lerp(0.7f, 0.5f, normalizedHour);
         }
-        else if (isMorning == false && worldClockData.hours >= 7 && worldClockData.hours < 0)
+        else if (isMorning == false && worldClockData.hours >= 9 && worldClockData.hours < 0)
         {
             // Set intensityMultiplier for night
-            intensityMultiplier = Mathf.Lerp(0.3f, 0.6f, normalizedHour);
+            intensityMultiplier = Mathf.Lerp(0.5f, 0.3f, normalizedHour);
         }
 
         // Clamp intensity to prevent going above 1.05 or below 0.3
