@@ -39,6 +39,7 @@ public class NotificationManager : MonoBehaviour
 
     public IEnumerator ShowNotification(string currentKey)
     {
+        yield return new WaitForSeconds(2);
         LoadNotification(currentKey);
         panel.SetActive(true);
         // Play animation

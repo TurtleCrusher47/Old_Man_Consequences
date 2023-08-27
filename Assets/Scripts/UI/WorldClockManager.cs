@@ -148,7 +148,7 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.minutes = 0;
 
         // Check shark debt
-        if (worldClockData.currentDayIndex == 2)
+        if (worldClockData.currentDayIndex == 1)
         {
             // Check every tuesday if the player still owes money to the shark
             if (playerData.SharkDebt > 0)
@@ -179,7 +179,7 @@ public class WorldClockManager : MonoBehaviour
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
 
-        if (worldClockData.currentDay / 7 >= worldClockData.currentWeek)
+        if (((worldClockData.currentDay - 1) / 7) + 1 > worldClockData.currentWeek)
         {
             NextWeek();
         }
@@ -230,7 +230,7 @@ public class WorldClockManager : MonoBehaviour
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
 
-        if (worldClockData.currentDay / 7 >= worldClockData.currentWeek)
+        if (((worldClockData.currentDay - 1) / 7) + 1 > worldClockData.currentWeek)
         {
             NextWeek();
         }
@@ -268,7 +268,7 @@ public class WorldClockManager : MonoBehaviour
             }
         }
         // If player has 3 weeks left to repay bank
-        else if (worldClockData.currentWeek == 9)
+        else if (worldClockData.currentWeek == 8)
         {
             if (playerData.BankDebt > 0)
             {
