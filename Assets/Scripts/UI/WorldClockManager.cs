@@ -7,11 +7,16 @@ using UnityEditor.SearchService;
 
 public class WorldClockManager : MonoBehaviour
 {
+    [Header("Player Data")]
     [SerializeField] PlayerData playerData;
+    [Header("Player Stats")]
     [SerializeField] UIPlayerStats uIPlayerStats;
+    [Header("Notification Elements")]
     [SerializeField] GameObject notificationManagerGO;
     [SerializeField] NotificationManager notificationManager;
+    [Header("Phone Elements")]
     [SerializeField] PhoneManager phoneManager;
+    [Header("Blackout Elements")]
     [SerializeField] GameObject blackoutPanel;
 
     [Header("UI Elements")]
@@ -25,6 +30,12 @@ public class WorldClockManager : MonoBehaviour
     [SerializeField] private Light2D globalLight; // Reference to the 2D light
     [SerializeField] private float baseIntensity = 1.0f; // Base intensity of the light
     [SerializeField] private float intensityChangePerHour = 0.1f; // Intensity change per hour
+
+    [Header("Light Colour")]
+    [SerializeField] private Color morningColor;
+    [SerializeField] private Color afternoonColor;
+    [SerializeField] private Color eveningColor;
+    [SerializeField] private Color nightColor;
 
     public static WorldClockManager Instance { get; private set; }
 
@@ -104,11 +115,13 @@ public class WorldClockManager : MonoBehaviour
 
         if (worldClockData.minutes % 30 == 0) // Check if it's a new hour
         {
-            // Calculate intensity based on time of day
+            // Calculate intensity and color based on time of day
             float intensity = CalculateIntensity();
+            Color lightColor = GetLightColor();
 
-            // Apply the intensity to the global light
+            // Apply the intensity and color to the global light
             globalLight.intensity = intensity;
+            globalLight.color = lightColor;
         }
 
         // Debug the time, days and numOfTheDays
@@ -275,37 +288,65 @@ public class WorldClockManager : MonoBehaviour
         uIPlayerStats.UpdateUIFromPlayerData();
     }
 
-    private float CalculateIntensity()
+    private Color GetLightColor()
     {
-        float intensityMultiplier = 0.0f;
-
-        if (worldClockData.hours >= 20 || worldClockData.hours < 7)
+        if (worldClockData.hours >= 0.5f && worldClockData.hours < 1.05f)
         {
-            // Night: Intensity at 8 PM is 0.3
-            intensityMultiplier = Mathf.Lerp(1.1f, 0.3f, Mathf.Clamp01((float)(worldClockData.hours + 12 - 20) / 4.0f));
+            return Color.Lerp(morningColor, afternoonColor, (worldClockData.hours - 0.5f) / (1.05f - 0.5f));
         }
-        else if (worldClockData.hours < 12)
+        else if (worldClockData.hours >= 1.05f && worldClockData.hours < 0.6f)
         {
-            // Morning: Intensity from 7 AM to 12 PM
-            intensityMultiplier = Mathf.Lerp(0.3f, 1.1f, (float)(worldClockData.hours - 7) / 5.0f);
+            return Color.Lerp(afternoonColor, eveningColor, (worldClockData.hours - 1.05f) / (0.6f - 1.05f));
         }
-        else if (worldClockData.hours < 18)
+        else if (worldClockData.hours >= 0.6f && worldClockData.hours < 0.3f)
         {
-            // Afternoon: Intensity from 12 PM to 6 PM
-            intensityMultiplier = Mathf.Lerp(1.1f, 0.5f, (float)(worldClockData.hours - 12) / 6.0f);
-        }
-        else if (worldClockData.hours >= 18 && worldClockData.hours < 20)
-        {
-            // Evening: Intensity from 6 PM to 8 PM
-            intensityMultiplier = Mathf.Lerp(0.5f, 0.3f, (float)(worldClockData.hours - 18) / 2.0f);
+            return Color.Lerp(eveningColor, nightColor, (worldClockData.hours - 0.6f) / (0.3f - 0.6f));
         }
         else
         {
-            // Night: Intensity at and after 8 PM is 0.3
-            intensityMultiplier = 0.3f;
+            return nightColor;
+        }
+    }
+
+    private float CalculateIntensity()
+    {
+        float intensityMultiplier = 0.0f;
+        Color targetColor = Color.white; // Default color
+
+        // Calculate intensityMultiplier as before
+
+        // Convert 12-hour format to a normalized value between 0 and 1
+        float normalizedHour = worldClockData.hours / 12.0f;
+
+        if (worldClockData.hours >= 0.5f && worldClockData.hours < 1.05f)
+        {
+            // Set intensityMultiplier for morning
+            targetColor = morningColor;
+            intensityMultiplier = Mathf.Lerp(0.3f, 1.1f, (normalizedHour + 0.5f) % 1.0f);
+        }
+        else if (worldClockData.hours >= 1.05f && worldClockData.hours < 6.0f)
+        {
+            // Set intensityMultiplier for afternoon
+            targetColor = afternoonColor;
+            intensityMultiplier = Mathf.Lerp(1.1f, 0.5f, (normalizedHour + 1.05f) % 1.0f);
+        }
+        else if (worldClockData.hours >= 6.0f && worldClockData.hours < 7.5f)
+        {
+            // Set intensityMultiplier for evening
+            targetColor = eveningColor;
+            intensityMultiplier = Mathf.Lerp(0.5f, 0.3f, (normalizedHour + 6.0f) % 1.0f);
+        }
+        else
+        {
+            // Set intensityMultiplier for night
+            targetColor = nightColor;
+            intensityMultiplier = Mathf.Lerp(0.3f, 0.3f, (normalizedHour + 7.5f) % 1.0f);
         }
 
-        // Apply a change every 30 minutes
+        // Apply the color to the global light's color property
+        globalLight.color = targetColor;
+
+        // Apply the change every 30 minutes
         float progressThroughHour = (float)worldClockData.minutes / 60.0f;
         float change = intensityChangePerHour * progressThroughHour;
         intensityMultiplier += change;
