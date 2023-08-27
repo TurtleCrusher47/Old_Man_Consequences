@@ -230,7 +230,7 @@ public class WorldClockManager : MonoBehaviour
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
 
-        if (worldClockData.currentDay / 7 > worldClockData.currentWeek)
+        if (worldClockData.currentDay / 7 >= worldClockData.currentWeek)
         {
             NextWeek();
         }
@@ -242,14 +242,20 @@ public class WorldClockManager : MonoBehaviour
 
             playerData.CurrentHydration = playerData.MaxHydration;
 
-        phoneManager.UpdateWeekText();
 
         SceneChanger.ChangeScene("NPCScene");
         
-        worldClockData.currentWeek = worldClockData.currentDay / 7;
+        worldClockData.currentWeek ++;
+        worldClockData.currentDay = worldClockData.currentWeek * 7 - 6;
+
+        worldClockData.currentDayIndex = 0;
+        worldClockData.hours = 7;
+        worldClockData.minutes = 0;
+
+        phoneManager.UpdateWeekText();
 
         // If player has 1 week left to repay bank
-        if (worldClockData.currentWeek == 6)
+        if (worldClockData.currentWeek == 10)
         {
             if (playerData.BankDebt > 0)
             {
@@ -257,7 +263,7 @@ public class WorldClockManager : MonoBehaviour
             }
         }
         // If player has 2 weeks left to repay bank
-        else if (worldClockData.currentWeek == 7)
+        else if (worldClockData.currentWeek == 9)
         {
             if (playerData.BankDebt > 0)
             {
@@ -265,7 +271,7 @@ public class WorldClockManager : MonoBehaviour
             }
         }
         // If player has 3 weeks left to repay bank
-        else if (worldClockData.currentWeek == 8)
+        else if (worldClockData.currentWeek == 9)
         {
             if (playerData.BankDebt > 0)
             {
