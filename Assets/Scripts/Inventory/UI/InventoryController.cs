@@ -24,12 +24,12 @@ public class InventoryController : MonoBehaviour
     {
         //inventoryData.Init();
         inventoryData.OnInventoryUpdated += UpdateInventoryUI;   
-        // foreach (InventoryItemStruct item in initialItems)
-        // {
-        //     if (item.IsEmpty)
-        //         continue;
-        //     inventoryData.AddItem(item);
-        // }
+        foreach (InventoryItemStruct item in initialItems)
+        {
+            if (item.IsEmpty)
+                continue;
+            inventoryData.AddItem(item);
+        }
     }
 
     private void UpdateInventoryUI(Dictionary<int, InventoryItemStruct> inventoryState)

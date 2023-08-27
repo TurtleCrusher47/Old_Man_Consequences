@@ -106,12 +106,6 @@ public class ShopManager : MonoBehaviour
 
             inventoryData.AddItem(purchaseableItemSO[buttonNumber], 1);
 
-            //add this code back when we add the inventory to the scene
-            //inventoryUI is an InventoryPage instance that should be serialized
-            // foreach (var item in inventoryData.GetCurrentInventoryState())
-            // {
-            //     inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
-            // }
             UpdateBalance();
             CheckPurchaseable();
         }
