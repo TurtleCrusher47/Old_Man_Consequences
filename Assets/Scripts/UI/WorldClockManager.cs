@@ -172,6 +172,11 @@ public class WorldClockManager : MonoBehaviour
 
         playerData.CurrentStamina = playerData.MaxStamina;
 
+        if (playerData.CurrentHydration < 30)
+        {
+            playerData.CurrentHydration = 30;
+        }
+
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
 
@@ -218,6 +223,11 @@ public class WorldClockManager : MonoBehaviour
 
         playerData.CurrentStamina = playerData.MaxStamina * 0.5f;
 
+        if (playerData.CurrentHydration < 30)
+        {
+            playerData.CurrentHydration = 30;
+        }
+
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
 
@@ -229,6 +239,10 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextWeek()
     {
+        playerData.CurrentStamina = playerData.MaxStamina;
+
+            playerData.CurrentHydration = playerData.MaxHydration;
+
         phoneManager.UpdateWeekText();
 
         SceneChanger.ChangeScene("NPCScene");
