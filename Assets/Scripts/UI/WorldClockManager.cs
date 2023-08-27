@@ -96,6 +96,10 @@ public class WorldClockManager : MonoBehaviour
                         NextDay();
                     }
                 }
+                else if (worldClockData.hours == 7 && isMorning)
+                {
+                    SharkAndBankCheck();
+                }
             }
         }
 
@@ -134,8 +138,6 @@ public class WorldClockManager : MonoBehaviour
 
     public void NextDay()
     {
-        StartCoroutine(Blackout());
-        
         if (playerData.BankDebt <= 0)
         {
             SceneChanger.ChangeScene("WinEndScene");
@@ -147,27 +149,7 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
-        // Check shark debt
-        if (worldClockData.currentDayIndex == 1)
-        {
-            // Check every tuesday if the player still owes money to the shark
-            if (playerData.SharkDebt > 0)
-            playerData.SharkDebtWeeks ++;
-            else
-            playerData.SharkDebtWeeks = 0;
-
-            if (playerData.SharkDebtWeeks == 2)
-            {
-                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
-            }
-
-            // Check if the player has owed the shark for 2 weeks
-            if (playerData.SharkDebtWeeks >= 3)
-            {
-                // Put in code for what happens when it has been 3 weeks
-                SceneChanger.ChangeScene("SharkEndScene");
-            }
-        }
+        StartCoroutine(Blackout());
 
         playerData.CurrentStamina = playerData.MaxStamina;
 
@@ -249,43 +231,17 @@ public class WorldClockManager : MonoBehaviour
         worldClockData.hours = 7;
         worldClockData.minutes = 0;
 
-        SceneChanger.ChangeScene("NPCScene");
-
-        // If player has 1 week left to repay bank
-        if (worldClockData.currentWeek == 10)
-        {
-            if (playerData.BankDebt > 0)
-            {
-                StartCoroutine(notificationManager.ShowNotification("BankOneWeek"));
-            }
-        }
-        // If player has 2 weeks left to repay bank
-        else if (worldClockData.currentWeek == 9)
-        {
-            if (playerData.BankDebt > 0)
-            {
-                StartCoroutine(notificationManager.ShowNotification("BankTwoWeeks"));
-            }
-        }
-        // If player has 3 weeks left to repay bank
-        else if (worldClockData.currentWeek == 8)
-        {
-            if (playerData.BankDebt > 0)
-            {
-                StartCoroutine(notificationManager.ShowNotification("BankThreeWeeks"));
-            }
-        }
         // Loss condition
-        else if (worldClockData.currentWeek == 11)
+        if (worldClockData.currentWeek == 11)
         {
             if (playerData.BankDebt > 0)
             {
                 SceneChanger.ChangeScene("BankEndScene");
             }
-
         }
 
         // Code to transition to beach scene
+        SceneChanger.ChangeScene("NPCScene");
         
         UpdateUI();
         uIPlayerStats.UpdateUIFromPlayerData();
@@ -341,7 +297,60 @@ public class WorldClockManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         blackoutPanel.SetActive(false);
+    }
 
-       
+    private void SharkAndBankCheck()
+    {
+        Debug.Log("Started");
+
+        // Check shark debt
+        if (worldClockData.currentDayIndex == 1)
+        {
+            // Check every tuesday if the player still owes money to the shark
+            if (playerData.SharkDebt > 0)
+            playerData.SharkDebtWeeks ++;
+            else
+            playerData.SharkDebtWeeks = 0;
+
+            if (playerData.SharkDebtWeeks == 2)
+            {
+                StartCoroutine(notificationManager.ShowNotification("SharkWarning"));
+            }
+
+            // Check if the player has owed the shark for 2 weeks
+            if (playerData.SharkDebtWeeks >= 3)
+            {
+                // Put in code for what happens when it has been 3 weeks
+                SceneChanger.ChangeScene("SharkEndScene");
+            }
+        }
+            // Check bank debt on sundays
+            else if (worldClockData.currentDayIndex == 6)
+            {
+                // If player has 1 week left to repay bank
+                if (worldClockData.currentWeek == 10)
+                {
+                    if (playerData.BankDebt > 0)
+                    {
+                        StartCoroutine(notificationManager.ShowNotification("BankOneWeek"));
+                    }
+                }
+                // If player has 2 weeks left to repay bank
+                else if (worldClockData.currentWeek == 8)
+                {
+                    if (playerData.BankDebt > 0)
+                    {
+                        StartCoroutine(notificationManager.ShowNotification("BankTwoWeeks"));
+                    }
+                }
+                // If player has 3 weeks left to repay bank
+                else if (worldClockData.currentWeek == 7)
+                {
+                    if (playerData.BankDebt > 0)
+                    {
+                        StartCoroutine(notificationManager.ShowNotification("BankThreeWeeks"));
+                    }
+                }
+            }
     }
 }
