@@ -1750,14 +1750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73179dd8919b30e4e91d1b5700429c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFields:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  targetValue: 100
-  animationDuration: 2
-  countUp: 1
-  testKey: 13
 --- !u!1 &409025780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,7 +4170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &661451842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6183,7 +6175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
   uIPlayerStats: {fileID: 950152377}
-  notificationManagerGO: {fileID: 0}
+  notificationManagerGO: {fileID: 188686195}
   notificationManager: {fileID: 188686197}
   phoneManager: {fileID: 1767794145}
   blackoutPanel: {fileID: 1228686599}

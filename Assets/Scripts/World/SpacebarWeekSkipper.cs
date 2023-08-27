@@ -9,8 +9,8 @@ public class SpacebarWeekSkipper : MonoBehaviour
     [SerializeField] Slider slider;
     public SceneTransitionChange sceneChanger;
 
-    public GameObject worldClockManagerGO;
-    public WorldClockManager worldClockManager;
+    private GameObject worldClockManagerGO;
+    private WorldClockManager worldClockManager;
 
     private bool inCollider;
     

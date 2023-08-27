@@ -1936,8 +1936,6 @@ MonoBehaviour:
   loadingPanel: {fileID: 260092482}
   slider: {fileID: 2025785541}
   sceneChanger: {fileID: 472773544}
-  worldClockManagerGO: {fileID: 0}
-  worldClockManager: {fileID: 0}
 --- !u!1 &877541718
 GameObject:
   m_ObjectHideFlags: 0

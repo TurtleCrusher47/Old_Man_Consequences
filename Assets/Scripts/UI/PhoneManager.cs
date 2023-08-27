@@ -24,6 +24,7 @@ public class PhoneManager : MonoBehaviour
     public void UpdateWeekText()
     {
         weekText.text = "Week " + worldClockData.currentWeek.ToString();
+        Debug.Log("Updated week text");
     }
 
     public void UpdateBalanceAndDebtText()
@@ -40,6 +41,7 @@ public class PhoneManager : MonoBehaviour
     public void TurnOnPhone()
     {
         UpdateSharkDebtText();
+        UpdateWeekText();
         animator.SetBool("PhoneClicked", true);
     }
 
