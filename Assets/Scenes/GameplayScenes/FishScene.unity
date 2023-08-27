@@ -614,16 +614,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8088752989758326263, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
   m_PrefabInstance: {fileID: 56316708}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &56316714 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8088752988006286337, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
-  m_PrefabInstance: {fileID: 56316708}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &56316715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8088752988494298385, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
-  m_PrefabInstance: {fileID: 56316708}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &56316716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,23 +629,6 @@ MonoBehaviour:
   itemImage: {fileID: 56316712}
   title: {fileID: 56316711}
   descrip: {fileID: 56316710}
---- !u!114 &56316717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56316715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 6822967593319603812, guid: ee3cada414485514496efbd91ec53972, type: 3}
-  contentPanel: {fileID: 56316714}
-  itemDescrip: {fileID: 56316716}
-  mouseFollower: {fileID: 2138246681}
-  actionPanel: {fileID: 1594087787}
 --- !u!1 &70005289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,7 +3343,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 56316717, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
   m_PrefabInstance: {fileID: 56316708}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56316715}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}

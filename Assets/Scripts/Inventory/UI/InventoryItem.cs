@@ -28,21 +28,32 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     }
 
     public void ResetData()
-    {
+    {   
+        if (this.itemImage != null)
+        {
+            this.itemImage.gameObject.SetActive(false);
+            empty = true;  
+        }
         
-        itemImage.gameObject.SetActive(false);
-        empty = true;  
     }
 
     public void Deselect()
     {
-        borderImage.enabled = false;
+        if (this.borderImage != null)
+        {
+            borderImage.enabled = false;
+        }
     }
 
     public void SetData(Sprite sprite, int quantity)
     {
-        this.itemImage.gameObject.SetActive(true);
-        this.itemImage.sprite = sprite;
+        if (this.itemImage != null)
+        {
+            this.itemImage.gameObject.SetActive(true);
+            this.itemImage.sprite = sprite;
+
+        }
+        
         this.quantityText.text = quantity + "";
         empty = false;
     }

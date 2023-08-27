@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InventoryController : MonoBehaviour
 {
@@ -21,9 +22,14 @@ public class InventoryController : MonoBehaviour
     }
 
     private void PrepareInventoryData()
-    {
+    {   
         //inventoryData.Init();
-        inventoryData.OnInventoryUpdated += UpdateInventoryUI;   
+
+        if (SceneManager.GetActiveScene().name != "ShopScene" && SceneManager.GetActiveScene().name != "GeneralStoreScene")
+        {
+            inventoryData.OnInventoryUpdated += UpdateInventoryUI;   
+
+        }
         foreach (InventoryItemStruct item in initialItems)
         {
             if (item.IsEmpty)
@@ -34,11 +40,16 @@ public class InventoryController : MonoBehaviour
 
     private void UpdateInventoryUI(Dictionary<int, InventoryItemStruct> inventoryState)
     {
-        inventoryUI.ResetAllItems();
-
-        foreach (var item in inventoryState)
+        if (SceneManager.GetActiveScene().name != "ShopScene" && SceneManager.GetActiveScene().name != "GeneralStoreScene")
         {
-            inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+        
+            inventoryUI.ResetAllItems();
+
+            foreach (var item in inventoryState)
+            {
+                inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+            }
+
         }
 
     }

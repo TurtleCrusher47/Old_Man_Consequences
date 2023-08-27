@@ -498,6 +498,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbbfe718f3061440977cc03f5e00696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &158239553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 56316717, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
+  m_PrefabInstance: {fileID: 1128190625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186878952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,16 +2603,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8088752989758326263, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
   m_PrefabInstance: {fileID: 1128190625}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1128190631 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8088752988006286337, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
-  m_PrefabInstance: {fileID: 1128190625}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1128190632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8088752988494298385, guid: 0c2d54f9e30a97e48b2924058a4ee868, type: 3}
-  m_PrefabInstance: {fileID: 1128190625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1128190633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2617,23 +2618,6 @@ MonoBehaviour:
   itemImage: {fileID: 1128190629}
   title: {fileID: 1128190628}
   descrip: {fileID: 1128190627}
---- !u!114 &1128190634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128190632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 220b2a21ac6db1e46af11bad36bb1630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 6822967593319603812, guid: ee3cada414485514496efbd91ec53972, type: 3}
-  contentPanel: {fileID: 1128190631}
-  itemDescrip: {fileID: 1128190633}
-  mouseFollower: {fileID: 146796779}
-  actionPanel: {fileID: 1090392598}
 --- !u!1 &1142355038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,7 +3939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851ed335b0870c47aa62c208eb2f7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 1128190634}
+  inventoryUI: {fileID: 158239553}
   inventoryData: {fileID: 11400000, guid: eb97e20639c29a04a930a784a553431c, type: 2}
   initialItems: []
 --- !u!114 &1990774110

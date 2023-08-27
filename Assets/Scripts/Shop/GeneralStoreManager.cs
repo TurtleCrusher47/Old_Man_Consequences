@@ -53,7 +53,8 @@ public class GeneralStoreManager : MonoBehaviour
         {
             playerData.Balance -= purchaseableItemSO[buttonNumber].PurchasePrice;
 
-            inventoryData.AddItem(purchaseableItemSO[buttonNumber], 1);
+            PurchaseableItemSO itemToAdd = purchaseableItemSO[buttonNumber];
+            inventoryData.AddItem(itemToAdd, 1);
 
             UpdateBalance();
             CheckPurchaseable();

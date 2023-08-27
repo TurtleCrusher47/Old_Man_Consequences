@@ -52,6 +52,7 @@ public class InventoryPage : MonoBehaviour
 
     internal void ResetAllItems()
     {
+        //Debug.Log("run reset");
         foreach (var item in listOFUIItems)
         {
             item.ResetData();

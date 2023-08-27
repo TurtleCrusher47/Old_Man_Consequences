@@ -979,7 +979,7 @@ MonoBehaviour:
     m_Right: 100
     m_Top: 100
     m_Bottom: 100
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -1314,6 +1314,7 @@ GameObject:
   - component: {fileID: 8088752989758326217}
   - component: {fileID: 8088752989758326220}
   - component: {fileID: 56316716}
+  - component: {fileID: 2094325930}
   m_Layer: 5
   m_Name: InventoryDescription
   m_TagString: Untagged
@@ -1428,6 +1429,21 @@ MonoBehaviour:
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &56316716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088752989758326263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca35416849151e4fba1cb6384473fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 8088752989167690685}
+  title: {fileID: 8088752989759493532}
+  descrip: {fileID: 8088752988207173161}
+--- !u!114 &2094325930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
