@@ -242,8 +242,8 @@ public class FishingController : MonoBehaviour
     {
         return selectedBait;
     }
-    public void ConsumeStamina()
+    public void ConsumeStamina(int staminaToConsume)
     {
-        playerData.CurrentStamina--;
+        playerData.CurrentStamina -= staminaToConsume;
     }
 }
