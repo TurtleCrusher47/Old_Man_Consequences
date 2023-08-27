@@ -41,6 +41,7 @@ public class PhoneManager : MonoBehaviour
     public void TurnOnPhone()
     {
         UpdateSharkDebtText();
+        UpdateWeekText();
         animator.SetBool("PhoneClicked", true);
     }
 
