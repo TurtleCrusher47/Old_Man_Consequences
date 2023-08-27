@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d2a25ebdf78447a99ce81752fb20c, type: 3}
   m_Name: BankOneWeek
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 0fe1f6c9e0516bc4d94cf43a0351a30d, type: 3}
   message: You have one week left to pay the bank
