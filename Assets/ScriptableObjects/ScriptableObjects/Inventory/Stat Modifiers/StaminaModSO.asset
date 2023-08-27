@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: StaminaModSO
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 3705db37de946ad46857c51424360de1, type: 2}
+  particleEffect: {fileID: 273702485310648426, guid: c88f54d9c9f92b84d86ec8f4a6eec9b3, type: 3}
