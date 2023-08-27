@@ -7,14 +7,13 @@ public class PlayerStaminaModifierSO : CharacterStatModifierSO
 {
     [SerializeField] private PlayerData playerData;
 
-    //[SerializeField] private GameObject particleEffect;
+    [SerializeField] private GameObject particleEffect;
 
     public override void AffectCharacter(GameObject character, float val)
     {
         playerData.CurrentStamina += val;
-        //GameObject effect = Instantiate(particleEffect, character.transform).gameObject;
+        GameObject effect = Instantiate(particleEffect, character.transform).gameObject;
 
-        //Destroy(effect, 3.0f);
-
+        Destroy(effect, 1.0f);
     }
 }
