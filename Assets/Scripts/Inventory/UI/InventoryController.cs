@@ -22,9 +22,9 @@ public class InventoryController : MonoBehaviour
 
     private void PrepareInventoryData()
     {
-        //inventoryData.Init();
+        inventoryData.Init();
         inventoryData.OnInventoryUpdated += UpdateInventoryUI;   
-        foreach (InventoryItemStruct item in initialItems)
+        foreach (InventoryItemStruct item in inventoryData.InventoryItems)
         {
             if (item.IsEmpty)
                 continue;

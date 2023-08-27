@@ -24,10 +24,30 @@ public class InventorySO : ScriptableObject
 
     public void Init()
     {
-        inventoryItems = new List<InventoryItemStruct>();
+        bool isEmpty = true;
+
         for (int i = 0; i < Size; i++)
         {
-            inventoryItems.Add(InventoryItemStruct.GetEmptyItem());
+            if (inventoryItems[i].IsEmpty)
+            {
+                continue;
+            }
+
+            else
+            {
+                isEmpty = false;
+            }
+        }
+
+        if (isEmpty)
+        {
+
+            for (int i = 0; i < Size; i++)
+            {
+                inventoryItems = new List<InventoryItemStruct>();
+                inventoryItems.Add(InventoryItemStruct.GetEmptyItem());
+                
+            }
         }
     }
 

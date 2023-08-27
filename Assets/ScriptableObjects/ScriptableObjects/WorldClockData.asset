@@ -23,6 +23,6 @@ MonoBehaviour:
   - Fri.
   - Sat.
   - Sun.
-  currentWeek: 1
-  hours: 7
-  minutes: 0
+  currentWeek: 0
+  hours: 1
+  minutes: 32
